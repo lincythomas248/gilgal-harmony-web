@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { BookOpen, Users, ArrowRight, Globe, HandHeart, Church, Video, PlayCircle, Calendar } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import logo from "@/assets/logo-church.png";
+import heroBg from "@/assets/hero-dove.jpg";
 
 const ministries = [
   {
@@ -45,8 +46,10 @@ export default function Home() {
     <Layout>
       {/* Hero - Compact Gateway */}
       <section className="relative min-h-[65vh] max-h-[70vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 hero-mesh" />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-transparent to-navy/60" />
+        <div className="absolute inset-0">
+          <img src={heroBg} alt="" className="w-full h-full object-cover object-center" />
+        </div>
+        <div className="absolute inset-0 bg-navy/40" />
         
         <div className="orb orb-gold w-80 h-80 top-10 -right-40 animate-float" />
         <div className="orb orb-blue w-96 h-96 -bottom-24 -left-48 animate-float-slow" />
