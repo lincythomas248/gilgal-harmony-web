@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BookOpen, Users, ArrowRight, Globe, HandHeart, Church, Video, PlayCircle, Calendar } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
-import logo from "@/assets/logo-church.png";
 import heroBg from "@/assets/hero-dove.jpg";
 
 const ministries = [
@@ -55,14 +54,6 @@ export default function Home() {
         <div className="orb orb-blue w-96 h-96 -bottom-24 -left-48 animate-float-slow" />
         
         <div className="section-container relative z-10 text-center py-10">
-          <div className="relative inline-block mb-5">
-            <div className="absolute inset-0 blur-[50px] bg-accent/30 rounded-full scale-[1.8]" />
-            <img
-              src={logo}
-              alt="IPC Gilgal Church"
-              className="relative w-20 h-20 md:w-28 md:h-28 mx-auto drop-shadow-2xl"
-            />
-          </div>
           
           <h1 className="text-display-xl text-primary-foreground mb-2">
             <span className="block">IPC Gilgal</span>
