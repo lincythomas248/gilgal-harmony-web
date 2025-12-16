@@ -63,7 +63,7 @@ export function Header() {
           <div className="flex items-center justify-between py-3">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3">
-              <img src={logo} alt="IPC Gilgal Church" className="h-16 md:h-20 w-auto" />
+              <img src={logo} alt="IPC Gilgal Church" className="h-16 md:h-20 w-auto bg-white rounded-full p-1 shadow-md" />
               <div className="hidden sm:block">
                 <p className="text-lg font-semibold text-foreground">IPC Gilgal</p>
                 <p className="text-xs text-muted-foreground">Sharjah & RAK</p>
