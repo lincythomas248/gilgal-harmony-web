@@ -6,129 +6,139 @@
 
 @layer base {
   :root {
-    /* Rich, warm church palette */
-    --background: 42 30% 97%;
-    --foreground: 220 35% 15%;
+    /* IPC Gilgal Church - LOCKED COLOR PALETTE */
+    /* Primary Background - Cream #F6F1E7 (70%) */
+    --background: 40 43% 94%;
+    /* Body text #2B2B2B */
+    --foreground: 0 0% 17%;
 
+    /* Cards - White or very light cream */
     --card: 0 0% 100%;
-    --card-foreground: 220 35% 15%;
+    --card-foreground: 0 0% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 35% 15%;
+    --popover-foreground: 0 0% 17%;
 
-    /* Primary - Deep navy blue */
-    --primary: 220 55% 25%;
-    --primary-foreground: 42 40% 96%;
+    /* Primary - Deep Blue #1E2F4F (20%) */
+    --primary: 218 44% 21%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Warm sand */
-    --secondary: 38 35% 92%;
-    --secondary-foreground: 220 35% 20%;
+    /* Secondary - Light cream variant */
+    --secondary: 40 35% 90%;
+    --secondary-foreground: 218 44% 21%;
 
     /* Muted */
-    --muted: 38 20% 90%;
-    --muted-foreground: 220 15% 45%;
+    --muted: 40 25% 88%;
+    --muted-foreground: 0 0% 35%;
 
-    /* Accent - Rich warm gold */
-    --accent: 38 85% 48%;
-    --accent-foreground: 220 35% 12%;
+    /* Accent - Gold #D4A12A (10%) */
+    --accent: 43 70% 50%;
+    --accent-foreground: 0 0% 17%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 38 20% 85%;
-    --input: 38 20% 85%;
-    --ring: 220 55% 25%;
+    --border: 40 20% 85%;
+    --input: 40 20% 85%;
+    --ring: 218 44% 21%;
 
     --radius: 0.75rem;
 
-    /* Extended warm palette */
-    --navy: 220 55% 18%;
-    --navy-foreground: 42 40% 96%;
-    --navy-light: 220 40% 35%;
+    /* Extended locked palette */
+    /* Deep Blue variants */
+    --navy: 218 44% 21%;
+    --navy-foreground: 0 0% 100%;
+    --navy-light: 218 35% 35%;
     
-    --dove-blue: 210 45% 55%;
-    --dove-blue-light: 210 40% 94%;
+    /* Keep dove-blue as subtle accent of deep blue */
+    --dove-blue: 218 30% 45%;
+    --dove-blue-light: 40 30% 92%;
     
-    --cream: 42 50% 96%;
-    --cream-dark: 42 35% 92%;
+    /* Cream #F6F1E7 */
+    --cream: 40 43% 94%;
+    --cream-dark: 40 35% 90%;
     
-    --warm: 35 45% 94%;
-    --warm-dark: 35 30% 88%;
+    /* Warm cream variants */
+    --warm: 40 40% 92%;
+    --warm-dark: 40 30% 88%;
     
-    --gold: 38 85% 48%;
-    --gold-soft: 38 60% 92%;
-    --gold-dark: 38 75% 38%;
+    /* Gold #D4A12A */
+    --gold: 43 70% 50%;
+    --gold-soft: 43 50% 90%;
+    --gold-dark: 43 70% 40%;
     
-    --sand: 38 40% 90%;
-    --sand-dark: 38 30% 82%;
+    /* Sand - cream variant */
+    --sand: 40 35% 88%;
+    --sand-dark: 40 30% 82%;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 40 43% 94%;
+    --sidebar-foreground: 0 0% 17%;
+    --sidebar-primary: 218 44% 21%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 43 70% 50%;
+    --sidebar-accent-foreground: 0 0% 17%;
+    --sidebar-border: 40 20% 85%;
+    --sidebar-ring: 218 44% 21%;
   }
 
   .dark {
-    --background: 220 45% 8%;
-    --foreground: 42 25% 95%;
+    /* Dark mode uses same locked palette with adjusted values */
+    --background: 218 44% 12%;
+    --foreground: 40 30% 95%;
 
-    --card: 220 40% 12%;
-    --card-foreground: 42 25% 95%;
+    --card: 218 40% 16%;
+    --card-foreground: 40 30% 95%;
 
-    --popover: 220 40% 12%;
-    --popover-foreground: 42 25% 95%;
+    --popover: 218 40% 16%;
+    --popover-foreground: 40 30% 95%;
 
-    --primary: 210 50% 55%;
+    --primary: 218 35% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 35% 18%;
-    --secondary-foreground: 42 25% 95%;
+    --secondary: 218 35% 20%;
+    --secondary-foreground: 40 30% 95%;
 
-    --muted: 220 30% 18%;
-    --muted-foreground: 220 15% 60%;
+    --muted: 218 30% 20%;
+    --muted-foreground: 40 20% 60%;
 
-    --accent: 38 70% 55%;
+    --accent: 43 70% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 30% 22%;
-    --input: 220 30% 22%;
-    --ring: 210 50% 55%;
+    --border: 218 30% 25%;
+    --input: 218 30% 25%;
+    --ring: 218 35% 45%;
 
-    --navy: 220 45% 28%;
+    --navy: 218 44% 25%;
     --navy-foreground: 0 0% 100%;
-    --navy-light: 220 35% 40%;
+    --navy-light: 218 35% 40%;
     
-    --dove-blue: 210 40% 55%;
-    --dove-blue-light: 210 30% 20%;
+    --dove-blue: 218 30% 50%;
+    --dove-blue-light: 218 30% 22%;
     
-    --cream: 42 20% 12%;
-    --cream-dark: 42 15% 8%;
+    --cream: 40 20% 15%;
+    --cream-dark: 40 15% 10%;
     
-    --warm: 35 20% 14%;
-    --warm-dark: 35 15% 10%;
+    --warm: 40 20% 18%;
+    --warm-dark: 40 15% 12%;
     
-    --gold: 38 70% 55%;
-    --gold-soft: 38 35% 18%;
-    --gold-dark: 38 60% 45%;
+    --gold: 43 70% 55%;
+    --gold-soft: 43 35% 20%;
+    --gold-dark: 43 60% 45%;
     
-    --sand: 38 25% 16%;
-    --sand-dark: 38 20% 12%;
+    --sand: 40 25% 18%;
+    --sand-dark: 40 20% 14%;
 
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-background: 218 44% 12%;
+    --sidebar-foreground: 40 30% 95%;
+    --sidebar-primary: 43 70% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 218 30% 20%;
+    --sidebar-accent-foreground: 40 30% 95%;
+    --sidebar-border: 218 30% 25%;
+    --sidebar-ring: 43 70% 55%;
   }
 }
 
@@ -247,7 +257,7 @@
   }
 
   .btn-accent {
-    @apply bg-gradient-to-r from-accent to-gold-dark text-white hover:from-gold-dark hover:to-accent px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-[1.02];
+    @apply bg-accent text-foreground hover:bg-gold-dark px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-[1.02];
   }
 
   .btn-ghost {
@@ -255,7 +265,7 @@
   }
 
   .btn-gold {
-    @apply bg-accent text-white hover:bg-gold-dark px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-2xl;
+    @apply bg-accent text-foreground hover:bg-gold-dark px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-2xl;
   }
 
   /* Section backgrounds */
@@ -287,22 +297,18 @@
     @apply bg-gold-soft;
   }
 
-  /* Hero gradient mesh - warmer */
+  /* Hero background - Deep Blue base */
   .hero-mesh {
-    background: 
-      radial-gradient(ellipse 80% 50% at 50% -20%, hsl(var(--accent) / 0.2), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 60%, hsl(var(--dove-blue) / 0.12), transparent),
-      radial-gradient(ellipse 50% 30% at 20% 80%, hsl(var(--gold) / 0.1), transparent),
-      linear-gradient(180deg, hsl(var(--navy)) 0%, hsl(var(--primary)) 50%, hsl(var(--navy)) 100%);
+    background: hsl(var(--navy));
   }
 
-  /* Soft warm gradient for sections */
+  /* Soft warm gradient for sections - cream only */
   .gradient-warm {
-    background: linear-gradient(180deg, hsl(var(--cream)) 0%, hsl(var(--warm)) 50%, hsl(var(--cream)) 100%);
+    background: linear-gradient(180deg, hsl(var(--cream)) 0%, hsl(var(--background)) 100%);
   }
 
   .gradient-gold-soft {
-    background: linear-gradient(135deg, hsl(var(--gold-soft)) 0%, hsl(var(--cream)) 100%);
+    background: hsl(var(--gold-soft));
   }
 
   /* Floating orbs */
@@ -341,13 +347,13 @@
     font-family: 'Playfair Display', serif;
   }
 
-  /* Accent decorators */
+  /* Accent decorators - using gold only, no gradients */
   .accent-line {
-    @apply w-24 h-1 bg-gradient-to-r from-accent via-gold to-accent rounded-full;
+    @apply w-24 h-1 bg-accent rounded-full;
   }
 
   .accent-line-sm {
-    @apply w-16 h-0.5 bg-gradient-to-r from-accent to-gold rounded-full;
+    @apply w-16 h-0.5 bg-accent rounded-full;
   }
 
   .accent-dot {
@@ -375,14 +381,13 @@
   .divider-wave::before {
     content: '';
     @apply absolute -top-1 left-0 right-0 h-8;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48'%3E%3Cpath fill='%23f5f0e8' d='M0,48L80,42.7C160,37,320,27,480,26.7C640,27,800,37,960,37.3C1120,37,1280,27,1360,21.3L1440,16L1440,48L1360,48C1280,48,1120,48,960,48C800,48,640,48,480,48C320,48,160,48,80,48L0,48Z'/%3E%3C/svg%3E") no-repeat bottom;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 48'%3E%3Cpath fill='%23F6F1E7' d='M0,48L80,42.7C160,37,320,27,480,26.7C640,27,800,37,960,37.3C1120,37,1280,27,1360,21.3L1440,16L1440,48L1360,48C1280,48,1120,48,960,48C800,48,640,48,480,48C320,48,160,48,80,48L0,48Z'/%3E%3C/svg%3E") no-repeat bottom;
     background-size: cover;
   }
 
-  /* Reflective section */
+  /* Reflective section - solid deep blue */
   .section-reflective {
-    @apply relative overflow-hidden;
-    background: linear-gradient(135deg, hsl(var(--navy)) 0%, hsl(var(--primary)) 50%, hsl(var(--navy)) 100%);
+    @apply relative overflow-hidden bg-navy text-navy-foreground;
   }
 
   /* Grid patterns */
@@ -487,20 +492,19 @@
     @apply scale-110;
   }
 
-  /* Back to top button */
+  /* Back to top button - gold with dark text */
   .back-to-top {
-    @apply fixed bottom-8 right-8 z-50 w-12 h-12 bg-accent text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-gold-dark hover:scale-110 hover:shadow-xl;
+    @apply fixed bottom-8 right-8 z-50 w-12 h-12 bg-accent text-foreground rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-gold-dark hover:scale-110 hover:shadow-xl;
   }
 
-  /* Page header enhanced */
+  /* Page header enhanced - cream background */
   .page-header {
-    @apply relative overflow-hidden py-16 md:py-20;
-    background: linear-gradient(135deg, hsl(var(--cream)) 0%, hsl(var(--warm)) 50%, hsl(var(--sand)) 100%);
+    @apply relative overflow-hidden py-16 md:py-20 bg-background;
   }
 
   .page-header::before {
     content: '';
-    @apply absolute inset-0 opacity-40;
+    @apply absolute inset-0 opacity-30;
     background-image: radial-gradient(hsl(var(--accent) / 0.1) 1px, transparent 1px);
     background-size: 32px 32px;
   }
