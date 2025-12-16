@@ -25,7 +25,7 @@ export function Footer() {
           {/* Logo & About */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
-              <img src={logo} alt="IPC Gilgal Church" className="h-14 w-auto bg-white/95 rounded-full p-1.5 shadow-lg" />
+              <img src={logo} alt="IPC Gilgal Church" className="h-16 w-auto" />
               <div>
                 <h4 className="font-semibold text-navy-foreground">IPC Gilgal</h4>
                 <p className="text-xs text-navy-foreground/60">Sharjah & RAK</p>

@@ -43,39 +43,54 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* Hero - Compact Gateway */}
-      <section className="relative min-h-[65vh] max-h-[70vh] flex items-center justify-center overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+        {/* Dove image - visible and central */}
         <div className="absolute inset-0">
-          <img src={heroBg} alt="" className="w-full h-full object-cover object-center" />
+          <img 
+            src={heroBg} 
+            alt="Dove of peace" 
+            className="w-full h-full object-cover object-center" 
+          />
         </div>
-        <div className="absolute inset-0 bg-navy/40" />
+        {/* Subtle overlay - reduced to show dove clearly */}
+        <div className="absolute inset-0 bg-navy/25" />
         
-        <div className="orb orb-gold w-80 h-80 top-10 -right-40 animate-float" />
-        <div className="orb orb-blue w-96 h-96 -bottom-24 -left-48 animate-float-slow" />
-        
-        <div className="section-container relative z-10 text-center py-10">
+        {/* Content */}
+        <div className="section-container relative z-10 text-center py-16 md:py-20">
           
-          <h1 className="text-display-xl text-primary-foreground mb-2">
-            <span className="block">IPC Gilgal</span>
-            <span className="block text-accent">Church</span>
+          {/* Church Name - elegant serif typography */}
+          <h1 className="font-serif mb-6">
+            <span className="block text-5xl md:text-6xl lg:text-7xl font-semibold text-primary-foreground tracking-tight leading-tight">
+              IPC Gilgal
+            </span>
+            <span className="block text-4xl md:text-5xl lg:text-6xl font-medium text-accent mt-2">
+              Church
+            </span>
           </h1>
           
-          <div className="accent-line mx-auto mb-3" />
-          
-          <p className="text-lg md:text-xl text-primary-foreground/85 font-light max-w-xl mx-auto mb-1">
+          {/* Subtitle - clean sans-serif */}
+          <p className="text-lg md:text-xl text-primary-foreground/90 font-light max-w-xl mx-auto mb-3 leading-relaxed font-sans">
             A welcoming Christian community
           </p>
           
-          <p className="text-sm text-primary-foreground/50 tracking-widest uppercase mb-6">
+          <p className="text-sm text-primary-foreground/60 tracking-[0.2em] uppercase mb-10 font-sans">
             Sharjah & Ras Al Khaimah, UAE
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to="/about" className="btn-accent inline-flex items-center justify-center gap-2">
+          {/* Buttons - refined with hover states */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              to="/about" 
+              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-gold-dark text-foreground px-8 py-4 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
               Discover Our Church
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link to="/contact" className="btn-ghost inline-flex items-center justify-center gap-2">
+            <Link 
+              to="/contact" 
+              className="inline-flex items-center justify-center gap-2 bg-transparent text-primary-foreground border-2 border-primary-foreground/40 hover:border-primary-foreground/70 hover:bg-primary-foreground/10 px-8 py-4 rounded-lg font-semibold transition-all duration-200"
+            >
               Get in Touch
             </Link>
           </div>
