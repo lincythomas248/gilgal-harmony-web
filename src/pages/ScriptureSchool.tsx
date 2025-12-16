@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { BookOpen, Users, Star, Sparkles } from "lucide-react";
 import scriptureSchoolLogo from "@/assets/scripture-school-logo.png";
+import pencilsBg from "@/assets/scripture-school-bg.jpg";
 
 const ageGroups = [
   { name: "Beginners", ages: "3-5 years", description: "Introduction to Bible stories through interactive activities", color: "gold" },
@@ -21,7 +22,13 @@ export default function ScriptureSchool() {
         subtitle="Biblical education for children and youth of all ages."
       />
 
-      <section className="section-light page-section">
+      {/* Hero Image Banner */}
+      <section className="relative h-48 md:h-64 overflow-hidden">
+        <img src={pencilsBg} alt="Scripture School" className="w-full h-full object-cover object-bottom" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+      </section>
+
+      <section className="section-light page-section -mt-16 relative z-10">
         <div className="section-container">
           <div className="max-w-4xl mx-auto">
             {/* Logo and Introduction */}
@@ -29,7 +36,7 @@ export default function ScriptureSchool() {
               <img
                 src={scriptureSchoolLogo}
                 alt="Scripture School"
-                className="h-28 md:h-36 mx-auto mb-6"
+                className="h-28 md:h-36 mx-auto mb-6 drop-shadow-lg"
               />
               <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed text-lg">
                 Scripture School is our dedicated ministry for teaching biblical principles to children and young people. Through age-appropriate curriculum and engaging activities, we help young believers build a strong foundation in Christian faith.
