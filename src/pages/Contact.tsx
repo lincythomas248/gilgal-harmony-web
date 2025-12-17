@@ -45,7 +45,7 @@ export default function Contact() {
               <div className="card-warm">
                 <div className="flex items-center gap-3 mb-6">
                   <Sparkles className="w-5 h-5 text-accent" />
-                  <h2 className="text-xl font-semibold text-foreground font-serif">Send a Message</h2>
+                  <h2 className="text-xl font-semibold text-foreground">Send a Message</h2>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
@@ -113,7 +113,7 @@ export default function Contact() {
               {/* Contact Information */}
               <div className="space-y-6">
                 <div className="card-warm">
-                  <h2 className="text-xl font-semibold text-foreground mb-6 font-serif">Get in Touch</h2>
+                  <h2 className="text-xl font-semibold text-foreground mb-6">Get in Touch</h2>
                   <div className="space-y-4">
                     <a
                       href="mailto:ipcgilgalshj@gmail.com"
@@ -144,7 +144,7 @@ export default function Contact() {
                 </div>
 
                 <div className="card-warm">
-                  <h2 className="text-xl font-semibold text-foreground mb-6 font-serif">Follow Us</h2>
+                  <h2 className="text-xl font-semibold text-foreground mb-6">Follow Us</h2>
                   <div className="flex gap-4">
                     <a
                       href="https://www.facebook.com/ipcgilgalshj.org"
@@ -173,7 +173,7 @@ export default function Contact() {
                       <MapPin className="w-5 h-5 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-2 font-serif">Location</h3>
+                      <h3 className="font-semibold text-foreground mb-2">Location</h3>
                       <p className="text-muted-foreground">
                         IPC Gilgal Church serves communities in Sharjah and Ras Al Khaimah, United Arab Emirates. Contact us for service location details.
                       </p>

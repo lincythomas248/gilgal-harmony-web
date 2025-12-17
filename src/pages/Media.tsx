@@ -24,7 +24,7 @@ export default function Media() {
                   <Youtube className="w-12 h-12 text-destructive" />
                 </div>
                 <div className="text-center md:text-left">
-                  <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-3 font-serif">
+                  <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-3">
                     Our YouTube Channel
                   </h2>
                   <p className="text-muted-foreground mb-6 text-lg leading-relaxed">
@@ -49,7 +49,7 @@ export default function Media() {
                 <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-gold-soft rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
                   <PlayCircle className="w-7 h-7 text-accent" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3 font-serif">Sermon Archive</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-3">Sermon Archive</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Browse our collection of recorded sermons and messages from our pastors and guest speakers.
                 </p>
@@ -59,7 +59,7 @@ export default function Media() {
                 <div className="w-14 h-14 bg-gradient-to-br from-primary/15 to-dove-light rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
                   <BookOpen className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3 font-serif">Bible Teachings</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-3">Bible Teachings</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Access Bible study sessions and teaching series designed to help deepen your understanding of Scripture.
                 </p>

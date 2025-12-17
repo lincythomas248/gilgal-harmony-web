@@ -37,7 +37,7 @@ export default function About() {
                 <Sparkles className="w-5 h-5 text-accent" />
                 <div className="accent-line-sm" />
               </div>
-              <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6 font-serif">Our Church</h2>
+              <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">Our Church</h2>
               <p className="text-muted-foreground leading-relaxed mb-4 text-lg">
                 IPC Gilgal Church is a congregation of the Indian Pentecostal Church, one of the largest Pentecostal denominations with a rich heritage of Christian faith and worship. Our church serves as a spiritual home for believers in the Sharjah and Ras Al Khaimah emirates of the United Arab Emirates.
               </p>
@@ -68,7 +68,7 @@ export default function About() {
               <span className="inline-block px-4 py-1.5 bg-accent/90 text-foreground text-xs font-semibold uppercase tracking-wider rounded-full mb-4">
                 Our Values
               </span>
-              <h2 className="text-white font-serif text-3xl md:text-4xl">What We Stand For</h2>
+              <h2 className="text-white text-3xl md:text-4xl">What We Stand For</h2>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -76,7 +76,7 @@ export default function About() {
                 <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-gold-soft rounded-full flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300">
                   <MapPin className="w-8 h-8 text-accent" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3 font-serif">Local Presence</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-3">Local Presence</h3>
                 <p className="text-muted-foreground">
                   Serving communities in Sharjah and Ras Al Khaimah with regular worship services and fellowship gatherings.
                 </p>
@@ -86,7 +86,7 @@ export default function About() {
                 <div className="w-16 h-16 bg-gradient-to-br from-primary/15 to-dove-light rounded-full flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300">
                   <Users className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3 font-serif">Community</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-3">Community</h3>
                 <p className="text-muted-foreground">
                   A welcoming family of believers from diverse backgrounds, united in faith and fellowship.
                 </p>
@@ -96,7 +96,7 @@ export default function About() {
                 <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-gold-soft rounded-full flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300">
                   <Heart className="w-8 h-8 text-accent" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3 font-serif">Spiritual Growth</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-3">Spiritual Growth</h3>
                 <p className="text-muted-foreground">
                   Programs for all ages designed to deepen understanding and strengthen personal faith.
                 </p>
@@ -114,7 +114,7 @@ export default function About() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
               <span className="label-badge mb-4">Our Leaders</span>
-              <h2 className="text-foreground mb-3 font-serif">Serving With Dedication</h2>
+              <h2 className="text-foreground mb-3">Serving With Dedication</h2>
               <p className="text-subtitle max-w-lg mx-auto">
                 Our leaders shepherd our church community with love, care, and commitment to spiritual growth.
               </p>

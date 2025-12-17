@@ -68,7 +68,7 @@ export default function Events() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
               <span className="label-badge mb-4">Regular Services</span>
-              <h2 className="text-foreground font-serif mb-4">Weekly Gatherings</h2>
+              <h2 className="text-foreground mb-4">Weekly Gatherings</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Stay connected with our church community through regular services and events. Contact us for specific dates and times.
               </p>
@@ -84,7 +84,7 @@ export default function Events() {
                       </div>
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-foreground mb-2 font-serif">
+                      <h3 className="text-lg font-semibold text-foreground mb-2">
                         {event.title}
                       </h3>
                       <p className="text-muted-foreground text-sm mb-3">
@@ -118,7 +118,7 @@ export default function Events() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
               <span className="label-badge mb-4">Updates</span>
-              <h2 className="text-foreground font-serif mb-4">Latest News</h2>
+              <h2 className="text-foreground mb-4">Latest News</h2>
               <p className="text-muted-foreground">
                 Recent happenings and announcements from our church community.
               </p>
@@ -140,7 +140,7 @@ export default function Events() {
                       </span>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground mb-2 font-serif">{update.title}</h3>
+                      <h3 className="font-semibold text-foreground mb-2">{update.title}</h3>
                       <p className="text-sm text-muted-foreground">{update.description}</p>
                     </div>
                   </div>
@@ -158,7 +158,7 @@ export default function Events() {
             <div className="card-warm bg-gradient-to-br from-card via-dove-light/40 to-card border-dove/20 text-center">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Sparkles className="w-5 h-5 text-accent" />
-                <h2 className="text-xl font-semibold text-foreground font-serif">Special Programs</h2>
+                <h2 className="text-xl font-semibold text-foreground">Special Programs</h2>
                 <Sparkles className="w-5 h-5 text-accent" />
               </div>
               <p className="text-muted-foreground max-w-xl mx-auto">
