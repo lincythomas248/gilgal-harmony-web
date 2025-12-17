@@ -68,6 +68,7 @@ export default function Home() {
               <Link
                 key={tile.title}
                 to={tile.link}
+                onClick={() => window.scrollTo(0, 0)}
                 className={`group relative p-5 md:p-6 rounded-2xl border transition-all duration-400 hover:shadow-xl hover:-translate-y-1 overflow-hidden ${
                   tile.color === 'gold' 
                     ? 'bg-gradient-to-br from-card via-gold-soft/30 to-card border-gold/20 hover:border-gold/40' 
@@ -101,62 +102,68 @@ export default function Home() {
       </section>
 
       {/* Ministries - Compact Tabbed Interface */}
-      <section className="section-light py-8 md:py-10 relative">
-        <div className="section-container">
-          <div className="text-center mb-5">
+      <section className="section-light py-6 md:py-8 relative overflow-hidden">
+        {/* Subtle background accent */}
+        <div className="absolute top-0 right-0 w-48 h-48 bg-accent/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-40 h-40 bg-dove/5 rounded-full blur-3xl" />
+        
+        <div className="section-container relative">
+          <div className="text-center mb-4">
             <span className="label-badge mb-2">Our Ministries</span>
-            <h2 className="text-foreground text-2xl md:text-3xl mb-2">How We Serve</h2>
+            <h2 className="text-foreground text-2xl md:text-3xl">How We Serve</h2>
           </div>
 
-          {/* Tab Buttons */}
-          <div className="flex flex-wrap justify-center gap-2 mb-4">
-            {ministries.map((ministry, index) => (
+          {/* Ministry Pills */}
+          <div className="flex flex-wrap justify-center gap-2 mb-3">
+            {ministries.map((ministry) => (
               <Link
                 key={ministry.id}
                 to={ministry.link}
-                className={`px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2 ${
-                  index === 0
-                    ? ministry.color === 'accent'
-                      ? 'bg-gradient-to-r from-accent to-gold-dark text-white shadow-lg'
-                      : 'bg-gradient-to-r from-primary to-navy-light text-white shadow-lg'
-                    : 'bg-card border border-border hover:border-accent/40 text-foreground'
-                }`}
+                onClick={() => window.scrollTo(0, 0)}
+                className="px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2 bg-card border border-border hover:border-accent/40 hover:shadow-md hover:-translate-y-0.5 text-foreground"
               >
-                <ministry.icon className="w-4 h-4" />
-                <span className="hidden sm:inline">{ministry.label}</span>
+                <ministry.icon className="w-4 h-4 text-accent" />
+                <span>{ministry.label}</span>
               </Link>
             ))}
           </div>
 
-          {/* Info Pills */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-2">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cream/80 border border-gold/30 text-foreground text-sm">
-              <Globe className="w-4 h-4 text-accent" />
+          {/* Info Pills - Smaller & Lighter */}
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream/60 border border-gold/20 text-muted-foreground text-xs">
+              <Globe className="w-3.5 h-3.5 text-accent/70" />
               <span>Services in Malayalam</span>
             </div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cream/80 border border-gold/30 text-foreground text-sm">
-              <Bus className="w-4 h-4 text-accent" />
-              <span>Transport available (contact in advance)</span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream/60 border border-gold/20 text-muted-foreground text-xs">
+              <Bus className="w-3.5 h-3.5 text-accent/70" />
+              <span>Transportation available (contact in advance)</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Media + Events - Combined Strip */}
-      <section className="section-cream py-10 md:py-14">
-        <div className="section-container">
+      <section className="section-cream py-8 md:py-10 relative overflow-hidden">
+        {/* Subtle background texture */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+        
+        <div className="section-container relative">
           <div className="grid md:grid-cols-2 gap-4">
             {/* Media */}
-            <Link to="/media" className="group relative rounded-2xl overflow-hidden">
+            <Link 
+              to="/media" 
+              onClick={() => window.scrollTo(0, 0)}
+              className="group relative rounded-2xl overflow-hidden"
+            >
               <div className="absolute inset-0 bg-gradient-to-br from-navy via-primary to-navy" />
               <div className="absolute inset-0 pattern-grid opacity-10" />
               
-              <div className="relative p-6 md:p-8">
-                <div className="w-10 h-10 bg-primary-foreground/15 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <div className="relative p-5 md:p-6">
+                <div className="w-9 h-9 bg-primary-foreground/15 backdrop-blur-sm rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                   <PlayCircle className="w-5 h-5 text-primary-foreground" />
                 </div>
-                <h3 className="text-xl font-bold text-primary-foreground mb-2">Media</h3>
-                <p className="text-primary-foreground/70 text-sm mb-4">
+                <h3 className="text-lg md:text-xl font-bold text-primary-foreground mb-1.5">Media</h3>
+                <p className="text-primary-foreground/80 text-sm md:text-base leading-relaxed mb-3">
                   Sermons, teachings, and worship sessions
                 </p>
                 <span className="inline-flex items-center gap-2 text-accent font-semibold text-sm group-hover:gap-3 transition-all">
@@ -166,16 +173,20 @@ export default function Home() {
             </Link>
 
             {/* Events */}
-            <Link to="/events" className="group relative rounded-2xl overflow-hidden">
+            <Link 
+              to="/events" 
+              onClick={() => window.scrollTo(0, 0)}
+              className="group relative rounded-2xl overflow-hidden"
+            >
               <div className="absolute inset-0 bg-gradient-to-br from-accent via-gold to-accent" />
               <div className="absolute inset-0 pattern-dots-gold opacity-15" />
               
-              <div className="relative p-6 md:p-8">
-                <div className="w-10 h-10 bg-primary/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <div className="relative p-5 md:p-6">
+                <div className="w-9 h-9 bg-primary/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                   <Calendar className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-primary mb-2">Events</h3>
-                <p className="text-primary/70 text-sm mb-4">
+                <h3 className="text-lg md:text-xl font-bold text-primary mb-1.5">Events</h3>
+                <p className="text-primary/80 text-sm md:text-base leading-relaxed mb-3">
                   Upcoming services and gatherings
                 </p>
                 <span className="inline-flex items-center gap-2 text-primary font-semibold text-sm group-hover:gap-3 transition-all">
