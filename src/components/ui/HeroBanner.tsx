@@ -74,7 +74,7 @@ export function HeroBanner({
             
             {/* Title */}
             <h1 
-              className="font-serif animate-fade-in"
+              className="animate-fade-in"
               style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
             >
               <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1]">

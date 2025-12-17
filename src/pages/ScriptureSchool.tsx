@@ -54,7 +54,7 @@ export default function ScriptureSchool() {
         <div className="section-container">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
-              <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-2">
+              <h2 className="text-2xl md:text-3xl text-foreground mb-2">
                 What Children Experience
               </h2>
               <p className="text-muted-foreground">Faith, fun, and friendship every week</p>
@@ -93,7 +93,7 @@ export default function ScriptureSchool() {
                 <Users className="w-4 h-4 text-amber-600" />
                 <span className="text-sm font-medium text-amber-800">Age Groups</span>
               </div>
-              <h2 className="font-serif text-2xl md:text-3xl text-foreground">
+              <h2 className="text-2xl md:text-3xl text-foreground">
                 A Class for Every Child
               </h2>
             </div>
@@ -107,7 +107,7 @@ export default function ScriptureSchool() {
                   <div className={`w-12 h-12 ${group.bg} rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}>
                     <group.icon className={`w-6 h-6 ${group.color}`} />
                   </div>
-                  <h3 className="font-semibold text-foreground font-serif">{group.name}</h3>
+                  <h3 className="font-semibold text-foreground">{group.name}</h3>
                   <p className={`text-sm font-medium ${group.color}`}>{group.ages}</p>
                 </div>
               ))}
@@ -130,7 +130,7 @@ export default function ScriptureSchool() {
             <div className="w-14 h-14 bg-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <BookMarked className="w-7 h-7 text-amber-400" />
             </div>
-            <h2 className="font-serif text-2xl md:text-3xl text-white mb-3">
+            <h2 className="text-2xl md:text-3xl text-white mb-3">
               Explore Our Curriculum
             </h2>
             <p className="text-emerald-100/70 mb-8 max-w-md mx-auto">

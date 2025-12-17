@@ -342,7 +342,7 @@ export default function ScriptureSchoolCurriculum() {
                         {ageBand.icon}
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-foreground font-serif">
+                        <h3 className="text-lg font-semibold text-foreground">
                           {ageBand.name}
                         </h3>
                         <p className="text-sm text-muted-foreground mt-0.5">

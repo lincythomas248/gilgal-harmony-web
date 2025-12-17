@@ -60,7 +60,7 @@ export default function Home() {
         <div className="section-container relative">
           <div className="text-center mb-8">
             <span className="label-badge mb-2">Welcome</span>
-            <h2 className="text-foreground text-2xl md:text-3xl font-serif">Explore IPC Gilgal</h2>
+            <h2 className="text-foreground text-2xl md:text-3xl">Explore IPC Gilgal</h2>
           </div>
           
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
@@ -86,7 +86,7 @@ export default function Home() {
                   }`}>
                     <tile.icon className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-base md:text-lg font-bold text-foreground mb-1 font-serif">{tile.title}</h3>
+                  <h3 className="text-base md:text-lg font-bold text-foreground mb-1">{tile.title}</h3>
                   <p className="text-xs md:text-sm text-muted-foreground">{tile.description}</p>
                   <span className={`inline-flex items-center gap-1 mt-3 font-semibold text-xs group-hover:gap-2 transition-all ${
                     tile.color === 'gold' ? 'text-accent' : 'text-primary'
@@ -154,7 +154,7 @@ export default function Home() {
                         <ministry.icon className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-foreground mb-2 font-serif">{ministry.label}</h3>
+                        <h3 className="text-xl font-bold text-foreground mb-2">{ministry.label}</h3>
                         <p className="text-muted-foreground mb-4">{ministry.description}</p>
                         <Link 
                           to={ministry.link}
@@ -187,7 +187,7 @@ export default function Home() {
                 <div className="w-10 h-10 bg-primary-foreground/15 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <PlayCircle className="w-5 h-5 text-primary-foreground" />
                 </div>
-                <h3 className="text-xl font-bold text-primary-foreground mb-2 font-serif">Media</h3>
+                <h3 className="text-xl font-bold text-primary-foreground mb-2">Media</h3>
                 <p className="text-primary-foreground/70 text-sm mb-4">
                   Sermons, teachings, and worship sessions
                 </p>
@@ -206,7 +206,7 @@ export default function Home() {
                 <div className="w-10 h-10 bg-primary/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <Calendar className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-primary mb-2 font-serif">Events</h3>
+                <h3 className="text-xl font-bold text-primary mb-2">Events</h3>
                 <p className="text-primary/70 text-sm mb-4">
                   Upcoming services and gatherings
                 </p>

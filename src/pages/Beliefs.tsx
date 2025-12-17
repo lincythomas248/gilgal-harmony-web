@@ -71,7 +71,7 @@ export default function Beliefs() {
           <div className="max-w-3xl mx-auto">
             {/* Section heading - dominant focal point */}
             <div className="text-center mb-14 md:mb-20">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white font-serif mb-10 md:mb-12 tracking-tight leading-tight">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-10 md:mb-12 tracking-tight leading-tight">
                 Foundations of Our Faith
               </h2>
               <p className="text-white/95 max-w-2xl mx-auto text-xl md:text-2xl leading-relaxed md:leading-[1.9]">
@@ -97,7 +97,7 @@ export default function Beliefs() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-2xl md:text-[1.65rem] font-semibold text-foreground mb-3 font-serif">
+                    <h3 className="text-2xl md:text-[1.65rem] font-semibold text-foreground mb-3">
                       {belief.title}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed text-lg md:text-[1.125rem]">
