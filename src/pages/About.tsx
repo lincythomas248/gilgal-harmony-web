@@ -4,6 +4,7 @@ import { BackToTop } from "@/components/ui/BackToTop";
 import { MapPin, Users, Heart, Sparkles, Phone, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { LeadershipCard } from "@/components/home/LeadershipCard";
+import worshipBg from "@/assets/worship-community.jpg";
 
 const leadership = [
   { name: "Pr. John Varghese", role: "President", phone: "+971 50 189 2016" },
@@ -51,20 +52,27 @@ export default function About() {
         </div>
       </section>
 
-      {/* Values - Colored band */}
-      <section className="section-cream page-section relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-dove/10 rounded-full blur-3xl" />
+      {/* Values - Full-width image background */}
+      <section className="relative py-16 md:py-24 overflow-hidden">
+        {/* Background image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${worshipBg})` }}
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
         
-        <div className="section-container relative">
+        <div className="section-container relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
-              <span className="label-badge mb-4">Our Values</span>
-              <h2 className="text-foreground font-serif">What We Stand For</h2>
+              <span className="inline-block px-4 py-1.5 bg-accent/90 text-foreground text-xs font-semibold uppercase tracking-wider rounded-full mb-4">
+                Our Values
+              </span>
+              <h2 className="text-white font-serif text-3xl md:text-4xl">What We Stand For</h2>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="card-warm text-center group">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center group shadow-xl">
                 <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-gold-soft rounded-full flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300">
                   <MapPin className="w-8 h-8 text-accent" />
                 </div>
@@ -74,7 +82,7 @@ export default function About() {
                 </p>
               </div>
 
-              <div className="card-warm text-center group">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center group shadow-xl">
                 <div className="w-16 h-16 bg-gradient-to-br from-primary/15 to-dove-light rounded-full flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300">
                   <Users className="w-8 h-8 text-primary" />
                 </div>
@@ -84,7 +92,7 @@ export default function About() {
                 </p>
               </div>
 
-              <div className="card-warm text-center group">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center group shadow-xl">
                 <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-gold-soft rounded-full flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300">
                   <Heart className="w-8 h-8 text-accent" />
                 </div>
