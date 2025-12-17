@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { Calendar, Clock, MapPin, Megaphone, Sparkles } from "lucide-react";
 
@@ -56,9 +56,10 @@ export default function Events() {
   return (
     <Layout>
       <BackToTop />
-      <PageHeader
+      <HeroBanner
         title="Events"
-        subtitle="Upcoming gatherings, services, and special programs."
+        subtitle="Upcoming gatherings, services, and special programs"
+        primaryCta={{ text: "Contact Us", link: "/contact" }}
       />
 
       {/* Regular Events */}

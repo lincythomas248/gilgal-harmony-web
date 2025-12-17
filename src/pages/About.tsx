@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { MapPin, Users, Heart, Sparkles, Phone, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
@@ -20,9 +20,10 @@ export default function About() {
   return (
     <Layout>
       <BackToTop />
-      <PageHeader
+      <HeroBanner
         title="About Us"
-        subtitle="Learn about our church community and our presence in the UAE."
+        subtitle="Learn about our church community and our presence in the UAE"
+        primaryCta={{ text: "Contact Us", link: "/contact" }}
       />
 
       {/* Main content with alternating sections */}

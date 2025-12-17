@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { Youtube, PlayCircle, BookOpen, Sparkles } from "lucide-react";
 
@@ -7,9 +7,10 @@ export default function Media() {
   return (
     <Layout>
       <BackToTop />
-      <PageHeader
+      <HeroBanner
         title="Media"
-        subtitle="Access sermons, teachings, and other media resources."
+        subtitle="Access sermons, teachings, and other media resources"
+        primaryCta={{ text: "Visit YouTube", link: "https://www.youtube.com/@ipcgilgalshj" }}
       />
 
       <section className="section-light page-section">

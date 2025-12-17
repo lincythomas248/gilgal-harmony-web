@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { Mail, Phone, Facebook, Youtube, Send, MapPin, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -32,9 +32,9 @@ export default function Contact() {
   return (
     <Layout>
       <BackToTop />
-      <PageHeader
+      <HeroBanner
         title="Contact Us"
-        subtitle="We would love to hear from you. Reach out anytime."
+        subtitle="We would love to hear from you"
       />
 
       <section className="section-light page-section">

@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { BookOpen, Droplets, Flame, Heart, Cross, Sparkles } from "lucide-react";
 
@@ -45,9 +45,9 @@ export default function Beliefs() {
   return (
     <Layout>
       <BackToTop />
-      <PageHeader
+      <HeroBanner
         title="Our Beliefs"
-        subtitle="The foundational teachings that guide our faith community."
+        subtitle="The foundational teachings that guide our faith community"
       />
 
       <section className="section-light page-section">

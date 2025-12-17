@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { Image, Camera } from "lucide-react";
 
@@ -22,7 +22,7 @@ export default function Gallery() {
   return (
     <Layout>
       <BackToTop />
-      <PageHeader
+      <HeroBanner
         title="Gallery"
         subtitle="Glimpses of our church life and community gatherings"
       />
