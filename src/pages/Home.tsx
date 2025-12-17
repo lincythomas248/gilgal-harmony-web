@@ -60,11 +60,11 @@ export default function Home() {
         <div className="section-container relative z-10 text-center py-16 md:py-20">
           
           {/* Church Name - elegant serif typography */}
-          <h1 className="font-serif mb-6">
-            <span className="block text-5xl md:text-6xl lg:text-7xl font-semibold text-primary-foreground tracking-tight leading-tight">
+          <h1 className="font-serif mb-8">
+            <span className="block text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground tracking-tight leading-tight drop-shadow-lg">
               IPC Gilgal
             </span>
-            <span className="block text-4xl md:text-5xl lg:text-6xl font-medium text-accent mt-2">
+            <span className="block text-4xl md:text-5xl lg:text-6xl font-medium italic text-accent mt-3 drop-shadow-md">
               Church
             </span>
           </h1>
