@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Beliefs from "./pages/Beliefs";
 import Ministries from "./pages/Ministries";
 import ScriptureSchool from "./pages/ScriptureSchool";
+import ScriptureSchoolCurriculum from "./pages/ScriptureSchoolCurriculum";
 import PYPA from "./pages/PYPA";
 import PrayerFellowship from "./pages/PrayerFellowship";
 import Media from "./pages/Media";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/beliefs" element={<Beliefs />} />
           <Route path="/ministries" element={<Ministries />} />
           <Route path="/ministries/scripture-school" element={<ScriptureSchool />} />
+          <Route path="/scripture-school/curriculum" element={<ScriptureSchoolCurriculum />} />
           <Route path="/ministries/pypa" element={<PYPA />} />
           <Route path="/prayer-fellowship" element={<PrayerFellowship />} />
           <Route path="/media" element={<Media />} />

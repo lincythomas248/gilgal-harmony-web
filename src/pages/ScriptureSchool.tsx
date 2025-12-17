@@ -1,7 +1,9 @@
 import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { BackToTop } from "@/components/ui/BackToTop";
-import { BookOpen, Users, Star, Sparkles } from "lucide-react";
+import { BookOpen, Users, Star, Sparkles, FileText } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import scriptureSchoolLogo from "@/assets/scripture-school-logo.png";
 import pencilsBg from "@/assets/scripture-school-bg.jpg";
 
@@ -99,8 +101,30 @@ export default function ScriptureSchool() {
         </div>
       </section>
 
-      {/* Activities */}
+      {/* Curriculum Section */}
       <section className="section-light page-section">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-gold-soft rounded-xl flex items-center justify-center mx-auto mb-6">
+              <FileText className="w-7 h-7 text-accent" />
+            </div>
+            <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-4 font-serif">
+              Scripture School Curriculum
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto">
+              Our curriculum is thoughtfully structured from Beginners through Grade 12, with clear progression at each level. Lessons are aligned with regional examination focus areas to help students grow in biblical knowledge and faith.
+            </p>
+            <Button asChild className="rounded-full">
+              <Link to="/scripture-school/curriculum">
+                View Full Curriculum Map
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Activities */}
+      <section className="section-cream page-section">
         <div className="section-container">
           <div className="max-w-4xl mx-auto">
             <div className="card-warm relative overflow-hidden">
