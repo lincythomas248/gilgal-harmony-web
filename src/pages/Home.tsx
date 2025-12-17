@@ -46,7 +46,7 @@ export default function Home() {
       <HeroBanner
         title="IPC Gilgal"
         titleSecondLine="Church"
-        subtitle="A welcoming Christian community"
+        subtitle="A welcoming Malayalee Christian community united in faith and fellowship."
         location="Sharjah & Ras Al Khaimah, UAE"
         primaryCta={{ text: "Discover Our Church", link: "/about" }}
         secondaryCta={{ text: "Get in Touch", link: "/contact" }}
