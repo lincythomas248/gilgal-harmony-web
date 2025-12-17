@@ -42,6 +42,23 @@ const beliefs = [
   },
 ];
 
+// Belief Card component for consistent styling
+const BeliefCard = ({ belief }: { belief: typeof beliefs[0] }) => (
+  <div className="rounded-xl p-6 bg-[#FAF8F3] shadow-md border border-black/[0.04] h-full">
+    <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
+      belief.color === 'gold' ? 'bg-accent/12' : 'bg-primary/8'
+    }`}>
+      <belief.icon className={`w-6 h-6 ${belief.color === 'gold' ? 'text-accent' : 'text-primary'}`} />
+    </div>
+    <h3 className="text-lg font-semibold text-foreground mb-2 leading-snug">
+      {belief.title}
+    </h3>
+    <p className="text-muted-foreground text-sm leading-relaxed">
+      {belief.description}
+    </p>
+  </div>
+);
+
 export default function Beliefs() {
   return (
     <Layout>
@@ -51,103 +68,73 @@ export default function Beliefs() {
         subtitle="The foundational teachings that guide our faith community"
       />
 
-      {/* Beliefs section - Dove-centred sacred composition */}
-      <section className="relative pt-[420px] sm:pt-[480px] md:pt-[520px] pb-20 md:pb-32 overflow-hidden">
-        {/* Background image - unmodified, dove at top centre */}
+      {/* Transition band - visual rest between hero and beliefs */}
+      <section className="bg-background py-16 md:py-20">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tracking-tight leading-tight mb-5">
+              Foundations of Our Faith
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+              As a congregation of the Indian Pentecostal Church, our beliefs are rooted in historic Christian teachings. The following principles form the foundation of our faith and practice.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Beliefs section with dove backdrop */}
+      <section className="relative py-16 md:py-24 overflow-hidden">
+        {/* Background image - dove positioned in upper area */}
         <div 
           className="absolute inset-0 bg-cover bg-no-repeat"
           style={{ 
             backgroundImage: `url(${pentecostImage})`,
-            backgroundPosition: 'center top'
+            backgroundPosition: 'center 20%'
           }}
         />
+        {/* Very subtle warm tint for card readability - not washing out image */}
+        <div className="absolute inset-0 bg-background/20" />
         
-        {/* Content container - positioned below the dove */}
+        {/* Sacred Grid of Belief Cards */}
         <div className="section-container relative z-10">
           
-          {/* Quiet glass plaque - smaller, respectful, anchored */}
-          <div className="max-w-2xl mx-auto mb-12 md:mb-16 text-center">
-            <div 
-              className="inline-block rounded-2xl bg-black/35 backdrop-blur-sm px-8 py-6 sm:px-10 sm:py-7"
-              style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.35)' }}
-            >
-              <h2 
-                className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight leading-tight mb-3"
-                style={{ textShadow: '0 4px 16px rgba(0,0,0,0.6)' }}
-              >
-                Foundations of Our Faith
-              </h2>
-              <p 
-                className="text-base sm:text-lg text-white/85 leading-relaxed max-w-xl mx-auto"
-                style={{ textShadow: '0 3px 12px rgba(0,0,0,0.5)' }}
-              >
-                The principles that guide our congregation, rooted in historic Christian teachings.
-              </p>
+          {/* Desktop: 3 + 2 centered grid */}
+          <div className="hidden lg:block max-w-5xl mx-auto">
+            {/* First row - 3 cards */}
+            <div className="grid grid-cols-3 gap-6 mb-6">
+              {beliefs.slice(0, 3).map((belief, index) => (
+                <BeliefCard key={index} belief={belief} />
+              ))}
+            </div>
+            {/* Second row - 2 cards centered */}
+            <div className="flex justify-center gap-6">
+              {beliefs.slice(3, 5).map((belief, index) => (
+                <div key={index} className="w-[calc(33.333%-1rem)]">
+                  <BeliefCard belief={belief} />
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Mobile: Clean vertical stack */}
-          <div className="md:hidden space-y-5 max-w-md mx-auto px-2">
-            {beliefs.map((belief, index) => (
-              <div 
-                key={index} 
-                className="rounded-xl p-5 bg-[#FAF8F3] shadow-md border border-black/[0.04]"
-              >
-                <div className="flex items-start gap-4">
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                    belief.color === 'gold' ? 'bg-accent/12' : 'bg-primary/8'
-                  }`}>
-                    <belief.icon className={`w-6 h-6 ${belief.color === 'gold' ? 'text-accent' : 'text-primary'}`} />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-foreground mb-1.5 leading-snug">
-                      {belief.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {belief.description}
-                    </p>
-                  </div>
-                </div>
+          {/* Tablet: 2 + 2 + 1 grid */}
+          <div className="hidden md:block lg:hidden max-w-2xl mx-auto">
+            <div className="grid grid-cols-2 gap-5 mb-5">
+              {beliefs.slice(0, 4).map((belief, index) => (
+                <BeliefCard key={index} belief={belief} />
+              ))}
+            </div>
+            <div className="flex justify-center">
+              <div className="w-1/2">
+                <BeliefCard belief={beliefs[4]} />
               </div>
-            ))}
+            </div>
           </div>
 
-          {/* Desktop: Wide, shallow, grounded arc */}
-          <div className="hidden md:flex justify-center items-end gap-4 lg:gap-5 max-w-6xl mx-auto px-4">
-            {beliefs.map((belief, index) => {
-              // Wide shallow arc: center slightly elevated, outer cards level
-              // Minimal rotation for stability
-              const arcConfig = [
-                { translateY: 24, rotate: -2 },   // Far left
-                { translateY: 10, rotate: -1 },   // Left
-                { translateY: 0, rotate: 0 },     // Center - highest
-                { translateY: 10, rotate: 1 },    // Right
-                { translateY: 24, rotate: 2 },    // Far right
-              ];
-              const config = arcConfig[index];
-              
-              return (
-                <div 
-                  key={index} 
-                  className="w-[200px] lg:w-[220px] rounded-xl p-5 lg:p-6 bg-[#FAF8F3] shadow-lg border border-black/[0.05] transition-shadow duration-200 hover:shadow-xl"
-                  style={{ 
-                    transform: `translateY(${config.translateY}px) rotate(${config.rotate}deg)`,
-                  }}
-                >
-                  <div className={`w-11 h-11 lg:w-12 lg:h-12 rounded-lg flex items-center justify-center mb-4 ${
-                    belief.color === 'gold' ? 'bg-accent/12' : 'bg-primary/8'
-                  }`}>
-                    <belief.icon className={`w-5 h-5 lg:w-6 lg:h-6 ${belief.color === 'gold' ? 'text-accent' : 'text-primary'}`} />
-                  </div>
-                  <h3 className="text-base lg:text-lg font-semibold text-foreground mb-2 leading-snug">
-                    {belief.title}
-                  </h3>
-                  <p className="text-muted-foreground text-xs lg:text-sm leading-relaxed">
-                    {belief.description}
-                  </p>
-                </div>
-              );
-            })}
+          {/* Mobile: vertical stack */}
+          <div className="md:hidden space-y-4 max-w-md mx-auto">
+            {beliefs.map((belief, index) => (
+              <BeliefCard key={index} belief={belief} />
+            ))}
           </div>
         </div>
       </section>
