@@ -61,11 +61,11 @@ export default function ScriptureSchool() {
             
             {/* Right column - Text content + Logo */}
             <div className="text-left md:text-left">
-              {/* Logo - Using blend mode to remove white background */}
+              {/* Logo - Transparent PNG */}
               <img 
                 src={scriptureSchoolLogo} 
                 alt="Scripture School Logo" 
-                className="block w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain mb-6 mix-blend-multiply"
+                className="block w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain mb-6"
               />
               
               {/* Main Heading */}
