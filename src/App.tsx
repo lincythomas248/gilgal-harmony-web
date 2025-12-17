@@ -16,6 +16,7 @@ import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import DevotionsResources from "./pages/DevotionsResources";
+import ODBDevotionalDetail from "./pages/ODBDevotionalDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/resources/devotions" element={<DevotionsResources />} />
+          <Route path="/resources/devotions/odb/:slug" element={<ODBDevotionalDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
