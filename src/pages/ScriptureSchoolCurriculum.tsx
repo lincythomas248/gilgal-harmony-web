@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { BookOpen, GraduationCap, Star } from "lucide-react";
+import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png";
 
 interface Lesson {
   number: number;
@@ -304,9 +305,13 @@ export default function ScriptureSchoolCurriculum() {
   return (
     <Layout>
       <BackToTop />
-      <PageHeader
-        title="Scripture School Curriculum Map"
+      <HeroBanner
+        title="Scripture School"
+        titleSecondLine="Curriculum Map"
         subtitle="A structured journey through biblical education from Beginners to Grade 12"
+        logo={scriptureSchoolLogo}
+        logoAlt="Scripture School Logo"
+        showCurvedDivider={true}
       />
 
       {/* Introduction */}
