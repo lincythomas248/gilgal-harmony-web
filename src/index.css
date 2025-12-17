@@ -148,69 +148,72 @@
   }
 
   /* LOCKED TYPOGRAPHY SYSTEM - Montserrat (headings/UI) + Lora (body) */
+  /* These clamp sizes are authoritative. Any new section must use this scale. */
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Lora', Georgia, serif;
-    font-size: 17px;
-    line-height: 1.7;
+    font-size: clamp(16px, 1.25vw, 18px);
+    line-height: 1.75;
   }
 
-  /* H1 - Page Title */
+  /* H1 - Page Title (Montserrat 700) */
   h1 {
     font-family: 'Montserrat', system-ui, sans-serif;
-    @apply font-bold tracking-tight text-foreground;
-    font-size: clamp(3rem, 5vw, 3.5rem);
-    line-height: 1.15;
+    @apply font-bold text-foreground;
+    font-size: clamp(34px, 4.5vw, 56px);
+    line-height: 1.12;
     letter-spacing: -0.5px;
+    text-wrap: balance;
   }
 
-  /* H2 - Section Title */
+  /* H2 - Section Title (Montserrat 600) */
   h2 {
     font-family: 'Montserrat', system-ui, sans-serif;
-    @apply font-semibold tracking-tight text-foreground;
-    font-size: clamp(2.25rem, 4vw, 2.5rem);
-    line-height: 1.2;
+    @apply font-semibold text-foreground;
+    font-size: clamp(28px, 3.6vw, 40px);
+    line-height: 1.18;
+    text-wrap: balance;
   }
 
-  /* H3 - Subsection Title */
+  /* H3 - Subsection Title (Montserrat 600) */
   h3 {
     font-family: 'Montserrat', system-ui, sans-serif;
-    @apply font-semibold tracking-tight text-foreground;
-    font-size: clamp(1.75rem, 3vw, 2rem);
-    line-height: 1.25;
+    @apply font-semibold text-foreground;
+    font-size: clamp(22px, 2.8vw, 32px);
+    line-height: 1.22;
+    text-wrap: balance;
   }
 
-  /* H4 - Card/Block Title */
+  /* H4 - Card/Block Title (Montserrat 500) */
   h4 {
     font-family: 'Montserrat', system-ui, sans-serif;
-    @apply font-medium tracking-tight text-foreground;
-    font-size: clamp(1.375rem, 2.5vw, 1.5rem);
-    line-height: 1.3;
+    @apply font-medium text-foreground;
+    font-size: clamp(18px, 2.2vw, 24px);
+    line-height: 1.28;
   }
 
-  /* H5 - Small Heading */
+  /* H5 - Small Heading (Montserrat 500) */
   h5 {
     font-family: 'Montserrat', system-ui, sans-serif;
     @apply font-medium text-foreground;
-    font-size: clamp(1.125rem, 2vw, 1.25rem);
-    line-height: 1.35;
+    font-size: clamp(16px, 1.8vw, 20px);
+    line-height: 1.3;
   }
 
-  /* H6 - Eyebrow/Meta Title */
+  /* H6 - Eyebrow/Meta Title (Montserrat 500, uppercase) */
   h6 {
     font-family: 'Montserrat', system-ui, sans-serif;
     @apply font-medium text-foreground uppercase;
-    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-size: clamp(12px, 1.4vw, 16px);
     letter-spacing: 0.08em;
     line-height: 1.4;
   }
 
-  /* Body text - Lora */
+  /* Body text - Lora 400 */
   p {
     font-family: 'Lora', Georgia, serif;
-    @apply leading-relaxed;
-    font-size: 1.0625rem;
-    line-height: 1.7;
+    font-size: clamp(16px, 1.25vw, 18px);
+    line-height: 1.75;
   }
 
   /* Navigation, buttons, UI labels - Montserrat */
@@ -219,35 +222,44 @@
   }
 }
 
-/* Scripture text variant - special style */
+/* Typography variants - LOCKED SCALE */
 @layer components {
+  /* Scripture text variant - Lora italic */
   .text-scripture {
     font-family: 'Lora', Georgia, serif;
     @apply italic;
-    font-size: clamp(1.125rem, 2vw, 1.25rem);
-    line-height: 1.8;
+    font-size: clamp(16px, 1.4vw, 20px);
+    line-height: 1.85;
     letter-spacing: 0;
   }
 
   .text-scripture-lg {
     font-family: 'Lora', Georgia, serif;
     @apply italic text-muted-foreground;
-    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-    line-height: 1.8;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.85;
   }
 
-  /* Body small variant */
+  /* Body small variant (Lora 400) */
   .text-body-small {
     font-family: 'Lora', Georgia, serif;
-    font-size: 0.9375rem;
-    line-height: 1.6;
+    font-size: clamp(14px, 1.15vw, 16px);
+    line-height: 1.65;
   }
 
-  /* Caption/Meta text */
+  /* Caption/Meta text (Lora 400) */
   .text-caption {
     font-family: 'Lora', Georgia, serif;
-    font-size: 0.8125rem;
+    font-size: clamp(12px, 1vw, 14px);
     line-height: 1.5;
+  }
+
+  /* Scripture quote - prominent variant */
+  .text-scripture-quote {
+    font-family: 'Lora', Georgia, serif;
+    @apply italic;
+    font-size: clamp(16px, 1.4vw, 20px);
+    line-height: 1.85;
   }
 }
 
@@ -399,33 +411,30 @@
     background-color: hsl(var(--dove-blue) / 0.15);
   }
 
-  /* Text styles - LOCKED TYPOGRAPHY SYSTEM */
+  /* Text styles - LOCKED TYPOGRAPHY SYSTEM with clamp() */
   .text-display {
-    @apply text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
     font-family: 'Montserrat', system-ui, sans-serif;
-    line-height: 1.15;
+    @apply font-bold;
+    font-size: clamp(34px, 4.5vw, 56px);
+    line-height: 1.12;
     letter-spacing: -0.5px;
+    text-wrap: balance;
   }
 
   .text-display-xl {
-    @apply text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight;
     font-family: 'Montserrat', system-ui, sans-serif;
+    @apply font-bold;
+    font-size: clamp(40px, 5.5vw, 72px);
     line-height: 1.1;
     letter-spacing: -0.5px;
+    text-wrap: balance;
   }
 
   .text-subtitle {
-    @apply text-lg md:text-xl text-muted-foreground;
     font-family: 'Lora', Georgia, serif;
-    line-height: 1.7;
-  }
-
-  /* Scripture text - Lora italic for Bible verses and spiritual quotes */
-  .text-scripture-quote {
-    @apply italic;
-    font-family: 'Lora', Georgia, serif;
-    font-size: clamp(1.125rem, 2vw, 1.25rem);
-    line-height: 1.8;
+    @apply text-muted-foreground;
+    font-size: clamp(16px, 1.25vw, 18px);
+    line-height: 1.75;
   }
 
   /* Accent decorators - using gold only, no gradients */
