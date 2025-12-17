@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { BookOpen, Users, ArrowRight, Globe, HandHeart, Church, Video, PlayCircle, Calendar } from "lucide-react";
+import { BookOpen, Users, ArrowRight, Globe, HandHeart, Church, Video, PlayCircle, Calendar, BookOpenText } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
-
+import { PastorMessage } from "@/components/home/PastorMessage";
 const ministries = [
   {
     id: "scripture-school",
@@ -216,6 +216,23 @@ export default function Home() {
               </div>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Pastor's Message Section */}
+      <PastorMessage />
+
+      {/* Verse Banner */}
+      <section className="bg-primary py-12 md:py-16 relative overflow-hidden">
+        <div className="absolute inset-0 pattern-grid opacity-5" />
+        <div className="section-container relative text-center">
+          <BookOpenText className="w-8 h-8 text-accent/80 mx-auto mb-4" />
+          <blockquote className="text-xl md:text-2xl lg:text-3xl text-primary-foreground/90 font-serif italic max-w-3xl mx-auto leading-relaxed">
+            "For where two or three gather in my name, there am I with them."
+          </blockquote>
+          <cite className="block mt-4 text-primary-foreground/70 text-sm md:text-base font-medium not-italic">
+            Matthew 18:20
+          </cite>
         </div>
       </section>
     </Layout>
