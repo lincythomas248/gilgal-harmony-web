@@ -1,5 +1,4 @@
 import { Layout } from "@/components/layout/Layout";
-import { PageHeader } from "@/components/ui/PageHeader";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { 
   BookOpen, 
@@ -20,7 +19,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import pencilsBg from "@/assets/scripture-school-bg.jpg";
+import scriptureSchoolLogo from "@/assets/scripture-school-logo-new.png";
 
 const ageGroups = [
   { 
@@ -87,20 +86,79 @@ export default function ScriptureSchool() {
   return (
     <Layout>
       <BackToTop />
-      <PageHeader
-        title="Scripture School"
-        subtitle="Where faith takes root and joy blossoms"
-      />
-
-      {/* Hero Image Banner - Lighter & More Welcoming */}
-      <section className="relative h-40 md:h-52 overflow-hidden">
-        <img src={pencilsBg} alt="Scripture School" className="w-full h-full object-cover object-bottom" />
-        <div className="absolute inset-0 bg-gradient-to-t from-amber-50/95 via-background/40 to-transparent" />
+      
+      {/* Hero Section - Two Column Layout */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-amber-100/60 to-emerald-50/40">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-10 left-10 w-64 h-64 bg-amber-200/30 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 right-10 w-48 h-48 bg-emerald-200/30 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/3 w-40 h-40 bg-sky-200/20 rounded-full blur-3xl" />
+          
+          {/* Decorative dots and sparkles */}
+          <div className="absolute top-16 right-1/4 w-2 h-2 bg-amber-400/50 rounded-full animate-pulse" />
+          <div className="absolute top-24 left-1/5 w-1.5 h-1.5 bg-emerald-400/50 rounded-full animate-pulse delay-300" />
+          <div className="absolute bottom-20 left-1/3 w-2 h-2 bg-sky-400/40 rounded-full animate-pulse delay-500" />
+          <div className="absolute bottom-32 right-1/5 w-1.5 h-1.5 bg-violet-400/40 rounded-full animate-pulse delay-700" />
+          <div className="absolute top-1/3 right-1/6 w-1 h-1 bg-rose-400/50 rounded-full" />
+        </div>
         
-        {/* Decorative floating elements */}
-        <div className="absolute bottom-4 left-1/4 w-3 h-3 bg-amber-300/60 rounded-full animate-pulse" />
-        <div className="absolute bottom-8 right-1/3 w-2 h-2 bg-sky-300/60 rounded-full animate-pulse delay-300" />
-        <div className="absolute bottom-6 right-1/4 w-4 h-4 bg-emerald-300/50 rounded-full animate-pulse delay-500" />
+        <div className="section-container relative py-12 md:py-16 lg:py-20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-16">
+            {/* Left: Text Content */}
+            <div className="flex-1 text-center md:text-left order-1">
+              {/* Decorative sparkle */}
+              <div className="inline-flex items-center gap-2 mb-4">
+                <Sparkles className="w-5 h-5 text-amber-500" />
+                <Star className="w-4 h-4 text-emerald-500" />
+              </div>
+              
+              {/* Main Heading */}
+              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-wide leading-tight mb-4">
+                Scripture
+                <br />
+                <span className="bg-gradient-to-r from-emerald-700 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                  School
+                </span>
+              </h1>
+              
+              {/* Subheading */}
+              <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground font-serif italic leading-relaxed max-w-md mx-auto md:mx-0">
+                Where faith takes root and joy blossoms
+              </p>
+              
+              {/* Decorative line */}
+              <div className="flex items-center gap-2 mt-6 justify-center md:justify-start">
+                <div className="w-8 h-0.5 bg-gradient-to-r from-amber-400 to-amber-300 rounded-full" />
+                <Star className="w-3 h-3 text-amber-500" />
+                <div className="w-16 h-0.5 bg-gradient-to-r from-amber-300 to-emerald-300 rounded-full" />
+                <Star className="w-3 h-3 text-emerald-500" />
+                <div className="w-8 h-0.5 bg-gradient-to-r from-emerald-300 to-emerald-400 rounded-full" />
+              </div>
+            </div>
+            
+            {/* Right: Logo */}
+            <div className="flex-shrink-0 order-2 md:order-2">
+              <div className="relative">
+                {/* Glow effect behind logo */}
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-300/40 via-emerald-300/30 to-sky-300/20 rounded-full blur-2xl scale-110" />
+                
+                <img 
+                  src={scriptureSchoolLogo} 
+                  alt="Scripture School Logo" 
+                  className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 object-contain drop-shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Bottom curved divider */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 60" className="w-full h-8 md:h-12 fill-amber-50/90">
+            <path d="M0,60 C360,0 1080,0 1440,60 L1440,60 L0,60 Z" />
+          </svg>
+        </div>
       </section>
 
       {/* Curved Divider */}
