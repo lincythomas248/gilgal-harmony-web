@@ -1,6 +1,6 @@
-import { useState } from "react";
+
 import { Link } from "react-router-dom";
-import { BookOpen, Users, ArrowRight, Globe, HandHeart, Church, Video, PlayCircle, Calendar, BookOpenText } from "lucide-react";
+import { BookOpen, Users, ArrowRight, Globe, HandHeart, Church, Video, PlayCircle, Calendar, BookOpenText, Bus } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { PastorMessage } from "@/components/home/PastorMessage";
@@ -39,7 +39,7 @@ const exploreTiles = [
 ];
 
 export default function Home() {
-  const [activeMinistry, setActiveMinistry] = useState(0);
+  
 
   return (
     <Layout>
@@ -101,21 +101,21 @@ export default function Home() {
       </section>
 
       {/* Ministries - Compact Tabbed Interface */}
-      <section className="section-light py-12 md:py-16 relative">
+      <section className="section-light py-8 md:py-10 relative">
         <div className="section-container">
-          <div className="text-center mb-8">
+          <div className="text-center mb-5">
             <span className="label-badge mb-2">Our Ministries</span>
             <h2 className="text-foreground text-2xl md:text-3xl mb-2">How We Serve</h2>
           </div>
 
           {/* Tab Buttons */}
-          <div className="flex flex-wrap justify-center gap-2 mb-6">
+          <div className="flex flex-wrap justify-center gap-2 mb-4">
             {ministries.map((ministry, index) => (
-              <button
+              <Link
                 key={ministry.id}
-                onClick={() => setActiveMinistry(index)}
+                to={ministry.link}
                 className={`px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2 ${
-                  activeMinistry === index
+                  index === 0
                     ? ministry.color === 'accent'
                       ? 'bg-gradient-to-r from-accent to-gold-dark text-white shadow-lg'
                       : 'bg-gradient-to-r from-primary to-navy-light text-white shadow-lg'
@@ -124,52 +124,20 @@ export default function Home() {
               >
                 <ministry.icon className="w-4 h-4" />
                 <span className="hidden sm:inline">{ministry.label}</span>
-              </button>
+              </Link>
             ))}
           </div>
 
-          {/* Tab Content */}
-          <div className="max-w-2xl mx-auto">
-            {ministries.map((ministry, index) => (
-              <div
-                key={ministry.id}
-                className={`transition-all duration-400 ${
-                  activeMinistry === index 
-                    ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 absolute -translate-y-4 pointer-events-none'
-                }`}
-              >
-                {activeMinistry === index && (
-                  <div className={`card-warm p-6 md:p-8 rounded-2xl ${
-                    ministry.color === 'accent' 
-                      ? 'bg-gradient-to-br from-card via-gold-soft/25 to-card border-gold/20' 
-                      : 'bg-gradient-to-br from-card via-dove-light/35 to-card border-dove/20'
-                  }`}>
-                    <div className="flex items-start gap-4">
-                      <div className={`w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center shadow-md ${
-                        ministry.color === 'accent' 
-                          ? 'bg-gradient-to-br from-accent to-gold-dark' 
-                          : 'bg-gradient-to-br from-primary to-navy-light'
-                      }`}>
-                        <ministry.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-foreground mb-2">{ministry.label}</h3>
-                        <p className="text-muted-foreground mb-4">{ministry.description}</p>
-                        <Link 
-                          to={ministry.link}
-                          className={`inline-flex items-center gap-2 font-semibold text-sm hover:gap-3 transition-all ${
-                            ministry.color === 'accent' ? 'text-accent' : 'text-primary'
-                          }`}
-                        >
-                          Learn more <ArrowRight className="w-4 h-4" />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
+          {/* Info Pills */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-2">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cream/80 border border-gold/30 text-foreground text-sm">
+              <Globe className="w-4 h-4 text-accent" />
+              <span>Services in Malayalam</span>
+            </div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cream/80 border border-gold/30 text-foreground text-sm">
+              <Bus className="w-4 h-4 text-accent" />
+              <span>Transport available (contact in advance)</span>
+            </div>
           </div>
         </div>
       </section>
