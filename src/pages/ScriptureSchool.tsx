@@ -30,10 +30,10 @@ const experiences = [
 ];
 
 const ageGroups = [
-  { name: "Beginners", ages: "3–5 yrs", icon: Baby, color: "text-amber-600", bg: "bg-amber-100" },
+  { name: "Beginner", ages: "3–5 yrs", icon: Baby, color: "text-amber-600", bg: "bg-amber-100" },
   { name: "Primary", ages: "6–9 yrs", icon: BookMarked, color: "text-sky-600", bg: "bg-sky-100" },
   { name: "Juniors", ages: "10–12 yrs", icon: Lightbulb, color: "text-emerald-600", bg: "bg-emerald-100" },
-  { name: "Intermediates", ages: "13–15 yrs", icon: GraduationCap, color: "text-violet-600", bg: "bg-violet-100" },
+  { name: "Intermediate", ages: "13–15 yrs", icon: GraduationCap, color: "text-violet-600", bg: "bg-violet-100" },
   { name: "Seniors", ages: "16+ yrs", icon: Crown, color: "text-rose-600", bg: "bg-rose-100" },
 ];
 
@@ -80,14 +80,12 @@ export default function ScriptureSchool() {
 
       {/* COMMUNITY PHOTO BAND */}
       <section className="relative w-full my-12 md:my-16 lg:my-20">
-        <div 
-          className="w-full h-[380px] sm:h-[450px] md:h-[520px] lg:h-[580px] bg-cover bg-no-repeat"
-          style={{ 
-            backgroundImage: `url(${communityPhoto})`,
-            backgroundPosition: 'center center'
-          }}
-          role="img"
-          aria-label="Scripture School community gathering"
+        <img
+          src={communityPhoto}
+          alt="Scripture School community group photo"
+          className="w-full h-auto"
+          loading="lazy"
+          decoding="async"
         />
       </section>
 
@@ -116,12 +114,17 @@ export default function ScriptureSchool() {
               {ageGroups.map((group, index) => (
                 <div 
                   key={index} 
-                  className="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 text-center group min-h-[140px] flex flex-col justify-center"
+                  className="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 text-center group min-h-[160px] flex flex-col items-center justify-center"
                 >
                   <div className={`w-12 h-12 ${group.bg} rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}>
                     <group.icon className={`w-6 h-6 ${group.color}`} />
                   </div>
-                  <h3 className="font-semibold text-foreground text-center leading-tight break-words">{group.name}</h3>
+                  <h3
+                    className="font-semibold text-foreground text-center whitespace-normal break-normal leading-[1.15]"
+                    style={{ textWrap: "balance" }}
+                  >
+                    {group.name}
+                  </h3>
                   <p className={`text-sm font-medium ${group.color} mt-1`}>{group.ages}</p>
                 </div>
               ))}
