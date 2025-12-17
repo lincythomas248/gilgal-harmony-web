@@ -43,24 +43,20 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* Hero Section - Two Column Layout */}
-      <section className="relative min-h-[80vh] flex items-center overflow-hidden">
+      {/* Hero Section - Two Column Layout (matching Scripture School) */}
+      <section className="relative min-h-[65vh] md:min-h-[70vh] flex items-center overflow-hidden">
         {/* Background base - dark navy */}
         <div className="absolute inset-0 bg-gradient-to-br from-[hsl(218,44%,14%)] via-navy to-[hsl(218,44%,18%)]" />
         
-        {/* Subtle warm glow near dove area */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-1/3 left-1/3 w-64 h-64 bg-gold/8 rounded-full blur-[100px] pointer-events-none" />
-        
         {/* Two Column Grid */}
-        <div className="section-container relative z-10 py-16 md:py-20">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
+        <div className="section-container relative z-10 py-12 md:py-16">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             
-            {/* Column A: Dove Image */}
+            {/* Column A: Dove Image - Clear, no heavy overlay */}
             <div className="relative order-1 md:order-1 flex justify-center md:justify-start">
-              <div className="relative w-full max-w-md md:max-w-lg lg:max-w-xl">
-                {/* Soft glow behind dove */}
-                <div className="absolute inset-0 bg-gradient-radial from-gold/15 via-transparent to-transparent blur-2xl scale-110" />
+              <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg">
+                {/* Soft golden glow behind dove */}
+                <div className="absolute inset-0 bg-gradient-radial from-gold/20 via-accent/10 to-transparent blur-3xl scale-125" />
                 <img 
                   src={heroBg} 
                   alt="Dove of peace - symbol of the Holy Spirit" 
@@ -71,24 +67,24 @@ export default function Home() {
             </div>
             
             {/* Column B: Text Content */}
-            <div className="order-2 md:order-2 text-center md:text-left space-y-8">
+            <div className="order-2 md:order-2 text-center md:text-left space-y-6">
               
               {/* Primary Heading */}
               <h1 
                 className="font-serif animate-fade-in"
                 style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
               >
-                <span className="block text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground tracking-tight leading-[1.1]">
+                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground tracking-tight leading-[1.1]">
                   IPC Gilgal
                 </span>
-                <span className="block text-3xl md:text-4xl lg:text-5xl font-semibold text-primary-foreground/90 mt-2">
+                <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-primary-foreground/90 mt-2">
                   Church
                 </span>
               </h1>
               
               {/* Secondary Emphasis - Script/Italic */}
               <p 
-                className="text-xl md:text-2xl lg:text-3xl text-accent font-serif italic leading-relaxed animate-fade-in"
+                className="text-lg md:text-xl lg:text-2xl text-accent font-serif italic leading-relaxed animate-fade-in"
                 style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
               >
                 A welcoming Christian community
@@ -96,7 +92,7 @@ export default function Home() {
               
               {/* Location - Small Caps */}
               <p 
-                className="text-sm md:text-base text-primary-foreground/60 tracking-[0.3em] uppercase font-medium animate-fade-in"
+                className="text-sm md:text-base text-primary-foreground/60 tracking-[0.25em] uppercase font-medium animate-fade-in"
                 style={{ animationDelay: '0.6s', animationFillMode: 'both' }}
               >
                 Sharjah & Ras Al Khaimah, UAE
@@ -104,19 +100,19 @@ export default function Home() {
               
               {/* CTA Buttons */}
               <div 
-                className="flex flex-col sm:flex-row gap-5 justify-center md:justify-start pt-4 animate-fade-in"
+                className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2 animate-fade-in"
                 style={{ animationDelay: '0.7s', animationFillMode: 'both' }}
               >
                 <Link 
                   to="/about" 
-                  className="inline-flex items-center justify-center gap-3 bg-accent hover:bg-gold-dark text-foreground px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-center gap-3 bg-accent hover:bg-gold-dark text-foreground px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                 >
                   Discover Our Church
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link 
                   to="/contact" 
-                  className="inline-flex items-center justify-center gap-2 bg-transparent text-primary-foreground border-2 border-primary-foreground/30 hover:border-primary-foreground/60 hover:bg-primary-foreground/5 px-8 py-4 rounded-xl font-semibold transition-all duration-300"
+                  className="inline-flex items-center justify-center gap-2 bg-transparent text-primary-foreground border-2 border-primary-foreground/30 hover:border-primary-foreground/60 hover:bg-primary-foreground/5 px-8 py-4 rounded-full font-semibold transition-all duration-300"
                 >
                   Get in Touch
                 </Link>
@@ -124,6 +120,11 @@ export default function Home() {
             </div>
           </div>
         </div>
+        
+        {/* Curved bottom divider (matching Scripture School) */}
+        <svg viewBox="0 0 1440 60" className="absolute bottom-0 w-full h-10 md:h-14" preserveAspectRatio="none">
+          <path d="M0,60 C480,0 960,0 1440,60 L1440,60 L0,60 Z" className="fill-background" />
+        </svg>
       </section>
 
       {/* Explore IPC Gilgal - Hub Grid */}
