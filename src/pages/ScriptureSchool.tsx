@@ -1,6 +1,14 @@
+import { useState, useRef } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { HeroBanner } from "@/components/ui/HeroBanner";
+import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { 
   BookOpen, 
   Users, 
@@ -13,10 +21,12 @@ import {
   BookMarked,
   Lightbulb,
   Crown,
-  Heart
+  Heart,
+  CheckCircle2,
+  Clock,
+  X
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png";
 import communityPhoto from "@/assets/scripture-school-community.jpg";
 
@@ -31,14 +41,150 @@ const experiences = [
 ];
 
 const ageGroups = [
-  { name: "Beginner", ages: "3–5 yrs", icon: Baby, color: "text-amber-600", bg: "bg-amber-100" },
-  { name: "Primary", ages: "6–9 yrs", icon: BookMarked, color: "text-sky-600", bg: "bg-sky-100" },
-  { name: "Juniors", ages: "10–12 yrs", icon: Lightbulb, color: "text-emerald-600", bg: "bg-emerald-100" },
-  { name: "Intermediate", ages: "13–15 yrs", icon: GraduationCap, color: "text-violet-600", bg: "bg-violet-100" },
-  { name: "Seniors", ages: "16+ yrs", icon: Crown, color: "text-rose-600", bg: "bg-rose-100" },
+  { 
+    id: "beginners",
+    name: "Beginners", 
+    ages: "3–5 yrs", 
+    icon: Baby, 
+    color: "text-amber-600", 
+    bg: "bg-amber-100",
+    borderActive: "ring-amber-400",
+    summary: "Foundation of faith through stories and songs",
+    whatTheyLearn: [
+      "Basic Bible stories from Creation to Jesus",
+      "Simple prayers and worship songs",
+      "God's love and care for them",
+      "Being kind and sharing with others",
+      "Memory verses with actions"
+    ],
+    classFlow: [
+      "Circle time with songs and prayer",
+      "Bible story with visual aids",
+      "Creative activity (coloring, crafts)",
+      "Snack and fellowship time",
+      "Closing prayer and memory verse"
+    ]
+  },
+  { 
+    id: "primary",
+    name: "Primary", 
+    ages: "6–9 yrs", 
+    icon: BookMarked, 
+    color: "text-sky-600", 
+    bg: "bg-sky-100",
+    borderActive: "ring-sky-400",
+    summary: "Building strong biblical foundations",
+    whatTheyLearn: [
+      "Old Testament patriarchs and prophets",
+      "Key events from Genesis to Malachi",
+      "Introduction to Jesus' life and ministry",
+      "The importance of obedience and faith",
+      "Structured memory verse program"
+    ],
+    classFlow: [
+      "Opening worship and prayer",
+      "Review of previous lesson",
+      "Main Bible teaching with discussion",
+      "Workbook activities",
+      "Memory verse practice and closing"
+    ]
+  },
+  { 
+    id: "juniors",
+    name: "Juniors", 
+    ages: "10–12 yrs", 
+    icon: Lightbulb, 
+    color: "text-emerald-600", 
+    bg: "bg-emerald-100",
+    borderActive: "ring-emerald-400",
+    summary: "Deepening understanding of Scripture",
+    whatTheyLearn: [
+      "The Gospels and life of Christ in depth",
+      "The early church and Acts",
+      "Paul's missionary journeys",
+      "Application of biblical principles",
+      "Exam-focused scripture memorization"
+    ],
+    classFlow: [
+      "Praise and worship session",
+      "Interactive Bible quiz",
+      "In-depth scripture study",
+      "Group discussion and questions",
+      "Prayer requests and closing"
+    ]
+  },
+  { 
+    id: "intermediate",
+    name: "Intermediate", 
+    ages: "13–15 yrs", 
+    icon: GraduationCap, 
+    color: "text-violet-600", 
+    bg: "bg-violet-100",
+    borderActive: "ring-violet-400",
+    summary: "Exploring theological foundations",
+    whatTheyLearn: [
+      "Systematic theology introduction",
+      "Biblical interpretation principles",
+      "Church history and doctrine",
+      "Defending the faith (apologetics)",
+      "Personal devotional practices"
+    ],
+    classFlow: [
+      "Contemporary worship",
+      "Deep-dive scripture analysis",
+      "Theological discussion",
+      "Real-life application scenarios",
+      "Personal prayer and reflection"
+    ]
+  },
+  { 
+    id: "seniors",
+    name: "Seniors", 
+    ages: "16+ yrs", 
+    icon: Crown, 
+    color: "text-rose-600", 
+    bg: "bg-rose-100",
+    borderActive: "ring-rose-400",
+    summary: "Preparing for life and ministry",
+    whatTheyLearn: [
+      "Advanced theological studies",
+      "Leadership and ministry skills",
+      "Christian worldview and ethics",
+      "Preparing for adult life decisions",
+      "Comprehensive exam preparation"
+    ],
+    classFlow: [
+      "Youth-led worship",
+      "Intensive scripture study",
+      "Debate and discussion sessions",
+      "Mentorship and guidance",
+      "Commissioning prayer"
+    ]
+  },
 ];
 
 export default function ScriptureSchool() {
+  const [activeAgeGroup, setActiveAgeGroup] = useState<string | null>(null);
+  const [accordionValue, setAccordionValue] = useState<string[]>([]);
+  const curriculumRef = useRef<HTMLDivElement>(null);
+
+  const handleAgeGroupClick = (groupId: string) => {
+    setActiveAgeGroup(groupId);
+    setAccordionValue([groupId]);
+    
+    // Smooth scroll to curriculum section
+    setTimeout(() => {
+      curriculumRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  };
+
+  const handleShowAll = () => {
+    setActiveAgeGroup(null);
+    setAccordionValue([]);
+  };
+
+  const activeGroup = ageGroups.find(g => g.id === activeAgeGroup);
+
   return (
     <Layout>
       <BackToTop />
@@ -91,17 +237,17 @@ export default function ScriptureSchool() {
       </section>
 
       {/* Curved transition */}
-      <div className="relative h-12 md:h-16 bg-background">
+      <div className="relative h-10 md:h-12 bg-background">
         <svg viewBox="0 0 1440 60" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
           <path d="M0,0 C480,60 960,60 1440,0 L1440,60 L0,60 Z" className="fill-amber-50/70" />
         </svg>
       </div>
 
       {/* A CLASS FOR EVERY CHILD */}
-      <section id="classes" className="bg-amber-50/70 py-14 md:py-20 scroll-mt-20">
+      <section id="classes" className="bg-amber-50/70 py-10 md:py-14 scroll-mt-20">
         <div className="section-container">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-10">
+            <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/80 rounded-full mb-4 shadow-sm">
                 <Users className="w-4 h-4 text-amber-600" />
                 <span className="text-sm font-medium text-amber-800">Age Groups</span>
@@ -109,61 +255,194 @@ export default function ScriptureSchool() {
               <h2 className="text-2xl md:text-3xl text-foreground">
                 A Class for Every Child
               </h2>
+              <p className="text-muted-foreground mt-2 text-sm">Click a class to explore its curriculum</p>
             </div>
             
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-              {ageGroups.map((group, index) => (
-                <div 
-                  key={index} 
-                  className="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 text-center group min-h-[160px] flex flex-col items-center justify-center"
-                >
-                  <div className={`w-12 h-12 ${group.bg} rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}>
-                    <group.icon className={`w-6 h-6 ${group.color}`} />
-                  </div>
-                  <h3
-                    className="font-semibold text-foreground text-center whitespace-normal break-normal leading-[1.15]"
-                    style={{ textWrap: "balance" }}
+              {ageGroups.map((group) => {
+                const isActive = activeAgeGroup === group.id;
+                return (
+                  <button
+                    key={group.id}
+                    onClick={() => handleAgeGroupClick(group.id)}
+                    className={`
+                      bg-white rounded-2xl p-5 shadow-sm text-center group 
+                      min-h-[160px] flex flex-col items-center justify-center
+                      cursor-pointer transition-all duration-300 
+                      hover:-translate-y-1 hover:shadow-lg
+                      focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary
+                      ${isActive 
+                        ? `ring-2 ${group.borderActive} shadow-lg -translate-y-1` 
+                        : 'hover:ring-1 hover:ring-gray-200'
+                      }
+                    `}
+                    aria-pressed={isActive}
                   >
-                    {group.name}
-                  </h3>
-                  <p className={`text-sm font-medium ${group.color} mt-1`}>{group.ages}</p>
-                </div>
-              ))}
+                    <div className={`
+                      w-12 h-12 ${group.bg} rounded-xl flex items-center justify-center mx-auto mb-3 
+                      transition-all duration-300
+                      ${isActive ? 'scale-110' : 'group-hover:scale-110'}
+                    `}>
+                      <group.icon className={`w-6 h-6 ${group.color}`} />
+                    </div>
+                    <h3
+                      className="font-semibold text-foreground text-center leading-tight min-h-[2.5rem] flex items-center justify-center"
+                    >
+                      {group.name}
+                    </h3>
+                    <p className={`text-sm font-medium ${group.color} mt-1`}>{group.ages}</p>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Curved transition to curriculum */}
-      <div className="relative h-12 md:h-16 bg-amber-50/70">
+      {/* Tighter curved transition to curriculum */}
+      <div className="relative h-8 md:h-10 bg-amber-50/70">
         <svg viewBox="0 0 1440 60" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
           <path d="M0,0 C480,60 960,60 1440,0 L1440,60 L0,60 Z" className="fill-emerald-900" />
         </svg>
       </div>
 
-      {/* CURRICULUM TEASER */}
-      <section className="bg-emerald-900 py-14 md:py-20">
+      {/* CURRICULUM ACCORDION SECTION */}
+      <section ref={curriculumRef} className="bg-emerald-900 py-10 md:py-14 scroll-mt-16">
         <div className="section-container">
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="w-14 h-14 bg-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <BookMarked className="w-7 h-7 text-amber-400" />
+          <div className="max-w-4xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <div className="w-14 h-14 bg-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <BookMarked className="w-7 h-7 text-amber-400" />
+              </div>
+              <h2 className="text-2xl md:text-3xl text-white mb-2">
+                Explore Our Curriculum
+              </h2>
+              <p className="text-emerald-100/70 max-w-md mx-auto text-sm">
+                A thoughtful journey from Beginners to Grade 12, with clear milestones and exam-focused lessons.
+              </p>
+              
+              {/* Active filter indicator */}
+              {activeGroup && (
+                <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
+                  <span className="text-white/90 text-sm">
+                    Showing: <span className="font-semibold text-amber-300">{activeGroup.name}</span> ({activeGroup.ages})
+                  </span>
+                  <button
+                    onClick={handleShowAll}
+                    className="ml-1 p-1 hover:bg-white/10 rounded-full transition-colors"
+                    aria-label="Show all age groups"
+                  >
+                    <X className="w-4 h-4 text-white/70 hover:text-white" />
+                  </button>
+                </div>
+              )}
+              {!activeGroup && (
+                <p className="mt-4 text-emerald-100/50 text-sm">Select an age group above or expand any below</p>
+              )}
             </div>
-            <h2 className="text-2xl md:text-3xl text-white mb-3">
-              Explore Our Curriculum
-            </h2>
-            <p className="text-emerald-100/70 mb-8 max-w-md mx-auto">
-              A thoughtful journey from Beginners to Grade 12, with clear milestones and exam-focused lessons.
-            </p>
-            <Button 
-              asChild 
-              size="lg"
-              className="rounded-full bg-white hover:bg-amber-50 text-emerald-900 font-semibold shadow-lg hover:shadow-xl transition-all px-8"
+
+            {/* Accordion Panels */}
+            <Accordion 
+              type="multiple" 
+              value={accordionValue}
+              onValueChange={setAccordionValue}
+              className="space-y-3"
             >
-              <Link to="/scripture-school/curriculum" className="inline-flex items-center gap-2">
-                <BookMarked className="w-4 h-4" />
-                View Full Curriculum Map
-              </Link>
-            </Button>
+              {ageGroups.map((group) => (
+                <AccordionItem 
+                  key={group.id} 
+                  value={group.id}
+                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden"
+                >
+                  <AccordionTrigger className="px-5 py-4 hover:bg-white/5 hover:no-underline [&[data-state=open]]:bg-white/10">
+                    <div className="flex items-center gap-4 text-left">
+                      <div className={`w-10 h-10 ${group.bg} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                        <group.icon className={`w-5 h-5 ${group.color}`} />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white text-lg">{group.name}</h3>
+                        <p className="text-emerald-100/60 text-sm">{group.ages} • {group.summary}</p>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-5 pb-5">
+                    <div className="grid md:grid-cols-2 gap-6 pt-2">
+                      {/* What They Learn */}
+                      <div className="bg-white/5 rounded-xl p-5">
+                        <div className="flex items-center gap-2 mb-3">
+                          <CheckCircle2 className="w-5 h-5 text-amber-400" />
+                          <h4 className="font-semibold text-white">What They Learn</h4>
+                        </div>
+                        <ul className="space-y-2">
+                          {group.whatTheyLearn.map((item, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-emerald-100/80 text-sm">
+                              <span className="text-amber-400 mt-1">•</span>
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Typical Class Flow */}
+                      <div className="bg-white/5 rounded-xl p-5">
+                        <div className="flex items-center gap-2 mb-3">
+                          <Clock className="w-5 h-5 text-amber-400" />
+                          <h4 className="font-semibold text-white">Typical Class Flow</h4>
+                        </div>
+                        <ul className="space-y-2">
+                          {group.classFlow.map((item, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-emerald-100/80 text-sm">
+                              <span className="text-amber-400 font-medium">{idx + 1}.</span>
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* CTA Row */}
+                    <div className="flex flex-wrap gap-3 mt-5 pt-4 border-t border-white/10">
+                      <Button 
+                        asChild 
+                        size="sm"
+                        className="rounded-full bg-amber-500 hover:bg-amber-400 text-emerald-950 font-medium"
+                      >
+                        <Link to="/scripture-school/curriculum">
+                          <BookMarked className="w-4 h-4 mr-2" />
+                          View Lessons
+                        </Link>
+                      </Button>
+                      <Button 
+                        asChild 
+                        variant="outline"
+                        size="sm"
+                        className="rounded-full border-white/20 text-white hover:bg-white/10 hover:text-white"
+                      >
+                        <Link to="/scripture-school/curriculum">
+                          <BookOpen className="w-4 h-4 mr-2" />
+                          View Memory Verses
+                        </Link>
+                      </Button>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+
+            {/* Full Curriculum Link */}
+            <div className="text-center mt-8">
+              <Button 
+                asChild 
+                size="lg"
+                className="rounded-full bg-white hover:bg-amber-50 text-emerald-900 font-semibold shadow-lg hover:shadow-xl transition-all px-8"
+              >
+                <Link to="/scripture-school/curriculum" className="inline-flex items-center gap-2">
+                  <BookMarked className="w-4 h-4" />
+                  View Full Curriculum Map
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
