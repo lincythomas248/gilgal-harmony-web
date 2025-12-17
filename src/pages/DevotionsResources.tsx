@@ -1,9 +1,13 @@
+import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
-import { BookOpen, ExternalLink, Play, Headphones } from "lucide-react";
-import ourDailyBreadBanner from "@/assets/our-daily-bread-banner.jpg";
+import { BookOpen, ExternalLink, Play, Headphones, Calendar, ChevronRight } from "lucide-react";
+import { useODBDevotionals, getExcerpt } from "@/hooks/useODBDevotionals";
+import { format } from "date-fns";
 
 const DevotionsResources = () => {
+  const { devotionals, loading, error } = useODBDevotionals(7);
+
   return (
     <Layout>
       <HeroBanner
@@ -19,33 +23,86 @@ const DevotionsResources = () => {
               Explore devotionals, Bible reading plans, worship music, and faith-building content designed for youth.
             </p>
 
-            {/* Resource Cards Grid */}
+            {/* Our Daily Bread Section */}
+            <div className="mb-12">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-foreground">Our Daily Bread</h2>
+                <a
+                  href="https://ourdailybread.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-primary hover:underline flex items-center gap-1"
+                >
+                  Visit ODB <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
+
+              {loading ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {[...Array(6)].map((_, i) => (
+                    <div key={i} className="card-elevated p-4 animate-pulse">
+                      <div className="h-32 bg-muted rounded-lg mb-3" />
+                      <div className="h-5 bg-muted rounded w-3/4 mb-2" />
+                      <div className="h-4 bg-muted rounded w-1/2" />
+                    </div>
+                  ))}
+                </div>
+              ) : error ? (
+                <div className="card-elevated p-6 text-center">
+                  <p className="text-muted-foreground mb-4">{error}</p>
+                  <a
+                    href="https://ourdailybread.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    Visit Our Daily Bread directly
+                  </a>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {devotionals.map((devotional) => (
+                    <Link
+                      key={devotional.slug}
+                      to={`/resources/devotions/odb/${devotional.slug}`}
+                      className="group card-elevated overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    >
+                      {devotional.thumbnail && (
+                        <div className="aspect-video overflow-hidden">
+                          <img
+                            src={devotional.thumbnail}
+                            alt={devotional.title}
+                            loading="lazy"
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                      )}
+                      <div className="p-4">
+                        <h3 className="font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                          {devotional.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+                          {getExcerpt(devotional.description, 20)}
+                        </p>
+                        <div className="flex items-center justify-between text-xs text-muted-foreground">
+                          <span className="flex items-center gap-1">
+                            <Calendar className="w-3.5 h-3.5" />
+                            {devotional.pubDate && format(new Date(devotional.pubDate), 'MMM d')}
+                          </span>
+                          <span className="flex items-center gap-0.5 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                            Read <ChevronRight className="w-3.5 h-3.5" />
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Other Resources Grid */}
+            <h2 className="text-2xl font-bold text-foreground mb-6">More Resources</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Card A: Our Daily Bread */}
-              <a
-                href="https://ourdailybread.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group card-elevated block overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              >
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={ourDailyBreadBanner}
-                    alt="Our Daily Bread - Daily devotional readings"
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-5">
-                  <h2 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-                    Our Daily Bread
-                    <ExternalLink className="w-4 h-4 text-muted-foreground" />
-                  </h2>
-                  <p className="text-sm text-muted-foreground">
-                    Daily devotional readings to nourish your faith and deepen your walk with God.
-                  </p>
-                </div>
-              </a>
 
               {/* Card B: YouTube Embed */}
               <div className="card-elevated overflow-hidden">
