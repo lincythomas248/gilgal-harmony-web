@@ -83,19 +83,17 @@ export default function Beliefs() {
       </section>
 
       {/* Beliefs section with dove backdrop */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
-        {/* Background image - dove positioned in upper area */}
+      <section className="relative pt-56 sm:pt-72 md:pt-96 lg:pt-[26rem] pb-16 md:pb-24 overflow-hidden">
+        {/* Background image - dove visible at top */}
         <div 
           className="absolute inset-0 bg-cover bg-no-repeat"
           style={{ 
             backgroundImage: `url(${pentecostImage})`,
-            backgroundPosition: 'center 20%'
+            backgroundPosition: 'center 12%'
           }}
         />
-        {/* Very subtle warm tint for card readability - not washing out image */}
-        <div className="absolute inset-0 bg-background/20" />
         
-        {/* Sacred Grid of Belief Cards */}
+        {/* Sacred Grid of Belief Cards - positioned below dove safe zone */}
         <div className="section-container relative z-10">
           
           {/* Desktop: 3 + 2 centered grid */}
