@@ -1,6 +1,7 @@
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
-import { Users, Heart, BookOpen, Music } from "lucide-react";
+import { Users, Heart, BookOpen, Music, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const activities = [
   {
@@ -73,6 +74,25 @@ export default function PYPA() {
                 Young people of all backgrounds are welcome to participate in PYPA activities. Connect with us through the church to learn more about upcoming youth gatherings and programs.
               </p>
             </div>
+
+            {/* Resources & Devotions */}
+            <Link
+              to="/resources/devotions"
+              className="group card-elevated block mt-8 p-6 transition-all duration-300 hover:shadow-lg hover:scale-[1.01] cursor-pointer"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex-1">
+                  <h2 className="text-xl font-semibold text-foreground mb-2">Resources & Devotions</h2>
+                  <p className="text-muted-foreground text-sm">
+                    Weekly devotionals, Bible reading, and youth-friendly resources to grow in faith.
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 text-primary ml-4">
+                  <span className="text-sm font-medium hidden sm:inline">Explore</span>
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
       </section>

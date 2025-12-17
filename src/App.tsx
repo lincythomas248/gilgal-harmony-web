@@ -15,6 +15,7 @@ import Media from "./pages/Media";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
+import DevotionsResources from "./pages/DevotionsResources";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/events" element={<Events />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/resources/devotions" element={<DevotionsResources />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
