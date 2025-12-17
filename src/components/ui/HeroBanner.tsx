@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import heroBg from "@/assets/hero-dove.jpg";
+import heroBg from "@/assets/hero-bible.jpg";
 
 interface CTAButton {
   text: string;
@@ -31,26 +31,27 @@ export function HeroBanner({
   showCurvedDivider = true,
 }: HeroBannerProps) {
   return (
-    <section className="relative min-h-[360px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px] flex items-center overflow-hidden">
-      {/* Full-bleed dove background */}
+    <section className="relative min-h-[320px] sm:min-h-[380px] md:min-h-[430px] lg:min-h-[480px] flex items-center overflow-hidden">
+      {/* Full-bleed Bible background */}
       <div 
-        className="absolute inset-0 bg-cover bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ 
           backgroundImage: `url(${heroBg})`,
-          backgroundPosition: '15% 40%'
         }}
       />
       
-      {/* Subtle warm glow behind dove area */}
-      <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-radial from-gold/15 via-transparent to-transparent opacity-60" />
-      
-      {/* Right-to-left gradient overlay - lighter on left for dove visibility */}
-      <div className="absolute inset-0 bg-gradient-to-l from-black/90 via-black/50 to-black/10" />
+      {/* Dark warm overlay for readability - preserves Bible warmth */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(10, 18, 30, 0.75), rgba(10, 18, 30, 0.85))'
+        }}
+      />
       
       {/* Content container */}
       <div className="section-container relative z-10 py-10 md:py-14">
         <div className="grid md:grid-cols-2 gap-8 items-center">
-          {/* Left column - Empty for dove visibility */}
+          {/* Left column - Empty to avoid text over book spine */}
           <div className="hidden md:block" />
           
           {/* Right column - Content */}
