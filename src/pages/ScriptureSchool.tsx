@@ -81,10 +81,10 @@ export default function ScriptureSchool() {
       {/* COMMUNITY PHOTO BAND */}
       <section className="relative w-full my-12 md:my-16 lg:my-20">
         <div 
-          className="w-full h-[280px] sm:h-[320px] md:h-[380px] lg:h-[420px] bg-cover bg-no-repeat"
+          className="w-full h-[320px] sm:h-[380px] md:h-[450px] lg:h-[500px] bg-cover bg-no-repeat"
           style={{ 
             backgroundImage: `url(${communityPhoto})`,
-            backgroundPosition: 'center 65%'
+            backgroundPosition: 'center center'
           }}
           role="img"
           aria-label="Scripture School community gathering"
