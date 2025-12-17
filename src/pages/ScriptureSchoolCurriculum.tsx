@@ -2,13 +2,15 @@ import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { BookOpen, GraduationCap, Star } from "lucide-react";
+import { BookOpen, GraduationCap, Star, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png";
 
 interface Lesson {
@@ -317,15 +319,25 @@ export default function ScriptureSchoolCurriculum() {
       {/* Introduction */}
       <section className="section-cream page-section">
         <div className="section-container">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-muted-foreground leading-relaxed mb-4">
+          <div className="max-w-3xl mx-auto">
+            <div className="mb-8">
+              <Button asChild variant="outline" className="border-primary/30 text-primary hover:bg-primary/5">
+                <Link to="/ministries/scripture-school">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Scripture School
+                </Link>
+              </Button>
+            </div>
+            <div className="text-center">
+              <p className="text-muted-foreground leading-relaxed mb-4">
               Our curriculum is thoughtfully designed to nurture spiritual growth at every stage of a child's development. 
               From Beginners through Grade 12, students progress through age-appropriate lessons that build a strong foundation in Scripture.
             </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Lessons marked with <Badge variant="outline" className="mx-1 border-accent/50 text-accent bg-accent/5">Region Examination Focus</Badge> are 
-              emphasized for regional examinations, helping students prepare for assessments while deepening their biblical knowledge.
-            </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Lessons marked with <Badge variant="outline" className="mx-1 border-accent/50 text-accent bg-accent/5">Region Examination Focus</Badge> are 
+                emphasized for regional examinations, helping students prepare for assessments while deepening their biblical knowledge.
+              </p>
+            </div>
           </div>
         </div>
       </section>
