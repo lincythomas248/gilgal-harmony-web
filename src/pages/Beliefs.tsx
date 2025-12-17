@@ -52,54 +52,55 @@ export default function Beliefs() {
       />
 
       {/* Beliefs section with full-width background */}
-      <section className="relative py-20 md:py-32">
+      <section className="relative py-24 md:py-36">
         {/* Full-width background image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${pentecostImage})` }}
         />
-        {/* Stronger dark gradient overlay for readability */}
+        {/* Dark warm overlay - charcoal/brown tones for readability */}
         <div 
           className="absolute inset-0"
           style={{ 
-            background: 'linear-gradient(to bottom, rgba(10,20,35,0.65), rgba(10,20,35,0.45), rgba(10,20,35,0.65))'
+            background: 'linear-gradient(to bottom, rgba(25,20,15,0.78), rgba(30,25,20,0.72), rgba(25,20,15,0.78))'
           }}
         />
         
         {/* Content container */}
         <div className="section-container relative z-10">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             {/* Section heading - dominant focal point */}
-            <div className="text-center mb-10 md:mb-14">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-serif mb-8 md:mb-10 tracking-tight">
+            <div className="text-center mb-14 md:mb-20">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white font-serif mb-10 md:mb-12 tracking-tight leading-tight">
                 Foundations of Our Faith
               </h2>
-              <p className="text-white/95 max-w-3xl mx-auto text-lg md:text-xl leading-loose md:leading-loose">
+              <p className="text-white/95 max-w-2xl mx-auto text-xl md:text-2xl leading-relaxed md:leading-[1.9]">
                 As a congregation of the Indian Pentecostal Church, our beliefs are rooted in historic Christian teachings. The following principles form the foundation of our faith and practice.
               </p>
             </div>
 
-            {/* Belief cards - centered with enhanced styling */}
-            <div className="space-y-6 md:space-y-7">
+            {/* Belief cards - solid ivory backgrounds, no transparency */}
+            <div className="space-y-8 md:space-y-10">
               {beliefs.map((belief, index) => (
                 <div 
                   key={index} 
-                  className="bg-white/92 backdrop-blur-md rounded-3xl p-6 md:p-8 flex gap-5 md:gap-7 group shadow-xl border border-white/30"
+                  className="rounded-2xl p-7 md:p-9 flex gap-6 md:gap-8 group shadow-lg"
+                  style={{ backgroundColor: '#F8F4EB' }}
                 >
                   <div className="flex-shrink-0">
-                    <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 ${
+                    <div className={`w-16 h-16 md:w-18 md:h-18 rounded-xl flex items-center justify-center ${
                       belief.color === 'gold' 
-                        ? 'bg-gradient-to-br from-accent/30 to-gold-soft' 
-                        : 'bg-gradient-to-br from-primary/20 to-dove-light'
+                        ? 'bg-accent/15' 
+                        : 'bg-primary/10'
                     }`}>
-                      <belief.icon className={`w-7 h-7 md:w-8 md:h-8 ${belief.color === 'gold' ? 'text-accent' : 'text-primary'}`} />
+                      <belief.icon className={`w-8 h-8 md:w-9 md:h-9 ${belief.color === 'gold' ? 'text-accent' : 'text-primary'}`} />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-3 font-serif">
+                    <h3 className="text-2xl md:text-[1.65rem] font-semibold text-foreground mb-3 font-serif">
                       {belief.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
+                    <p className="text-muted-foreground leading-relaxed text-lg md:text-[1.125rem]">
                       {belief.description}
                     </p>
                   </div>
