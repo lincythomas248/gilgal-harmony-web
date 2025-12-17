@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, Facebook, Youtube, BookOpen } from "lucide-react";
+import { Mail, Phone, Facebook, Youtube } from "lucide-react";
 import logo from "@/assets/logo-church.png";
 
 export function Footer() {
@@ -12,15 +12,6 @@ export function Footer() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-foreground/20 to-transparent" />
 
       <div className="section-container py-14 relative">
-        {/* Scripture verse - faith-centered element */}
-        <div className="text-center mb-12 pb-10 border-b border-navy-foreground/10">
-          <BookOpen className="w-6 h-6 mx-auto mb-4 text-navy-foreground/40" />
-          <p className="text-lg md:text-xl italic text-navy-foreground/70 max-w-2xl mx-auto font-serif leading-relaxed">
-            "For where two or three gather in my name, there am I with them."
-          </p>
-          <p className="text-sm text-navy-foreground/50 mt-3">Matthew 18:20</p>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Logo & About */}
           <div className="lg:col-span-1">
