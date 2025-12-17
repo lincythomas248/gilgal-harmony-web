@@ -21,7 +21,6 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import pencilsBg from "@/assets/scripture-school-bg.jpg";
-import scriptureSchoolBadge from "@/assets/scripture-school-badge.png";
 
 const ageGroups = [
   { 
@@ -88,39 +87,24 @@ export default function ScriptureSchool() {
   return (
     <Layout>
       <BackToTop />
-      {/* Hero Section with Badge */}
-      <section className="relative bg-gradient-to-b from-emerald-900 via-emerald-800 to-emerald-900 py-12 md:py-20 overflow-hidden">
-        {/* Background pencils image with overlay */}
-        <div className="absolute inset-0">
-          <img src={pencilsBg} alt="" className="w-full h-full object-cover object-bottom opacity-20" />
-          <div className="absolute inset-0 bg-gradient-to-b from-emerald-900/80 via-emerald-800/90 to-emerald-900/95" />
-        </div>
+      <PageHeader
+        title="Scripture School"
+        subtitle="Where faith takes root and joy blossoms"
+      />
+
+      {/* Hero Image Banner - Lighter & More Welcoming */}
+      <section className="relative h-40 md:h-52 overflow-hidden">
+        <img src={pencilsBg} alt="Scripture School" className="w-full h-full object-cover object-bottom" />
+        <div className="absolute inset-0 bg-gradient-to-t from-amber-50/95 via-background/40 to-transparent" />
         
-        {/* Decorative elements */}
-        <div className="absolute top-10 left-10 w-32 h-32 bg-amber-400/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-emerald-400/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-amber-300/40 rounded-full animate-pulse" />
-        <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-amber-200/30 rounded-full animate-pulse delay-300" />
-        
-        <div className="section-container relative">
-          <div className="flex flex-col items-center text-center">
-            {/* Scripture School Badge - Prominent */}
-            <img 
-              src={scriptureSchoolBadge} 
-              alt="Scripture School" 
-              className="w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 drop-shadow-2xl mb-6 md:mb-8"
-            />
-            
-            {/* Subtitle */}
-            <p className="text-amber-200/90 text-lg md:text-xl font-medium max-w-md">
-              Where faith takes root and joy blossoms
-            </p>
-          </div>
-        </div>
+        {/* Decorative floating elements */}
+        <div className="absolute bottom-4 left-1/4 w-3 h-3 bg-amber-300/60 rounded-full animate-pulse" />
+        <div className="absolute bottom-8 right-1/3 w-2 h-2 bg-sky-300/60 rounded-full animate-pulse delay-300" />
+        <div className="absolute bottom-6 right-1/4 w-4 h-4 bg-emerald-300/50 rounded-full animate-pulse delay-500" />
       </section>
 
       {/* Curved Divider */}
-      <div className="relative -mt-1 z-10">
+      <div className="relative -mt-6 z-10">
         <svg viewBox="0 0 1440 60" className="w-full h-8 md:h-12 fill-amber-50/90">
           <path d="M0,60 C360,0 1080,0 1440,60 L1440,60 L0,60 Z" />
         </svg>
