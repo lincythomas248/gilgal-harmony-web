@@ -42,48 +42,55 @@ export default function ScriptureSchool() {
     <Layout>
       <BackToTop />
       
-      {/* HERO SECTION */}
+      {/* HERO SECTION - Two Column: Dove Left, Text Right */}
       <section className="relative min-h-[60vh] md:min-h-[65vh] flex items-center overflow-hidden">
-        {/* Full-cover dove background image */}
+        {/* Full-cover dove background image - crisp and visible */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-left bg-no-repeat"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
         
-        {/* Dark gradient overlay - top-left darker → bottom-right softer */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/40 to-black/20" />
+        {/* Right-side only gradient for text readability - keeps dove area clean */}
+        <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/50 to-transparent" />
         
-        {/* Logo - Absolute positioned top-right, no container */}
-        <img 
-          src={scriptureSchoolLogo} 
-          alt="Scripture School Logo" 
-          className="absolute top-6 right-6 md:top-10 md:right-10 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 object-contain z-10"
-        />
-        
-        {/* Content Container - Left aligned */}
-        <div className="section-container relative z-10 py-12 md:py-16">
-          <div className="max-w-2xl">
-            {/* Main Heading */}
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-wide leading-tight mb-4 md:mb-6">
-              SCRIPTURE SCHOOL
-            </h1>
+        {/* Two-column grid container */}
+        <div className="section-container relative z-10 py-10 md:py-14">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Left column - Empty space for dove visibility */}
+            <div className="hidden md:block" />
             
-            {/* Subheading */}
-            <p className="text-base sm:text-lg md:text-xl text-white/85 font-serif italic mb-8">
-              Where faith takes root and joy blossoms
-            </p>
-            
-            {/* CTA Button */}
-            <Button 
-              asChild 
-              size="lg"
-              className="rounded-full bg-accent hover:bg-gold-dark text-foreground font-semibold shadow-lg hover:shadow-xl transition-all px-8"
-            >
-              <a href="#classes" className="inline-flex items-center gap-2">
-                Explore Classes
-                <ChevronRight className="w-4 h-4" />
-              </a>
-            </Button>
+            {/* Right column - Text content + Logo */}
+            <div className="text-left md:text-left">
+              {/* Logo - Transparent, larger, no container */}
+              <img 
+                src={scriptureSchoolLogo} 
+                alt="Scripture School Logo" 
+                className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 object-contain mb-6"
+                style={{ background: 'transparent', boxShadow: 'none', border: 'none' }}
+              />
+              
+              {/* Main Heading */}
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-wide leading-tight mb-4">
+                SCRIPTURE SCHOOL
+              </h1>
+              
+              {/* Subheading */}
+              <p className="text-base sm:text-lg md:text-xl text-white/90 font-serif italic mb-8 max-w-md">
+                Where faith takes root and joy blossoms
+              </p>
+              
+              {/* CTA Button */}
+              <Button 
+                asChild 
+                size="lg"
+                className="rounded-full bg-accent hover:bg-gold-dark text-foreground font-semibold shadow-lg hover:shadow-xl transition-all px-8"
+              >
+                <a href="#classes" className="inline-flex items-center gap-2">
+                  Explore Classes
+                  <ChevronRight className="w-4 h-4" />
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
         
