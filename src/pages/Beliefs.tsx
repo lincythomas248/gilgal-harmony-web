@@ -51,62 +51,57 @@ export default function Beliefs() {
         subtitle="The foundational teachings that guide our faith community"
       />
 
-      <section className="section-light page-section">
-        <div className="section-container">
-          <div className="max-w-6xl mx-auto">
+      {/* Beliefs section with full-width background */}
+      <section className="relative py-16 md:py-24">
+        {/* Full-width background image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${pentecostImage})` }}
+        />
+        {/* Dark gradient overlay for readability */}
+        <div 
+          className="absolute inset-0"
+          style={{ 
+            background: 'linear-gradient(to bottom, rgba(10,20,35,0.55), rgba(10,20,35,0.35), rgba(10,20,35,0.55))'
+          }}
+        />
+        
+        {/* Content container */}
+        <div className="section-container relative z-10">
+          <div className="max-w-4xl mx-auto">
+            {/* Section intro */}
             <div className="text-center mb-12">
-              <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
+              <p className="text-white/90 max-w-2xl mx-auto text-lg leading-relaxed">
                 As a congregation of the Indian Pentecostal Church, our beliefs are rooted in historic Christian teachings. The following principles form the foundation of our faith and practice.
               </p>
             </div>
 
-            {/* Two-column layout: Image on left, beliefs on right */}
-            <div className="grid lg:grid-cols-5 gap-8 items-start">
-              {/* Image column - sticky on desktop */}
-              <div className="lg:col-span-2 lg:sticky lg:top-24">
-                <div className="rounded-2xl overflow-hidden shadow-xl">
-                  <img 
-                    src={pentecostImage} 
-                    alt="Holy Spirit descending as a dove - symbolizing Pentecost" 
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-                <p className="text-sm text-muted-foreground text-center mt-3 italic">
-                  The Holy Spirit descending upon believers
-                </p>
-              </div>
-
-              {/* Beliefs column */}
-              <div className="lg:col-span-3 space-y-5">
-                {beliefs.map((belief, index) => (
-                  <div 
-                    key={index} 
-                    className={`card-warm flex gap-5 md:gap-6 group ${
+            {/* Belief cards - centered */}
+            <div className="space-y-5">
+              {beliefs.map((belief, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white/90 backdrop-blur-sm rounded-2xl p-5 md:p-6 flex gap-5 md:gap-6 group shadow-lg border border-white/20"
+                >
+                  <div className="flex-shrink-0">
+                    <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 ${
                       belief.color === 'gold' 
-                        ? 'bg-gradient-to-r from-card via-gold-soft/30 to-card border-gold/20' 
-                        : 'bg-gradient-to-r from-card via-dove-light/40 to-card border-dove/20'
-                    }`}
-                  >
-                    <div className="flex-shrink-0">
-                      <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 ${
-                        belief.color === 'gold' 
-                          ? 'bg-gradient-to-br from-accent/20 to-gold-soft' 
-                          : 'bg-gradient-to-br from-primary/15 to-dove-light'
-                      }`}>
-                        <belief.icon className={`w-6 h-6 md:w-7 md:h-7 ${belief.color === 'gold' ? 'text-accent' : 'text-primary'}`} />
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2 font-serif">
-                        {belief.title}
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-                        {belief.description}
-                      </p>
+                        ? 'bg-gradient-to-br from-accent/30 to-gold-soft' 
+                        : 'bg-gradient-to-br from-primary/20 to-dove-light'
+                    }`}>
+                      <belief.icon className={`w-6 h-6 md:w-7 md:h-7 ${belief.color === 'gold' ? 'text-accent' : 'text-primary'}`} />
                     </div>
                   </div>
-                ))}
-              </div>
+                  <div>
+                    <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2 font-serif">
+                      {belief.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+                      {belief.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
