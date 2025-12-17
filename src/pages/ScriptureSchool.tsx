@@ -18,6 +18,7 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import scriptureSchoolLogo from "@/assets/scripture-school-logo-new.png";
+import heroBg from "@/assets/hero-dove.jpg";
 
 const experiences = [
   { icon: BookOpen, label: "Bible Stories", color: "text-amber-600", bg: "bg-amber-50" },
@@ -41,46 +42,76 @@ export default function ScriptureSchool() {
     <Layout>
       <BackToTop />
       
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-emerald-800 via-emerald-900 to-emerald-950">
-        {/* Single soft background shape */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-700/20 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
+      {/* HERO SECTION - Dove & Golden Light */}
+      <section className="relative min-h-[70vh] md:min-h-[75vh] flex items-center overflow-hidden">
+        {/* Background base - dark navy like homepage */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(218,44%,14%)] via-navy to-[hsl(218,44%,18%)]" />
         
-        <div className="section-container relative py-12 md:py-16">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            {/* Text Content */}
-            <div className="flex-1 text-center md:text-left">
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-4">
-                SCRIPTURE SCHOOL
-              </h1>
-              <p className="text-lg md:text-xl text-emerald-100/80 font-light max-w-lg mx-auto md:mx-0 mb-8">
-                Where faith takes root and joy blossoms
-              </p>
-              <Button 
-                asChild 
-                size="lg"
-                className="rounded-full bg-amber-500 hover:bg-amber-400 text-emerald-950 font-semibold shadow-lg hover:shadow-xl transition-all px-8"
-              >
-                <a href="#classes" className="inline-flex items-center gap-2">
-                  Explore Classes
-                  <ChevronRight className="w-4 h-4" />
-                </a>
-              </Button>
-            </div>
-            
-            {/* Logo - Supporting Element */}
-            <div className="flex-shrink-0 order-first md:order-last">
-              <img 
-                src={scriptureSchoolLogo} 
-                alt="Scripture School Logo" 
-                className="w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 object-contain drop-shadow-2xl"
-              />
+        {/* Dove image - positioned to left */}
+        <div className="absolute inset-y-0 left-0 w-1/2 md:w-2/5 flex items-center justify-center">
+          <div className="relative">
+            {/* Golden glow behind dove */}
+            <div className="absolute inset-0 bg-gradient-radial from-gold/20 via-accent/10 to-transparent blur-3xl scale-150" />
+            <img 
+              src={heroBg} 
+              alt="Dove of peace" 
+              className="relative w-full max-w-xs md:max-w-sm lg:max-w-md h-auto object-contain drop-shadow-2xl opacity-90"
+            />
+          </div>
+        </div>
+        
+        {/* Vignette overlay - darker edges, warm center */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,transparent_0%,rgba(15,23,42,0.4)_50%,rgba(15,23,42,0.8)_100%)]" />
+        
+        {/* Subtle warm glow near center */}
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-accent/8 rounded-full blur-[150px] pointer-events-none" />
+        
+        {/* Content Container */}
+        <div className="section-container relative z-10 py-12 md:py-16">
+          {/* Floating Content Panel */}
+          <div className="ml-auto w-full md:w-3/5 lg:w-1/2">
+            <div className="bg-background/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-10 lg:p-12 border border-accent/10">
+              {/* Two-column layout inside panel */}
+              <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
+                {/* Left: Text Content */}
+                <div className="flex-1 text-center md:text-left">
+                  <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight mb-4 leading-tight">
+                    SCRIPTURE SCHOOL
+                  </h1>
+                  <p className="text-base md:text-lg text-muted-foreground font-serif italic mb-8">
+                    Where faith takes root and joy blossoms
+                  </p>
+                  <Button 
+                    asChild 
+                    size="lg"
+                    className="rounded-full bg-accent hover:bg-gold-dark text-foreground font-semibold shadow-lg hover:shadow-xl transition-all px-8"
+                  >
+                    <a href="#classes" className="inline-flex items-center gap-2">
+                      Explore Classes
+                      <ChevronRight className="w-4 h-4" />
+                    </a>
+                  </Button>
+                </div>
+                
+                {/* Right: Logo */}
+                <div className="flex-shrink-0 order-first md:order-last">
+                  <div className="relative">
+                    {/* Subtle glow behind logo */}
+                    <div className="absolute inset-0 bg-accent/20 rounded-full blur-xl scale-110" />
+                    <img 
+                      src={scriptureSchoolLogo} 
+                      alt="Scripture School Logo" 
+                      className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 object-contain drop-shadow-lg"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         
         {/* Wave divider */}
-        <svg viewBox="0 0 1440 60" className="w-full h-10 md:h-14" preserveAspectRatio="none">
+        <svg viewBox="0 0 1440 60" className="absolute bottom-0 w-full h-10 md:h-14" preserveAspectRatio="none">
           <path d="M0,60 C480,0 960,0 1440,60 L1440,60 L0,60 Z" className="fill-background" />
         </svg>
       </section>
