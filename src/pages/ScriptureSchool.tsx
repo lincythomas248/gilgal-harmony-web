@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import scriptureSchoolLogo from "@/assets/scripture-school-logo-final.png";
+import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png";
 import heroBg from "@/assets/scripture-school-hero-bg.jpg";
 
 const experiences = [
@@ -61,19 +61,11 @@ export default function ScriptureSchool() {
             
             {/* Right column - Text content + Logo */}
             <div className="text-left md:text-left">
-              {/* Logo - Fully transparent, larger, no container */}
+              {/* Logo - Using blend mode to remove white background */}
               <img 
                 src={scriptureSchoolLogo} 
                 alt="Scripture School Logo" 
-                className="block w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain mb-6"
-                style={{ 
-                  background: 'transparent', 
-                  backgroundColor: 'transparent',
-                  boxShadow: 'none', 
-                  border: 'none',
-                  padding: 0,
-                  borderRadius: 0
-                }}
+                className="block w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain mb-6 mix-blend-multiply"
               />
               
               {/* Main Heading */}
