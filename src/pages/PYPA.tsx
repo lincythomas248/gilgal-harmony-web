@@ -1,7 +1,6 @@
 import { Layout } from "@/components/layout/Layout";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 import { Users, Heart, BookOpen, Music } from "lucide-react";
-import logo from "@/assets/logo-church.png";
 
 const activities = [
   {
@@ -29,21 +28,17 @@ const activities = [
 export default function PYPA() {
   return (
     <Layout>
-      <PageHeader
+      <HeroBanner
         title="PYPA"
         subtitle="Pentecostal Young People's Association"
+        primaryCta={{ text: "Join PYPA", link: "/contact" }}
       />
 
       <section className="page-section">
         <div className="section-container">
           <div className="max-w-4xl mx-auto">
-            {/* Logo and Introduction */}
+            {/* Introduction */}
             <div className="text-center mb-12">
-              <img
-                src={logo}
-                alt="IPC Gilgal Church"
-                className="h-24 md:h-28 mx-auto mb-6"
-              />
               <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 PYPA (Pentecostal Young People's Association) is the youth ministry of IPC Gilgal Church. We provide a welcoming space for young people to grow spiritually, develop their gifts, and connect with peers who share their faith.
               </p>

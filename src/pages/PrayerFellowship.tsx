@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 import { Clock, Users, BookOpen, Heart } from "lucide-react";
 
 const gatherings = [
@@ -32,9 +32,10 @@ const gatherings = [
 export default function PrayerFellowship() {
   return (
     <Layout>
-      <PageHeader
+      <HeroBanner
         title="Prayer & Fellowship"
-        subtitle="Opportunities to worship, pray, and connect with our community."
+        subtitle="Worship, pray, and connect with our community"
+        primaryCta={{ text: "Contact Us", link: "/contact" }}
       />
 
       <section className="page-section">

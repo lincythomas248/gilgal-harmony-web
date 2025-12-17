@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BookOpen, Users } from "lucide-react";
 
 const ministries = [
@@ -23,9 +23,10 @@ const ministries = [
 export default function Ministries() {
   return (
     <Layout>
-      <PageHeader
+      <HeroBanner
         title="Ministries"
-        subtitle="Explore our programs serving different age groups and needs."
+        subtitle="Programs serving different age groups and needs"
+        primaryCta={{ text: "Get Involved", link: "/contact" }}
       />
 
       <section className="page-section">

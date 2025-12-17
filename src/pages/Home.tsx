@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BookOpen, Users, ArrowRight, Globe, HandHeart, Church, Video, PlayCircle, Calendar } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
-import heroBg from "@/assets/hero-dove.jpg";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 
 const ministries = [
   {
@@ -43,91 +43,14 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* Hero Section - Navy background with dove layer */}
-      <section className="relative min-h-[60vh] md:min-h-[65vh] lg:min-h-[70vh] flex items-center overflow-hidden">
-        {/* Background - deep navy gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(218,44%,12%)] via-navy to-[hsl(218,44%,16%)]" />
-        
-        {/* Dove layer - absolute positioned, contained (no crop) */}
-        <div className="absolute inset-y-0 left-0 w-[55%] md:w-[55%] lg:w-[50%] flex items-center justify-center py-8 md:py-12">
-          {/* Soft golden glow behind dove */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-[80%] h-[80%] bg-gradient-radial from-gold/25 via-accent/10 to-transparent blur-3xl" />
-          </div>
-          <img 
-            src={heroBg} 
-            alt="Dove of peace - symbol of the Holy Spirit" 
-            className="relative w-full h-full object-contain drop-shadow-2xl animate-fade-in p-4 md:p-6"
-            style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
-          />
-        </div>
-        
-        {/* Text content - right side */}
-        <div className="section-container relative z-10 py-12 md:py-16">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            {/* Empty left column for dove space */}
-            <div className="hidden md:block" />
-            
-            {/* Right column: Text Content */}
-            <div className="text-center md:text-left space-y-6">
-              
-              {/* Primary Heading */}
-              <h1 
-                className="font-serif animate-fade-in"
-                style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
-              >
-                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground tracking-tight leading-[1.1]">
-                  IPC Gilgal
-                </span>
-                <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-primary-foreground/90 mt-2">
-                  Church
-                </span>
-              </h1>
-              
-              {/* Secondary Emphasis - Script/Italic */}
-              <p 
-                className="text-lg md:text-xl lg:text-2xl text-accent font-serif italic leading-relaxed animate-fade-in"
-                style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
-              >
-                A welcoming Christian community
-              </p>
-              
-              {/* Location - Small Caps */}
-              <p 
-                className="text-sm md:text-base text-primary-foreground/60 tracking-[0.25em] uppercase font-medium animate-fade-in"
-                style={{ animationDelay: '0.6s', animationFillMode: 'both' }}
-              >
-                Sharjah & Ras Al Khaimah, UAE
-              </p>
-              
-              {/* CTA Buttons */}
-              <div 
-                className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2 animate-fade-in"
-                style={{ animationDelay: '0.7s', animationFillMode: 'both' }}
-              >
-                <Link 
-                  to="/about" 
-                  className="inline-flex items-center justify-center gap-3 bg-accent hover:bg-gold-dark text-foreground px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-                >
-                  Discover Our Church
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link 
-                  to="/contact" 
-                  className="inline-flex items-center justify-center gap-2 bg-transparent text-primary-foreground border-2 border-primary-foreground/30 hover:border-primary-foreground/60 hover:bg-primary-foreground/5 px-8 py-4 rounded-full font-semibold transition-all duration-300"
-                >
-                  Get in Touch
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Curved bottom divider */}
-        <svg viewBox="0 0 1440 60" className="absolute bottom-0 w-full h-10 md:h-14" preserveAspectRatio="none">
-          <path d="M0,60 C480,0 960,0 1440,60 L1440,60 L0,60 Z" className="fill-background" />
-        </svg>
-      </section>
+      <HeroBanner
+        title="IPC Gilgal"
+        titleSecondLine="Church"
+        subtitle="A welcoming Christian community"
+        location="Sharjah & Ras Al Khaimah, UAE"
+        primaryCta={{ text: "Discover Our Church", link: "/about" }}
+        secondaryCta={{ text: "Get in Touch", link: "/contact" }}
+      />
 
       {/* Explore IPC Gilgal - Hub Grid */}
       <section className="section-cream py-12 md:py-16 relative overflow-hidden">
