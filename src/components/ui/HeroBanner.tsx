@@ -42,96 +42,99 @@ export function HeroBanner({
       
       {/* Content container - positioned at top to stay above the Bible */}
       <div className="section-container relative z-10 pt-8 pb-36 md:pt-12 md:pb-44 lg:pb-52">
-        <div className="max-w-2xl mx-auto text-center">
-          {/* Logo - transparent, no background */}
-          {logo && (
-            <img 
-              src={logo} 
-              alt={logoAlt}
-              className="block w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-contain mb-4 mx-auto animate-fade-in"
-              style={{ 
-                background: 'transparent',
-                boxShadow: 'none',
-                border: 'none',
-                padding: 0,
-                animationDelay: '0.1s',
-                animationFillMode: 'both'
-              }}
-            />
-          )}
-          
-          {/* Title - with text shadow for readability */}
-          <h1 
-            className="animate-fade-in"
-            style={{ 
-              animationDelay: '0.2s', 
-              animationFillMode: 'both',
-              textShadow: '0 2px 8px rgba(0,0,0,0.6)'
-            }}
-          >
-            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1]">
-              {title}
-            </span>
-            {titleSecondLine && (
-              <span className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white/95 mt-1">
-                {titleSecondLine}
-              </span>
+        {/* Glass panel container for readability */}
+        <div className="max-w-2xl mx-auto bg-black/40 backdrop-blur-sm rounded-2xl ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.45)] px-6 py-6 sm:px-8 sm:py-7 md:px-10 md:py-8">
+          <div className="text-center">
+            {/* Logo - transparent, no background */}
+            {logo && (
+              <img 
+                src={logo} 
+                alt={logoAlt}
+                className="block w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-contain mb-4 mx-auto animate-fade-in"
+                style={{ 
+                  background: 'transparent',
+                  boxShadow: 'none',
+                  border: 'none',
+                  padding: 0,
+                  animationDelay: '0.1s',
+                  animationFillMode: 'both'
+                }}
+              />
             )}
-          </h1>
-          
-          {/* Subtitle */}
-          {subtitle && (
-            <p 
-              className="text-base sm:text-lg md:text-xl text-accent font-serif italic leading-relaxed mt-3 animate-fade-in"
+            
+            {/* Title - with enhanced text shadow for readability */}
+            <h1 
+              className="animate-fade-in"
               style={{ 
-                animationDelay: '0.4s', 
+                animationDelay: '0.2s', 
                 animationFillMode: 'both',
-                textShadow: '0 1px 4px rgba(0,0,0,0.5)'
+                textShadow: '0 6px 24px rgba(0,0,0,0.75)'
               }}
             >
-              {subtitle}
-            </p>
-          )}
-          
-          {/* Location */}
-          {location && (
-            <p 
-              className="text-xs sm:text-sm text-white/80 tracking-[0.2em] uppercase font-medium mt-2 animate-fade-in"
-              style={{ 
-                animationDelay: '0.5s', 
-                animationFillMode: 'both',
-                textShadow: '0 1px 4px rgba(0,0,0,0.5)'
-              }}
-            >
-              {location}
-            </p>
-          )}
-          
-          {/* CTA Buttons */}
-          {(primaryCta || secondaryCta) && (
-            <div 
-              className="flex flex-col sm:flex-row gap-3 justify-center mt-5 animate-fade-in"
-              style={{ animationDelay: '0.6s', animationFillMode: 'both' }}
-            >
-              {primaryCta && (
-                <Link 
-                  to={primaryCta.link}
-                  className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-gold-dark text-foreground px-6 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-                >
-                  {primaryCta.text}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+              <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05]">
+                {title}
+              </span>
+              {titleSecondLine && (
+                <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white/95 mt-2">
+                  {titleSecondLine}
+                </span>
               )}
-              {secondaryCta && (
-                <Link 
-                  to={secondaryCta.link}
-                  className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border-2 border-white/40 hover:border-white/70 hover:bg-white/20 px-6 py-3 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm"
-                >
-                  {secondaryCta.text}
-                </Link>
-              )}
-            </div>
-          )}
+            </h1>
+            
+            {/* Subtitle */}
+            {subtitle && (
+              <p 
+                className="text-lg sm:text-xl md:text-2xl text-accent font-serif italic leading-relaxed mt-3 animate-fade-in"
+                style={{ 
+                  animationDelay: '0.4s', 
+                  animationFillMode: 'both',
+                  textShadow: '0 4px 16px rgba(0,0,0,0.8)'
+                }}
+              >
+                {subtitle}
+              </p>
+            )}
+            
+            {/* Location */}
+            {location && (
+              <p 
+                className="text-sm sm:text-base text-white/90 tracking-[0.22em] uppercase font-semibold mt-2 animate-fade-in"
+                style={{ 
+                  animationDelay: '0.5s', 
+                  animationFillMode: 'both',
+                  textShadow: '0 3px 12px rgba(0,0,0,0.85)'
+                }}
+              >
+                {location}
+              </p>
+            )}
+            
+            {/* CTA Buttons */}
+            {(primaryCta || secondaryCta) && (
+              <div 
+                className="flex flex-col sm:flex-row gap-3 justify-center mt-6 animate-fade-in"
+                style={{ animationDelay: '0.6s', animationFillMode: 'both' }}
+              >
+                {primaryCta && (
+                  <Link 
+                    to={primaryCta.link}
+                    className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-gold-dark text-foreground px-6 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                  >
+                    {primaryCta.text}
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                )}
+                {secondaryCta && (
+                  <Link 
+                    to={secondaryCta.link}
+                    className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border-2 border-white/40 hover:border-white/70 hover:bg-white/20 px-6 py-3 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm"
+                  >
+                    {secondaryCta.text}
+                  </Link>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
       
