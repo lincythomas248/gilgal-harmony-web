@@ -29,6 +29,7 @@ import {
 import { Link } from "react-router-dom";
 import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png";
 import communityPhoto from "@/assets/scripture-school-community.jpg";
+import { ageGroups } from "@/data/curriculumData";
 
 const experiences = [
   { icon: BookOpen, label: "Bible Stories", color: "text-amber-600", bg: "bg-amber-100", borderColor: "border-amber-200" },
@@ -40,16 +41,18 @@ const experiences = [
   { icon: BookMarked, label: "IPC Region Curriculum", color: "text-primary", bg: "bg-primary/10", borderColor: "border-primary/30" },
 ];
 
-const ageGroups = [
-  { 
-    id: "beginners",
-    name: "Beginners", 
-    ages: "3–5 yrs", 
-    icon: Baby, 
-    color: "text-amber-600", 
-    bg: "bg-amber-100",
-    borderActive: "ring-amber-400",
-    summary: "Foundation of faith through stories and songs",
+// Icon mapping for each group
+const groupIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  "sub-junior": Baby,
+  "junior": BookMarked,
+  "intermediate": Lightbulb,
+  "senior": GraduationCap,
+  "super-senior": Crown,
+};
+
+// Extended age group data with learning info
+const ageGroupDetails: Record<string, { whatTheyLearn: string[]; classFlow: string[] }> = {
+  "sub-junior": {
     whatTheyLearn: [
       "Basic Bible stories from Creation to Jesus",
       "Simple prayers and worship songs",
@@ -65,15 +68,7 @@ const ageGroups = [
       "Closing prayer and memory verse"
     ]
   },
-  { 
-    id: "primary",
-    name: "Primary", 
-    ages: "6–9 yrs", 
-    icon: BookMarked, 
-    color: "text-sky-600", 
-    bg: "bg-sky-100",
-    borderActive: "ring-sky-400",
-    summary: "Building strong biblical foundations",
+  "junior": {
     whatTheyLearn: [
       "Old Testament patriarchs and prophets",
       "Key events from Genesis to Malachi",
@@ -89,15 +84,7 @@ const ageGroups = [
       "Memory verse practice and closing"
     ]
   },
-  { 
-    id: "juniors",
-    name: "Juniors", 
-    ages: "10–12 yrs", 
-    icon: Lightbulb, 
-    color: "text-emerald-600", 
-    bg: "bg-emerald-100",
-    borderActive: "ring-emerald-400",
-    summary: "Deepening understanding of Scripture",
+  "intermediate": {
     whatTheyLearn: [
       "The Gospels and life of Christ in depth",
       "The early church and Acts",
@@ -113,15 +100,7 @@ const ageGroups = [
       "Prayer requests and closing"
     ]
   },
-  { 
-    id: "intermediate",
-    name: "Intermediate", 
-    ages: "13–15 yrs", 
-    icon: GraduationCap, 
-    color: "text-violet-600", 
-    bg: "bg-violet-100",
-    borderActive: "ring-violet-400",
-    summary: "Exploring theological foundations",
+  "senior": {
     whatTheyLearn: [
       "Systematic theology introduction",
       "Biblical interpretation principles",
@@ -137,15 +116,7 @@ const ageGroups = [
       "Personal prayer and reflection"
     ]
   },
-  { 
-    id: "seniors",
-    name: "Seniors", 
-    ages: "16+ yrs", 
-    icon: Crown, 
-    color: "text-rose-600", 
-    bg: "bg-rose-100",
-    borderActive: "ring-rose-400",
-    summary: "Preparing for life and ministry",
+  "super-senior": {
     whatTheyLearn: [
       "Advanced theological studies",
       "Leadership and ministry skills",
@@ -161,7 +132,7 @@ const ageGroups = [
       "Commissioning prayer"
     ]
   },
-];
+};
 
 export default function ScriptureSchool() {
   const [activeAgeGroup, setActiveAgeGroup] = useState<string | null>(null);
@@ -261,6 +232,7 @@ export default function ScriptureSchool() {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
               {ageGroups.map((group) => {
                 const isActive = activeAgeGroup === group.id;
+                const IconComponent = groupIcons[group.id] || BookMarked;
                 return (
                   <button
                     key={group.id}
@@ -283,14 +255,14 @@ export default function ScriptureSchool() {
                       transition-all duration-300
                       ${isActive ? 'scale-110' : 'group-hover:scale-110'}
                     `}>
-                      <group.icon className={`w-6 h-6 ${group.color}`} />
+                      <IconComponent className={`w-6 h-6 ${group.color}`} />
                     </div>
                     <h3
                       className="font-semibold text-foreground text-center leading-tight min-h-[2.5rem] flex items-center justify-center"
                     >
-                      {group.name}
+                      {group.group}
                     </h3>
-                    <p className={`text-sm font-medium ${group.color} mt-1`}>{group.ages}</p>
+                    <p className={`text-sm font-medium ${group.color} mt-1`}>{group.ageRange}</p>
                   </button>
                 );
               })}
@@ -319,14 +291,14 @@ export default function ScriptureSchool() {
                 Explore Our Curriculum
               </h2>
               <p className="text-emerald-100/70 max-w-md mx-auto text-sm">
-                A thoughtful journey from Beginners to Grade 12, with clear milestones and exam-focused lessons.
+                A thoughtful journey from Sub-Junior to Super-Senior, with clear milestones and exam-focused lessons.
               </p>
               
               {/* Active filter indicator */}
               {activeGroup && (
                 <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
                   <span className="text-white/90 text-sm">
-                    Showing: <span className="font-semibold text-amber-300">{activeGroup.name}</span> ({activeGroup.ages})
+                    Showing: <span className="font-semibold text-amber-300">{activeGroup.group}</span> ({activeGroup.ageRange})
                   </span>
                   <button
                     onClick={handleShowAll}
@@ -349,85 +321,90 @@ export default function ScriptureSchool() {
               onValueChange={setAccordionValue}
               className="space-y-3"
             >
-              {ageGroups.map((group) => (
-                <AccordionItem 
-                  key={group.id} 
-                  value={group.id}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden"
-                >
-                  <AccordionTrigger className="px-5 py-4 hover:bg-white/5 hover:no-underline [&[data-state=open]]:bg-white/10">
-                    <div className="flex items-center gap-4 text-left">
-                      <div className={`w-10 h-10 ${group.bg} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                        <group.icon className={`w-5 h-5 ${group.color}`} />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-white text-lg">{group.name}</h3>
-                        <p className="text-emerald-100/60 text-sm">{group.ages} • {group.summary}</p>
-                      </div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-5 pb-5">
-                    <div className="grid md:grid-cols-2 gap-6 pt-2">
-                      {/* What They Learn */}
-                      <div className="bg-white/5 rounded-xl p-5">
-                        <div className="flex items-center gap-2 mb-3">
-                          <CheckCircle2 className="w-5 h-5 text-amber-400" />
-                          <h4 className="font-semibold text-white">What They Learn</h4>
+              {ageGroups.map((group) => {
+                const IconComponent = groupIcons[group.id] || BookMarked;
+                const details = ageGroupDetails[group.id];
+                
+                return (
+                  <AccordionItem 
+                    key={group.id} 
+                    value={group.id}
+                    className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden"
+                  >
+                    <AccordionTrigger className="px-5 py-4 hover:bg-white/5 hover:no-underline [&[data-state=open]]:bg-white/10">
+                      <div className="flex items-center gap-4 text-left">
+                        <div className={`w-10 h-10 ${group.bg} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                          <IconComponent className={`w-5 h-5 ${group.color}`} />
                         </div>
-                        <ul className="space-y-2">
-                          {group.whatTheyLearn.map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-2 text-emerald-100/80 text-sm">
-                              <span className="text-amber-400 mt-1">•</span>
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
+                        <div>
+                          <h3 className="font-semibold text-white text-lg">{group.group}</h3>
+                          <p className="text-emerald-100/60 text-sm">{group.ageRange} • {group.summary}</p>
+                        </div>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-5 pb-5">
+                      <div className="grid md:grid-cols-2 gap-6 pt-2">
+                        {/* What They Learn */}
+                        <div className="bg-white/5 rounded-xl p-5">
+                          <div className="flex items-center gap-2 mb-3">
+                            <CheckCircle2 className="w-5 h-5 text-amber-400" />
+                            <h4 className="font-semibold text-white">What They Learn</h4>
+                          </div>
+                          <ul className="space-y-2">
+                            {details?.whatTheyLearn.map((item, idx) => (
+                              <li key={idx} className="flex items-start gap-2 text-emerald-100/80 text-sm">
+                                <span className="text-amber-400 mt-1">•</span>
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Typical Class Flow */}
+                        <div className="bg-white/5 rounded-xl p-5">
+                          <div className="flex items-center gap-2 mb-3">
+                            <Clock className="w-5 h-5 text-amber-400" />
+                            <h4 className="font-semibold text-white">Typical Class Flow</h4>
+                          </div>
+                          <ul className="space-y-2">
+                            {details?.classFlow.map((item, idx) => (
+                              <li key={idx} className="flex items-start gap-2 text-emerald-100/80 text-sm">
+                                <span className="text-amber-400 font-medium">{idx + 1}.</span>
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
 
-                      {/* Typical Class Flow */}
-                      <div className="bg-white/5 rounded-xl p-5">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Clock className="w-5 h-5 text-amber-400" />
-                          <h4 className="font-semibold text-white">Typical Class Flow</h4>
-                        </div>
-                        <ul className="space-y-2">
-                          {group.classFlow.map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-2 text-emerald-100/80 text-sm">
-                              <span className="text-amber-400 font-medium">{idx + 1}.</span>
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
+                      {/* CTA Row */}
+                      <div className="flex flex-wrap gap-3 mt-5 pt-4 border-t border-white/10">
+                        <Button 
+                          asChild 
+                          size="sm"
+                          className="rounded-full bg-amber-500 hover:bg-amber-400 text-emerald-950 font-medium"
+                        >
+                          <Link to="/scripture-school/curriculum">
+                            <BookMarked className="w-4 h-4 mr-2" />
+                            View Lessons
+                          </Link>
+                        </Button>
+                        <Button 
+                          asChild 
+                          variant="outline"
+                          size="sm"
+                          className="rounded-full border-white/20 text-white hover:bg-white/10 hover:text-white"
+                        >
+                          <Link to="/scripture-school/curriculum">
+                            <BookOpen className="w-4 h-4 mr-2" />
+                            View Memory Verses
+                          </Link>
+                        </Button>
                       </div>
-                    </div>
-
-                    {/* CTA Row */}
-                    <div className="flex flex-wrap gap-3 mt-5 pt-4 border-t border-white/10">
-                      <Button 
-                        asChild 
-                        size="sm"
-                        className="rounded-full bg-amber-500 hover:bg-amber-400 text-emerald-950 font-medium"
-                      >
-                        <Link to="/scripture-school/curriculum">
-                          <BookMarked className="w-4 h-4 mr-2" />
-                          View Lessons
-                        </Link>
-                      </Button>
-                      <Button 
-                        asChild 
-                        variant="outline"
-                        size="sm"
-                        className="rounded-full border-white/20 text-white hover:bg-white/10 hover:text-white"
-                      >
-                        <Link to="/scripture-school/curriculum">
-                          <BookOpen className="w-4 h-4 mr-2" />
-                          View Memory Verses
-                        </Link>
-                      </Button>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
+                    </AccordionContent>
+                  </AccordionItem>
+                );
+              })}
             </Accordion>
 
             {/* Full Curriculum Link */}
@@ -438,7 +415,7 @@ export default function ScriptureSchool() {
                 className="rounded-full bg-white hover:bg-amber-50 text-emerald-900 font-semibold shadow-lg hover:shadow-xl transition-all px-8"
               >
                 <Link to="/scripture-school/curriculum" className="inline-flex items-center gap-2">
-                  <BookMarked className="w-4 h-4" />
+                  <GraduationCap className="w-5 h-5" />
                   View Full Curriculum Map
                 </Link>
               </Button>
@@ -447,21 +424,31 @@ export default function ScriptureSchool() {
         </div>
       </section>
 
-      {/* Wave divider to verse */}
-      <svg viewBox="0 0 1440 60" className="w-full h-10 md:h-14 bg-emerald-900" preserveAspectRatio="none">
-        <path d="M0,0 C480,60 960,60 1440,0 L1440,60 L0,60 Z" className="fill-amber-50/80" />
-      </svg>
+      {/* Curved transition out */}
+      <div className="relative h-10 md:h-12 bg-emerald-900">
+        <svg viewBox="0 0 1440 60" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
+          <path d="M0,0 C480,60 960,60 1440,0 L1440,60 L0,60 Z" className="fill-background" />
+        </svg>
+      </div>
 
-      {/* SCRIPTURE VERSE */}
-      <section className="bg-amber-50/80 py-12 md:py-16">
+      {/* CONTACT CTA */}
+      <section className="bg-background py-16 md:py-20">
         <div className="section-container">
           <div className="max-w-2xl mx-auto text-center">
-            <blockquote className="text-lg md:text-xl text-foreground/90 font-serif italic leading-relaxed">
-              "Train up a child in the way he should go, and when he is old he will not depart from it."
-            </blockquote>
-            <p className="text-sm text-muted-foreground mt-4 tracking-wider uppercase font-medium">
-              Proverbs 22:6
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              Ready to Enroll Your Child?
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              Join our Scripture School family and give your child the gift of biblical education in a nurturing, faith-filled environment.
             </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button asChild className="rounded-full bg-accent hover:bg-accent/90 text-primary-foreground px-8">
+                <Link to="/contact">Contact Us</Link>
+              </Button>
+              <Button asChild variant="outline" className="rounded-full border-primary/30 text-primary hover:bg-primary/5 px-8">
+                <Link to="/events">Upcoming Events</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
