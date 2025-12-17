@@ -21,12 +21,13 @@ import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png"
 import communityPhoto from "@/assets/scripture-school-community.jpg";
 
 const experiences = [
-  { icon: BookOpen, label: "Bible Stories", color: "text-amber-600", bg: "bg-amber-50" },
-  { icon: Music, label: "Worship Songs", color: "text-sky-600", bg: "bg-sky-50" },
-  { icon: Palette, label: "Creative Arts", color: "text-emerald-600", bg: "bg-emerald-50" },
-  { icon: Heart, label: "Friendship", color: "text-rose-500", bg: "bg-rose-50" },
-  { icon: Award, label: "Achievements", color: "text-violet-600", bg: "bg-violet-50" },
-  { icon: PartyPopper, label: "Celebrations", color: "text-orange-500", bg: "bg-orange-50" },
+  { icon: BookOpen, label: "Bible Stories", color: "text-amber-600", bg: "bg-amber-100", borderColor: "border-amber-200" },
+  { icon: Music, label: "Worship Songs", color: "text-sky-600", bg: "bg-sky-100", borderColor: "border-sky-200" },
+  { icon: Palette, label: "Creative Arts", color: "text-emerald-600", bg: "bg-emerald-100", borderColor: "border-emerald-200" },
+  { icon: Heart, label: "Friendship", color: "text-rose-500", bg: "bg-rose-100", borderColor: "border-rose-200" },
+  { icon: Award, label: "Achievements", color: "text-violet-600", bg: "bg-violet-100", borderColor: "border-violet-200" },
+  { icon: PartyPopper, label: "Celebrations", color: "text-orange-500", bg: "bg-orange-100", borderColor: "border-orange-200" },
+  { icon: BookMarked, label: "IPC Region Curriculum", color: "text-primary", bg: "bg-primary/10", borderColor: "border-primary/30" },
 ];
 
 const ageGroups = [
@@ -51,26 +52,26 @@ export default function ScriptureSchool() {
       />
 
       {/* WHAT CHILDREN EXPERIENCE */}
-      <section className="bg-background py-14 md:py-20">
+      <section className="bg-background py-16 md:py-24">
         <div className="section-container">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <h2 className="text-2xl md:text-3xl text-foreground mb-2">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
                 What Children Experience
               </h2>
-              <p className="text-muted-foreground">Faith, fun, and friendship every week</p>
+              <p className="text-lg text-muted-foreground">Faith, fun, and friendship every week</p>
             </div>
             
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
               {experiences.map((exp, index) => (
                 <div 
                   key={index}
-                  className={`${exp.bg} rounded-2xl p-4 text-center hover:scale-105 transition-transform duration-200`}
+                  className={`${exp.bg} ${exp.borderColor} border-2 rounded-2xl p-6 text-center hover:scale-105 hover:shadow-lg transition-all duration-300 min-h-[140px] flex flex-col items-center justify-center`}
                 >
-                  <div className={`w-10 h-10 ${exp.bg} rounded-xl flex items-center justify-center mx-auto mb-2`}>
-                    <exp.icon className={`w-5 h-5 ${exp.color}`} />
+                  <div className={`w-14 h-14 ${exp.bg} rounded-2xl flex items-center justify-center mx-auto mb-3`}>
+                    <exp.icon className={`w-7 h-7 ${exp.color}`} />
                   </div>
-                  <p className={`text-sm font-medium ${exp.color}`}>{exp.label}</p>
+                  <p className={`text-base font-semibold ${exp.color} leading-tight`}>{exp.label}</p>
                 </div>
               ))}
             </div>
