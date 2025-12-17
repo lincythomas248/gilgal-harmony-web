@@ -81,7 +81,7 @@ export default function ScriptureSchool() {
       {/* COMMUNITY PHOTO BAND */}
       <section className="relative w-full my-12 md:my-16 lg:my-20">
         <div 
-          className="w-full h-[320px] sm:h-[380px] md:h-[450px] lg:h-[500px] bg-cover bg-no-repeat"
+          className="w-full h-[380px] sm:h-[450px] md:h-[520px] lg:h-[580px] bg-cover bg-no-repeat"
           style={{ 
             backgroundImage: `url(${communityPhoto})`,
             backgroundPosition: 'center center'
@@ -116,13 +116,13 @@ export default function ScriptureSchool() {
               {ageGroups.map((group, index) => (
                 <div 
                   key={index} 
-                  className="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 text-center group"
+                  className="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 text-center group min-h-[140px] flex flex-col justify-center"
                 >
                   <div className={`w-12 h-12 ${group.bg} rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}>
                     <group.icon className={`w-6 h-6 ${group.color}`} />
                   </div>
-                  <h3 className="font-semibold text-foreground">{group.name}</h3>
-                  <p className={`text-sm font-medium ${group.color}`}>{group.ages}</p>
+                  <h3 className="font-semibold text-foreground text-center leading-tight break-words">{group.name}</h3>
+                  <p className={`text-sm font-medium ${group.color} mt-1`}>{group.ages}</p>
                 </div>
               ))}
             </div>
