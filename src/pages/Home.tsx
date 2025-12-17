@@ -43,31 +43,33 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* Hero Section - Two Column Layout (matching Scripture School) */}
-      <section className="relative min-h-[65vh] md:min-h-[70vh] flex items-center overflow-hidden">
-        {/* Background base - dark navy */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(218,44%,14%)] via-navy to-[hsl(218,44%,18%)]" />
+      {/* Hero Section - Navy background with dove layer */}
+      <section className="relative min-h-[60vh] md:min-h-[65vh] lg:min-h-[70vh] flex items-center overflow-hidden">
+        {/* Background - deep navy gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(218,44%,12%)] via-navy to-[hsl(218,44%,16%)]" />
         
-        {/* Two Column Grid */}
+        {/* Dove layer - absolute positioned, contained (no crop) */}
+        <div className="absolute inset-y-0 left-0 w-[55%] md:w-[55%] lg:w-[50%] flex items-center justify-center py-8 md:py-12">
+          {/* Soft golden glow behind dove */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-[80%] h-[80%] bg-gradient-radial from-gold/25 via-accent/10 to-transparent blur-3xl" />
+          </div>
+          <img 
+            src={heroBg} 
+            alt="Dove of peace - symbol of the Holy Spirit" 
+            className="relative w-full h-full object-contain drop-shadow-2xl animate-fade-in p-4 md:p-6"
+            style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
+          />
+        </div>
+        
+        {/* Text content - right side */}
         <div className="section-container relative z-10 py-12 md:py-16">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Empty left column for dove space */}
+            <div className="hidden md:block" />
             
-            {/* Column A: Dove Image - Clear, no heavy overlay */}
-            <div className="relative order-1 md:order-1 flex justify-center md:justify-start">
-              <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg">
-                {/* Soft golden glow behind dove */}
-                <div className="absolute inset-0 bg-gradient-radial from-gold/20 via-accent/10 to-transparent blur-3xl scale-125" />
-                <img 
-                  src={heroBg} 
-                  alt="Dove of peace - symbol of the Holy Spirit" 
-                  className="relative w-full h-auto object-contain drop-shadow-2xl animate-fade-in"
-                  style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
-                />
-              </div>
-            </div>
-            
-            {/* Column B: Text Content */}
-            <div className="order-2 md:order-2 text-center md:text-left space-y-6">
+            {/* Right column: Text Content */}
+            <div className="text-center md:text-left space-y-6">
               
               {/* Primary Heading */}
               <h1 
@@ -121,7 +123,7 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Curved bottom divider (matching Scripture School) */}
+        {/* Curved bottom divider */}
         <svg viewBox="0 0 1440 60" className="absolute bottom-0 w-full h-10 md:h-14" preserveAspectRatio="none">
           <path d="M0,60 C480,0 960,0 1440,60 L1440,60 L0,60 Z" className="fill-background" />
         </svg>
