@@ -1,5 +1,6 @@
 import { Layout } from "@/components/layout/Layout";
 import { BackToTop } from "@/components/ui/BackToTop";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 import { 
   BookOpen, 
   Users, 
@@ -12,13 +13,11 @@ import {
   BookMarked,
   Lightbulb,
   Crown,
-  Heart,
-  ChevronRight
+  Heart
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png";
-import heroBg from "@/assets/scripture-school-hero-bg.jpg";
 
 const experiences = [
   { icon: BookOpen, label: "Bible Stories", color: "text-amber-600", bg: "bg-amber-50" },
@@ -42,62 +41,13 @@ export default function ScriptureSchool() {
     <Layout>
       <BackToTop />
       
-      {/* HERO SECTION - Two Column: Dove Left, Text Right */}
-      <section className="relative min-h-[60vh] md:min-h-[65vh] flex items-center overflow-hidden">
-        {/* Full-cover dove background image - crisp and visible */}
-        <div 
-          className="absolute inset-0 bg-cover bg-left bg-no-repeat"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        />
-        
-        {/* Right-side only gradient for text readability - keeps dove area clean */}
-        <div className="absolute inset-0 bg-gradient-to-l from-black/80 via-black/50 to-transparent" />
-        
-        {/* Two-column grid container */}
-        <div className="section-container relative z-10 py-10 md:py-14">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            {/* Left column - Empty space for dove visibility */}
-            <div className="hidden md:block" />
-            
-            {/* Right column - Text content + Logo */}
-            <div className="text-left md:text-left">
-              {/* Logo - Transparent PNG */}
-              <img 
-                src={scriptureSchoolLogo} 
-                alt="Scripture School Logo" 
-                className="block w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain mb-6"
-              />
-              
-              {/* Main Heading */}
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-wide leading-tight mb-4">
-                SCRIPTURE SCHOOL
-              </h1>
-              
-              {/* Subheading */}
-              <p className="text-base sm:text-lg md:text-xl text-white/90 font-serif italic mb-8 max-w-md">
-                Where faith takes root and joy blossoms
-              </p>
-              
-              {/* CTA Button */}
-              <Button 
-                asChild 
-                size="lg"
-                className="rounded-full bg-accent hover:bg-gold-dark text-foreground font-semibold shadow-lg hover:shadow-xl transition-all px-8"
-              >
-                <a href="#classes" className="inline-flex items-center gap-2">
-                  Explore Classes
-                  <ChevronRight className="w-4 h-4" />
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-        
-        {/* Wave divider */}
-        <svg viewBox="0 0 1440 60" className="absolute bottom-0 w-full h-10 md:h-14" preserveAspectRatio="none">
-          <path d="M0,60 C480,0 960,0 1440,60 L1440,60 L0,60 Z" className="fill-background" />
-        </svg>
-      </section>
+      <HeroBanner
+        title="Scripture School"
+        subtitle="Where faith takes root and joy blossoms"
+        logo={scriptureSchoolLogo}
+        logoAlt="Scripture School Logo"
+        primaryCta={{ text: "Explore Classes", link: "#classes" }}
+      />
 
       {/* WHAT CHILDREN EXPERIENCE */}
       <section className="bg-background py-14 md:py-20">
