@@ -37,12 +37,15 @@ export function HeroBanner({
         className="absolute inset-0 bg-cover bg-no-repeat"
         style={{ 
           backgroundImage: `url(${heroBg})`,
-          backgroundPosition: 'left center'
+          backgroundPosition: '15% 40%'
         }}
       />
       
-      {/* Right-to-left dark gradient overlay - keeps dove visible on left */}
-      <div className="absolute inset-0 bg-gradient-to-l from-black/85 via-black/60 to-black/20" />
+      {/* Subtle warm glow behind dove area */}
+      <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-radial from-gold/15 via-transparent to-transparent opacity-60" />
+      
+      {/* Right-to-left gradient overlay - lighter on left for dove visibility */}
+      <div className="absolute inset-0 bg-gradient-to-l from-black/90 via-black/50 to-black/10" />
       
       {/* Content container */}
       <div className="section-container relative z-10 py-10 md:py-14">
