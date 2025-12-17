@@ -18,6 +18,7 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png";
+import communityPhoto from "@/assets/scripture-school-community.jpg";
 
 const experiences = [
   { icon: BookOpen, label: "Bible Stories", color: "text-amber-600", bg: "bg-amber-50" },
@@ -75,6 +76,19 @@ export default function ScriptureSchool() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* COMMUNITY PHOTO BAND */}
+      <section className="relative w-full my-12 md:my-16 lg:my-20">
+        <div 
+          className="w-full h-[280px] sm:h-[320px] md:h-[380px] lg:h-[420px] bg-cover bg-no-repeat"
+          style={{ 
+            backgroundImage: `url(${communityPhoto})`,
+            backgroundPosition: 'center 65%'
+          }}
+          role="img"
+          aria-label="Scripture School community gathering"
+        />
       </section>
 
       {/* Curved transition */}
