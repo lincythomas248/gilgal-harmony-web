@@ -51,110 +51,98 @@ export default function Beliefs() {
         subtitle="The foundational teachings that guide our faith community"
       />
 
-      {/* Beliefs section with full-width background - NO overlay */}
-      <section className="relative pt-64 md:pt-80 pb-24 md:pb-36 overflow-hidden">
-        {/* Full-width background image - unmodified, positioned to show dove at top */}
+      {/* Beliefs section - Dove-centred sacred composition */}
+      <section className="relative pt-[420px] sm:pt-[480px] md:pt-[520px] pb-20 md:pb-32 overflow-hidden">
+        {/* Background image - unmodified, dove at top centre */}
         <div 
           className="absolute inset-0 bg-cover bg-no-repeat"
           style={{ 
             backgroundImage: `url(${pentecostImage})`,
-            backgroundPosition: 'center 15%'
+            backgroundPosition: 'center top'
           }}
         />
         
-        {/* Content container - starts below dove area */}
+        {/* Content container - positioned below the dove */}
         <div className="section-container relative z-10">
-          {/* Glass panel for heading + intro only */}
-          <div className="max-w-4xl mx-auto mb-16 md:mb-24">
+          
+          {/* Quiet glass plaque - smaller, respectful, anchored */}
+          <div className="max-w-2xl mx-auto mb-12 md:mb-16 text-center">
             <div 
-              className="rounded-3xl bg-black/42 backdrop-blur-sm ring-1 ring-white/10 px-6 py-8 sm:px-10 sm:py-10 text-center"
-              style={{ boxShadow: '0 18px 70px rgba(0,0,0,0.55)' }}
+              className="inline-block rounded-2xl bg-black/35 backdrop-blur-sm px-8 py-6 sm:px-10 sm:py-7"
+              style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.35)' }}
             >
               <h2 
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05] mb-6 md:mb-8"
-                style={{ textShadow: '0 10px 30px rgba(0,0,0,0.8)' }}
+                className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight leading-tight mb-3"
+                style={{ textShadow: '0 4px 16px rgba(0,0,0,0.6)' }}
               >
                 Foundations of Our Faith
               </h2>
               <p 
-                className="text-lg sm:text-xl md:text-2xl text-white/90 leading-relaxed md:leading-[1.9] max-w-3xl mx-auto"
-                style={{ textShadow: '0 6px 18px rgba(0,0,0,0.75)' }}
+                className="text-base sm:text-lg text-white/85 leading-relaxed max-w-xl mx-auto"
+                style={{ textShadow: '0 3px 12px rgba(0,0,0,0.5)' }}
               >
-                As a congregation of the Indian Pentecostal Church, our beliefs are rooted in historic Christian teachings. The following principles form the foundation of our faith and practice.
+                The principles that guide our congregation, rooted in historic Christian teachings.
               </p>
             </div>
           </div>
 
-          {/* Belief cards - Arc layout on desktop, stack on mobile */}
-          {/* Mobile: stacked */}
-          <div className="md:hidden space-y-6 max-w-lg mx-auto">
+          {/* Mobile: Clean vertical stack */}
+          <div className="md:hidden space-y-5 max-w-md mx-auto px-2">
             {beliefs.map((belief, index) => (
               <div 
                 key={index} 
-                className="rounded-2xl p-6 flex gap-5 bg-white/90 backdrop-blur-sm ring-1 ring-black/5 shadow-xl"
+                className="rounded-xl p-5 bg-[#FAF8F3] shadow-md border border-black/[0.04]"
               >
-                <div className="flex-shrink-0">
-                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${
-                    belief.color === 'gold' 
-                      ? 'bg-accent/15' 
-                      : 'bg-primary/10'
+                <div className="flex items-start gap-4">
+                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                    belief.color === 'gold' ? 'bg-accent/12' : 'bg-primary/8'
                   }`}>
-                    <belief.icon className={`w-7 h-7 ${belief.color === 'gold' ? 'text-accent' : 'text-primary'}`} />
+                    <belief.icon className={`w-6 h-6 ${belief.color === 'gold' ? 'text-accent' : 'text-primary'}`} />
                   </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
-                    {belief.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed text-base">
-                    {belief.description}
-                  </p>
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground mb-1.5 leading-snug">
+                      {belief.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {belief.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Desktop: Wider arc layout */}
-          <div className="hidden md:block relative max-w-7xl mx-auto" style={{ height: '520px' }}>
+          {/* Desktop: Wide, shallow, grounded arc */}
+          <div className="hidden md:flex justify-center items-end gap-4 lg:gap-5 max-w-6xl mx-auto px-4">
             {beliefs.map((belief, index) => {
-              // Arc positioning: center card highest, sides lower, outer lowest
-              // Positions spread wider toward edges
-              const positions = [
-                { left: '2%', top: '55%', rotate: -5 },      // Far left - lowest
-                { left: '18%', top: '30%', rotate: -3 },     // Left - lower
-                { left: '50%', top: '8%', rotate: 0, center: true }, // Center - highest
-                { left: '82%', top: '30%', rotate: 3 },      // Right - lower
-                { left: '98%', top: '55%', rotate: 5 },      // Far right - lowest
+              // Wide shallow arc: center slightly elevated, outer cards level
+              // Minimal rotation for stability
+              const arcConfig = [
+                { translateY: 24, rotate: -2 },   // Far left
+                { translateY: 10, rotate: -1 },   // Left
+                { translateY: 0, rotate: 0 },     // Center - highest
+                { translateY: 10, rotate: 1 },    // Right
+                { translateY: 24, rotate: 2 },    // Far right
               ];
-              const pos = positions[index];
+              const config = arcConfig[index];
               
               return (
                 <div 
                   key={index} 
-                  className="absolute w-[280px] lg:w-[300px] rounded-2xl p-6 lg:p-7 bg-white/90 backdrop-blur-sm ring-1 ring-black/5 shadow-xl transition-transform duration-300 hover:scale-105"
+                  className="w-[200px] lg:w-[220px] rounded-xl p-5 lg:p-6 bg-[#FAF8F3] shadow-lg border border-black/[0.05] transition-shadow duration-200 hover:shadow-xl"
                   style={{ 
-                    left: pos.left,
-                    top: pos.top,
-                    transform: `translateX(-50%) rotate(${pos.rotate}deg)`,
+                    transform: `translateY(${config.translateY}px) rotate(${config.rotate}deg)`,
                   }}
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0">
-                      <div className={`w-12 h-12 lg:w-14 lg:h-14 rounded-xl flex items-center justify-center ${
-                        belief.color === 'gold' 
-                          ? 'bg-accent/15' 
-                          : 'bg-primary/10'
-                      }`}>
-                        <belief.icon className={`w-6 h-6 lg:w-7 lg:h-7 ${belief.color === 'gold' ? 'text-accent' : 'text-primary'}`} />
-                      </div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg lg:text-xl font-semibold text-foreground mb-2 leading-tight">
-                        {belief.title}
-                      </h3>
-                    </div>
+                  <div className={`w-11 h-11 lg:w-12 lg:h-12 rounded-lg flex items-center justify-center mb-4 ${
+                    belief.color === 'gold' ? 'bg-accent/12' : 'bg-primary/8'
+                  }`}>
+                    <belief.icon className={`w-5 h-5 lg:w-6 lg:h-6 ${belief.color === 'gold' ? 'text-accent' : 'text-primary'}`} />
                   </div>
-                  <p className="text-muted-foreground leading-relaxed text-sm lg:text-base mt-3">
+                  <h3 className="text-base lg:text-lg font-semibold text-foreground mb-2 leading-snug">
+                    {belief.title}
+                  </h3>
+                  <p className="text-muted-foreground text-xs lg:text-sm leading-relaxed">
                     {belief.description}
                   </p>
                 </div>
