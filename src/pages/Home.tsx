@@ -44,55 +44,57 @@ export default function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-        {/* Dove image - visible and central */}
+      <section className="relative min-h-[75vh] flex items-center overflow-hidden">
+        {/* Dove image - positioned to the left */}
         <div className="absolute inset-0">
           <img 
             src={heroBg} 
             alt="Dove of peace" 
-            className="w-full h-full object-cover object-center" 
+            className="w-full h-full object-cover object-[30%_center] md:object-[25%_center]" 
           />
         </div>
-        {/* Subtle overlay - reduced to show dove clearly */}
-        <div className="absolute inset-0 bg-navy/25" />
+        {/* Gradient overlay - darker on right for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/20 via-navy/40 to-navy/70" />
         
-        {/* Content */}
-        <div className="section-container relative z-10 text-center py-16 md:py-20">
-          
-          {/* Church Name - elegant serif typography */}
-          <h1 className="font-serif mb-8">
-            <span className="block text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground tracking-tight leading-tight drop-shadow-lg">
-              IPC Gilgal
-            </span>
-            <span className="block text-4xl md:text-5xl lg:text-6xl font-medium italic text-accent mt-3 drop-shadow-md">
-              Church
-            </span>
-          </h1>
-          
-          {/* Subtitle - clean sans-serif */}
-          <p className="text-lg md:text-xl text-primary-foreground/90 font-light max-w-xl mx-auto mb-3 leading-relaxed font-sans">
-            A welcoming Christian community
-          </p>
-          
-          <p className="text-sm text-primary-foreground/60 tracking-[0.2em] uppercase mb-10 font-sans">
-            Sharjah & Ras Al Khaimah, UAE
-          </p>
-          
-          {/* Buttons - refined with hover states */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              to="/about" 
-              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-gold-dark text-foreground px-8 py-4 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
-            >
-              Discover Our Church
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link 
-              to="/contact" 
-              className="inline-flex items-center justify-center gap-2 bg-transparent text-primary-foreground border-2 border-primary-foreground/40 hover:border-primary-foreground/70 hover:bg-primary-foreground/10 px-8 py-4 rounded-lg font-semibold transition-all duration-200"
-            >
-              Get in Touch
-            </Link>
+        {/* Content - positioned to the right */}
+        <div className="section-container relative z-10 py-20 md:py-24">
+          <div className="ml-auto max-w-2xl text-center md:text-right md:pr-8">
+            
+            {/* Church Name - larger and more prominent */}
+            <h1 className="font-serif mb-10">
+              <span className="block text-6xl md:text-7xl lg:text-8xl font-bold text-primary-foreground tracking-tight leading-none drop-shadow-xl">
+                IPC Gilgal
+              </span>
+              <span className="block text-5xl md:text-6xl lg:text-7xl font-semibold italic text-accent mt-4 drop-shadow-lg">
+                Church
+              </span>
+            </h1>
+            
+            {/* Subtitle - elegant serif */}
+            <p className="text-xl md:text-2xl text-primary-foreground font-serif italic max-w-lg ml-auto mb-4 leading-relaxed drop-shadow-md">
+              A welcoming Christian community
+            </p>
+            
+            <p className="text-sm md:text-base text-primary-foreground/80 tracking-[0.25em] uppercase mb-12 font-medium">
+              Sharjah & Ras Al Khaimah, UAE
+            </p>
+            
+            {/* Buttons - refined with hover states */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-end">
+              <Link 
+                to="/about" 
+                className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-gold-dark text-foreground px-8 py-4 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                Discover Our Church
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link 
+                to="/contact" 
+                className="inline-flex items-center justify-center gap-2 bg-primary-foreground/10 backdrop-blur-sm text-primary-foreground border-2 border-primary-foreground/50 hover:border-primary-foreground hover:bg-primary-foreground/20 px-8 py-4 rounded-lg font-semibold transition-all duration-200"
+              >
+                Get in Touch
+              </Link>
+            </div>
           </div>
         </div>
       </section>
