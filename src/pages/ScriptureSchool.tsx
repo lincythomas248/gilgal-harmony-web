@@ -4,7 +4,6 @@ import { BackToTop } from "@/components/ui/BackToTop";
 import { BookOpen, Users, Star, Sparkles, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import scriptureSchoolLogo from "@/assets/scripture-school-logo.png";
 import pencilsBg from "@/assets/scripture-school-bg.jpg";
 
 const ageGroups = [
@@ -33,13 +32,8 @@ export default function ScriptureSchool() {
       <section className="section-light page-section -mt-16 relative z-10">
         <div className="section-container">
           <div className="max-w-4xl mx-auto">
-            {/* Logo and Introduction */}
+            {/* Introduction */}
             <div className="text-center mb-12">
-              <img
-                src={scriptureSchoolLogo}
-                alt="Scripture School"
-                className="h-28 md:h-36 mx-auto mb-6 drop-shadow-lg"
-              />
               <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed text-lg">
                 Scripture School is our dedicated ministry for teaching biblical principles to children and young people. Through age-appropriate curriculum and engaging activities, we help young believers build a strong foundation in Christian faith.
               </p>
