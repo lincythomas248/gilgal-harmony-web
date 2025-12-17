@@ -43,57 +43,84 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative min-h-[75vh] flex items-center overflow-hidden bg-navy">
-        {/* Dove image - positioned on the left half only */}
-        <div className="absolute inset-y-0 left-0 w-1/2 md:w-[55%]">
-          <img 
-            src={heroBg} 
-            alt="Dove of peace" 
-            className="w-full h-full object-cover object-[70%_center]" 
-          />
-          {/* Fade to navy on the right edge */}
-          <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-r from-transparent to-navy" />
-        </div>
+      {/* Hero Section - Two Column Layout */}
+      <section className="relative min-h-[80vh] flex items-center overflow-hidden">
+        {/* Background base - dark navy */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(218,44%,14%)] via-navy to-[hsl(218,44%,18%)]" />
         
-        {/* Content - positioned on the right half */}
-        <div className="section-container relative z-10 py-20 md:py-24">
-          <div className="ml-auto w-full md:w-1/2 text-center md:text-left md:pl-8">
+        {/* Subtle warm glow near dove area */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-1/3 left-1/3 w-64 h-64 bg-gold/8 rounded-full blur-[100px] pointer-events-none" />
+        
+        {/* Two Column Grid */}
+        <div className="section-container relative z-10 py-16 md:py-20">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
             
-            {/* Church Name - larger and more prominent */}
-            <h1 className="font-serif mb-10">
-              <span className="block text-6xl md:text-7xl lg:text-8xl font-bold text-primary-foreground tracking-tight leading-none drop-shadow-xl">
-                IPC Gilgal
-              </span>
-              <span className="block text-5xl md:text-6xl lg:text-7xl font-semibold italic text-accent mt-4 drop-shadow-lg">
-                Church
-              </span>
-            </h1>
+            {/* Column A: Dove Image */}
+            <div className="relative order-1 md:order-1 flex justify-center md:justify-start">
+              <div className="relative w-full max-w-md md:max-w-lg lg:max-w-xl">
+                {/* Soft glow behind dove */}
+                <div className="absolute inset-0 bg-gradient-radial from-gold/15 via-transparent to-transparent blur-2xl scale-110" />
+                <img 
+                  src={heroBg} 
+                  alt="Dove of peace - symbol of the Holy Spirit" 
+                  className="relative w-full h-auto object-contain drop-shadow-2xl animate-fade-in"
+                  style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
+                />
+              </div>
+            </div>
             
-            {/* Subtitle - elegant serif */}
-            <p className="text-xl md:text-2xl text-primary-foreground font-serif italic max-w-lg mb-4 leading-relaxed drop-shadow-md">
-              A welcoming Christian community
-            </p>
-            
-            <p className="text-sm md:text-base text-primary-foreground/80 tracking-[0.25em] uppercase mb-12 font-medium">
-              Sharjah & Ras Al Khaimah, UAE
-            </p>
-            
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Link 
-                to="/about" 
-                className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-gold-dark text-foreground px-8 py-4 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
+            {/* Column B: Text Content */}
+            <div className="order-2 md:order-2 text-center md:text-left space-y-8">
+              
+              {/* Primary Heading */}
+              <h1 
+                className="font-serif animate-fade-in"
+                style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
               >
-                Discover Our Church
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link 
-                to="/contact" 
-                className="inline-flex items-center justify-center gap-2 bg-primary-foreground/10 backdrop-blur-sm text-primary-foreground border-2 border-primary-foreground/50 hover:border-primary-foreground hover:bg-primary-foreground/20 px-8 py-4 rounded-lg font-semibold transition-all duration-200"
+                <span className="block text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground tracking-tight leading-[1.1]">
+                  IPC Gilgal
+                </span>
+                <span className="block text-3xl md:text-4xl lg:text-5xl font-semibold text-primary-foreground/90 mt-2">
+                  Church
+                </span>
+              </h1>
+              
+              {/* Secondary Emphasis - Script/Italic */}
+              <p 
+                className="text-xl md:text-2xl lg:text-3xl text-accent font-serif italic leading-relaxed animate-fade-in"
+                style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
               >
-                Get in Touch
-              </Link>
+                A welcoming Christian community
+              </p>
+              
+              {/* Location - Small Caps */}
+              <p 
+                className="text-sm md:text-base text-primary-foreground/60 tracking-[0.3em] uppercase font-medium animate-fade-in"
+                style={{ animationDelay: '0.6s', animationFillMode: 'both' }}
+              >
+                Sharjah & Ras Al Khaimah, UAE
+              </p>
+              
+              {/* CTA Buttons */}
+              <div 
+                className="flex flex-col sm:flex-row gap-5 justify-center md:justify-start pt-4 animate-fade-in"
+                style={{ animationDelay: '0.7s', animationFillMode: 'both' }}
+              >
+                <Link 
+                  to="/about" 
+                  className="inline-flex items-center justify-center gap-3 bg-accent hover:bg-gold-dark text-foreground px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                >
+                  Discover Our Church
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link 
+                  to="/contact" 
+                  className="inline-flex items-center justify-center gap-2 bg-transparent text-primary-foreground border-2 border-primary-foreground/30 hover:border-primary-foreground/60 hover:bg-primary-foreground/5 px-8 py-4 rounded-xl font-semibold transition-all duration-300"
+                >
+                  Get in Touch
+                </Link>
+              </div>
             </div>
           </div>
         </div>
