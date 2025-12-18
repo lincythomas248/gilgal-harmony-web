@@ -1,42 +1,71 @@
+import { useMemo, useState, useCallback } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { Youtube, PlayCircle, BookOpen, Sparkles } from "lucide-react";
-import { GalleryCollection, type GalleryCollectionData } from "@/components/gallery/GalleryCollection";
+
+import { GalleryCollection } from "@/components/gallery/GalleryCollection";
+import { GalleryLightbox } from "@/components/gallery/GalleryLightbox";
+import { galleryCollections } from "@/data/galleryData";
+import { cn } from "@/lib/utils";
 
 export default function Media() {
-  const mergedGallery: GalleryCollectionData = {
-    id: "all-media",
-    title: "Gallery",
-    description: "Swipe through moments from our church community.",
-    images: [
-      {
-        type: "image" as const,
-        src: "/placeholder.svg",
-        alt: "Church gathering",
-        subtitle: "Christmas Service – Worship & fellowship",
-      },
-      {
-        type: "video" as const,
-        src: "/sample.mp4",
-        poster: "/placeholder.svg",
-        alt: "Baptism video",
-        subtitle: "Baptism – Celebrating new life in Christ",
-      },
-      {
-        type: "image" as const,
-        src: "/placeholder.svg",
-        alt: "Youth fellowship",
-        subtitle: "Youth Fellowship – Growing together in faith",
-      },
-      {
-        type: "image" as const,
-        src: "/placeholder.svg",
-        alt: "Prayer meeting",
-        subtitle: "Prayer Meeting – United in prayer",
-      },
-    ],
-  };
+  // ✅ ONE continuous gallery (flatten + filter)
+  const allImages = useMemo(() => {
+    return galleryCollections.flatMap((collection) =>
+      collection.images
+        .filter((img) => !!img.src)
+        .map((img) => ({
+          ...img,
+          category: collection.title,
+        })),
+    );
+  }, []);
+
+  const hasAnyImages = allImages.length > 0;
+
+  const categories = useMemo(() => {
+    const set = new Set<string>();
+    galleryCollections.forEach((c) => set.add(c.title));
+    return ["All", ...Array.from(set)];
+  }, []);
+
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredImages = useMemo(() => {
+    if (selectedCategory === "All") return allImages;
+    return allImages.filter((img: any) => img.category === selectedCategory);
+  }, [allImages, selectedCategory]);
+
+  const mergedCollection = useMemo(() => {
+    return {
+      id: "media-merged-gallery",
+      title: "Gallery",
+      description: "Swipe sideways to browse photos and videos.",
+      images: filteredImages,
+    };
+  }, [filteredImages]);
+
+  // ✅ Lightbox state (tap → full screen)
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = useCallback((index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  }, []);
+
+  const closeLightbox = useCallback(() => setLightboxOpen(false), []);
+
+  const prevLightbox = useCallback(() => {
+    if (!filteredImages.length) return;
+    setLightboxIndex((i) => (i - 1 + filteredImages.length) % filteredImages.length);
+  }, [filteredImages.length]);
+
+  const nextLightbox = useCallback(() => {
+    if (!filteredImages.length) return;
+    setLightboxIndex((i) => (i + 1) % filteredImages.length);
+  }, [filteredImages.length]);
 
   return (
     <Layout>
@@ -110,10 +139,43 @@ export default function Media() {
               </div>
             </div>
 
-            {/* ✅ ONE continuous Gallery Carousel */}
-            <div className="mt-12">
-              <GalleryCollection collection={mergedGallery} showViewAllLink={false} />
-            </div>
+            {/* ✅ Gallery Carousel moved HERE (Media page) */}
+            {hasAnyImages && (
+              <div className="mt-12">
+                {/* Filter chips */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {categories.map((c) => (
+                    <button
+                      key={c}
+                      onClick={() => setSelectedCategory(c)}
+                      className={cn(
+                        "px-3 py-1.5 rounded-full text-sm border transition",
+                        selectedCategory === c
+                          ? "bg-primary text-primary-foreground border-primary"
+                          : "bg-background border-border hover:bg-muted",
+                      )}
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
+
+                <GalleryCollection
+                  collection={mergedCollection as any}
+                  showViewAllLink={false}
+                  onItemClick={openLightbox}
+                />
+
+                <GalleryLightbox
+                  open={lightboxOpen}
+                  items={filteredImages as any}
+                  index={lightboxIndex}
+                  onClose={closeLightbox}
+                  onPrev={prevLightbox}
+                  onNext={nextLightbox}
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
