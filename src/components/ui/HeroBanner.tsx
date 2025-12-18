@@ -11,6 +11,7 @@ interface HeroBannerProps {
   title: string;
   titleSecondLine?: string;
   subtitle?: string;
+  subtitleSecondLine?: string;
   location?: string;
   primaryCta?: CTAButton;
   secondaryCta?: CTAButton;
@@ -23,6 +24,7 @@ export function HeroBanner({
   title,
   titleSecondLine,
   subtitle,
+  subtitleSecondLine,
   location,
   primaryCta,
   secondaryCta,
@@ -92,6 +94,12 @@ export function HeroBanner({
                 }}
               >
                 {subtitle}
+                {subtitleSecondLine && (
+                  <>
+                    <br />
+                    {subtitleSecondLine}
+                  </>
+                )}
               </p>
             )}
             
