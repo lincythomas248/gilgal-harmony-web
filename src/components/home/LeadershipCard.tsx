@@ -5,9 +5,10 @@ interface LeadershipCardProps {
   role: string;
   phone: string;
   image?: string;
+  imagePosition?: string;
 }
 
-export function LeadershipCard({ name, role, phone, image }: LeadershipCardProps) {
+export function LeadershipCard({ name, role, phone, image, imagePosition = "center 20%" }: LeadershipCardProps) {
   return (
     <div className="bg-card rounded-2xl p-6 text-center shadow-sm border border-border hover:shadow-md transition-all duration-300 group">
       {/* Avatar with gradient ring */}
@@ -19,7 +20,7 @@ export function LeadershipCard({ name, role, phone, image }: LeadershipCardProps
               src={image} 
               alt={name} 
               className="w-full h-full object-cover"
-              style={{ objectPosition: 'center 20%' }}
+              style={{ objectPosition: imagePosition }}
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-muted to-muted/80 flex items-center justify-center">
