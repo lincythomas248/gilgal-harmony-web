@@ -39,10 +39,10 @@ export default function About() {
               </div>
               <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">Our Church</h2>
               <p className="text-muted-foreground leading-relaxed mb-4 text-lg">
-                IPC Gilgal Church is a congregation of the Indian Pentecostal Church, one of the largest Pentecostal denominations with a rich heritage of Christian faith and worship. Our church serves as a spiritual home for believers in the Sharjah and Ras Al Khaimah emirates of the United Arab Emirates.
+                IPC Gilgal Church is a congregation of the Indian Pentecostal Church, one of the largest Pentecostal denominations with a rich heritage of Pentecostal faith and worship. Our church serves as a spiritual home for believers in the Sharjah and Ras Al Khaimah emirates of the United Arab Emirates.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                We are a community of families, individuals, and young people who come together for worship, fellowship, and mutual encouragement in our Christian faith. Our services and programs are designed to nurture spiritual growth and build meaningful connections among our members.
+                We are a community of families, individuals, and young people who come together for worship, fellowship, and mutual encouragement in our Pentecostal faith. Our services and programs are designed to nurture spiritual growth and build meaningful connections among our members.
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 As part of the broader IPC family, we maintain strong ties with fellow congregations while serving the unique needs of our local community in the UAE.

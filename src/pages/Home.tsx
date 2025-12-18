@@ -26,7 +26,7 @@ const ministries = [
     label: "Prayer & Fellowship",
     icon: HandHeart,
     color: "accent",
-    description: "Regular gatherings for prayer, Bible study, and Christian community.",
+    description: "Regular gatherings for prayer, Bible study, and Pentecostal community.",
     link: "/prayer-fellowship"
   }
 ];
