@@ -23,7 +23,7 @@ export function Footer() {
               </div>
             </div>
             <p className="text-navy-foreground/70 text-sm leading-relaxed">
-              A welcoming Christian community serving believers in the United Arab Emirates with faith, hope, and love.
+              A welcoming Pentecostal community serving believers in the United Arab Emirates with faith, hope, and love.
             </p>
           </div>
 
