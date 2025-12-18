@@ -10,9 +10,8 @@ export interface GalleryImage {
   caption?: string;
   subtitle?: string;
 
-  // ✅ Video support
   type?: "image" | "video";
-  poster?: string; // recommended for video previews
+  poster?: string;
 }
 
 export interface GalleryCollectionData {
@@ -39,28 +38,18 @@ export function GalleryCollection({
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
 
-  const displayImages = maxImages ? collection.images.slice(0, maxImages) : collection.images;
-
-  const hasRealMedia = displayImages.some((img) => !!img.src);
+  const items = maxImages ? collection.images.slice(0, maxImages) : collection.images;
+  const hasRealMedia = items.some((i) => !!i.src);
 
   useEffect(() => {
     if (!api) return;
-
     setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap());
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap());
-    });
+    api.on("select", () => setCurrent(api.selectedScrollSnap()));
   }, [api]);
 
-  const scrollPrev = useCallback(() => {
-    api?.scrollPrev();
-  }, [api]);
-
-  const scrollNext = useCallback(() => {
-    api?.scrollNext();
-  }, [api]);
+  const scrollPrev = useCallback(() => api?.scrollPrev(), [api]);
+  const scrollNext = useCallback(() => api?.scrollNext(), [api]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -70,10 +59,8 @@ export function GalleryCollection({
     [scrollPrev, scrollNext],
   );
 
-  const currentItem = displayImages[current];
-  const caption = currentItem?.subtitle ?? currentItem?.caption;
+  const caption = items[current]?.subtitle ?? items[current]?.caption;
 
-  // Empty state (no media at all)
   if (!hasRealMedia) {
     return (
       <section className="py-8 first:pt-0">
@@ -99,7 +86,6 @@ export function GalleryCollection({
 
   return (
     <section className="py-8 first:pt-0">
-      {/* Header */}
       <div className="flex items-start justify-between mb-6">
         <div>
           <h2 className="text-h3 font-heading font-semibold text-foreground">{collection.title}</h2>
@@ -114,7 +100,6 @@ export function GalleryCollection({
         )}
       </div>
 
-      {/* Carousel */}
       <div
         className="relative max-w-4xl rounded-xl border border-border/60 bg-card shadow-md overflow-hidden"
         onKeyDown={handleKeyDown}
@@ -124,9 +109,8 @@ export function GalleryCollection({
       >
         <Carousel setApi={setApi} opts={{ align: "start", loop: true }} className="w-full">
           <CarouselContent className="ml-0">
-            {displayImages.map((item, index) => {
-              const type = item.type ?? "image";
-              const isVideo = type === "video";
+            {items.map((item, index) => {
+              const isVideo = (item.type ?? "image") === "video";
 
               return (
                 <CarouselItem key={index} className="pl-0 basis-full">
@@ -143,46 +127,33 @@ export function GalleryCollection({
                       if (e.key === "Enter" || e.key === " ") onItemClick(index);
                     }}
                   >
-                    {/* ✅ IMAGE */}
-                    {item.src && !isVideo && (
-                      <img
-                        src={item.src}
-                        alt={item.alt || collection.title}
-                        loading="lazy"
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                    )}
-
-                    {/* ✅ VIDEO (proper preview + safe playback) */}
-                    {item.src && isVideo && (
-                      <>
-                        {/* We use a real <video> so it works everywhere. */}
-                        <video
+                    {item.src ? (
+                      isVideo ? (
+                        <>
+                          <video
+                            src={item.src}
+                            poster={item.poster}
+                            controls
+                            muted
+                            playsInline
+                            preload="metadata"
+                            className="absolute inset-0 w-full h-full object-cover bg-black"
+                            onClick={(e) => e.stopPropagation()}
+                          />
+                          <div className="absolute top-3 left-3 px-2 py-1 rounded-full bg-black/60 text-white text-xs flex items-center gap-1 pointer-events-none">
+                            <Play className="w-3.5 h-3.5" />
+                            Video
+                          </div>
+                        </>
+                      ) : (
+                        <img
                           src={item.src}
-                          poster={item.poster}
-                          controls
-                          muted
-                          playsInline
-                          preload="metadata"
-                          className="absolute inset-0 w-full h-full object-cover bg-black"
-                          // Prevent carousel swipe feeling “stuck” when user taps controls
-                          onClick={(e) => {
-                            // If you later add a lightbox, this prevents toggling slide by accident.
-                            // Keep it simple: allow playback, but still allow onItemClick if you want.
-                            e.stopPropagation();
-                          }}
+                          alt={item.alt || collection.title}
+                          loading="lazy"
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                         />
-
-                        {/* Optional subtle play badge (premium hint) */}
-                        <div className="absolute top-3 left-3 px-2 py-1 rounded-full bg-black/60 text-white text-xs flex items-center gap-1 pointer-events-none">
-                          <Play className="w-3.5 h-3.5" />
-                          Video
-                        </div>
-                      </>
-                    )}
-
-                    {/* Placeholder */}
-                    {!item.src && (
+                      )
+                    ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <ImageIcon className="w-12 h-12 text-muted-foreground/30" />
                       </div>
@@ -193,7 +164,6 @@ export function GalleryCollection({
             })}
           </CarouselContent>
 
-          {/* Arrows */}
           {count > 1 && (
             <>
               <Button
@@ -217,7 +187,6 @@ export function GalleryCollection({
             </>
           )}
 
-          {/* Counter */}
           {count > 1 && (
             <div className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2.5 py-1 rounded-full">
               {current + 1} / {count}
@@ -225,7 +194,6 @@ export function GalleryCollection({
           )}
         </Carousel>
 
-        {/* Caption */}
         {caption && (
           <div className="px-4 py-3 bg-muted/30 border-t border-border/30">
             <p className="text-body-small text-muted-foreground italic text-center">{caption}</p>

@@ -10,14 +10,12 @@ import { cn } from "@/lib/utils";
 export default function Gallery() {
   const hasCollections = galleryCollections.length > 0;
 
-  // Flatten ALL collections into ONE continuous gallery
   const allImages = useMemo(() => {
     return galleryCollections.flatMap((collection) =>
       collection.images
         .filter((img) => !!img.src)
         .map((img) => ({
           ...img,
-          // keep collection context for future (filters / badges), harmless extra fields
           category: collection.title,
         })),
     );
@@ -25,7 +23,6 @@ export default function Gallery() {
 
   const hasAnyImages = allImages.length > 0;
 
-  // Optional: keep simple category chips (All + per collection)
   const categories = useMemo(() => {
     const set = new Set<string>();
     galleryCollections.forEach((c) => set.add(c.title));
@@ -55,7 +52,6 @@ export default function Gallery() {
 
       <section className="section-light page-section">
         <div className="section-container">
-          {/* Slim info banner when images are coming */}
           {hasCollections && !hasAnyImages && (
             <div className="mb-10 max-w-3xl">
               <div className="flex items-center gap-4 px-5 py-4 bg-muted/40 border border-border/40 rounded-xl">
@@ -72,7 +68,6 @@ export default function Gallery() {
             </div>
           )}
 
-          {/* All empty state - only when NO collections exist */}
           {!hasCollections && (
             <div className="py-16">
               <div className="max-w-md mx-auto text-center">
@@ -88,30 +83,25 @@ export default function Gallery() {
             </div>
           )}
 
-          {/* ONE continuous gallery + optional filter chips */}
           {hasCollections && hasAnyImages && (
             <div className="mt-6">
-              {/* Filter chips (optional but helpful) */}
-              {categories.length > 1 && (
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {categories.map((c) => (
-                    <button
-                      key={c}
-                      onClick={() => setSelectedCategory(c)}
-                      className={cn(
-                        "px-3 py-1.5 rounded-full text-sm border transition",
-                        selectedCategory === c
-                          ? "bg-primary text-primary-foreground border-primary"
-                          : "bg-background border-border hover:bg-muted",
-                      )}
-                    >
-                      {c}
-                    </button>
-                  ))}
-                </div>
-              )}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {categories.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => setSelectedCategory(c)}
+                    className={cn(
+                      "px-3 py-1.5 rounded-full text-sm border transition",
+                      selectedCategory === c
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-background border-border hover:bg-muted",
+                    )}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
 
-              {/* Single merged carousel */}
               <GalleryCollection collection={mergedCollection as any} showViewAllLink={false} />
             </div>
           )}
