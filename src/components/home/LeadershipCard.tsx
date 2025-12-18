@@ -13,16 +13,17 @@ export function LeadershipCard({ name, role, phone, image }: LeadershipCardProps
       {/* Avatar with gradient ring */}
       <div className="relative inline-block mb-5">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full scale-110 group-hover:scale-115 transition-transform duration-300" />
-        <div className="relative w-24 h-24 rounded-full overflow-hidden">
+        <div className="relative w-28 h-28 rounded-full overflow-hidden ring-2 ring-border/50">
           {image ? (
             <img 
               src={image} 
               alt={name} 
-              className="w-full h-full object-cover object-top"
+              className="w-full h-full object-cover"
+              style={{ objectPosition: 'center 20%' }}
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-muted to-muted/80 flex items-center justify-center">
-              <User className="w-10 h-10 text-muted-foreground/70" />
+              <User className="w-12 h-12 text-muted-foreground/70" />
             </div>
           )}
         </div>
