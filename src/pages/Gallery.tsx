@@ -8,22 +8,24 @@ import { galleryCollections } from "@/data/galleryData";
 import { cn } from "@/lib/utils";
 
 export default function Gallery() {
-  // --- flatten all collections into ONE list ---
+  const hasCollections = galleryCollections.length > 0;
+
+  // Flatten ALL collections into ONE continuous gallery
   const allImages = useMemo(() => {
     return galleryCollections.flatMap((collection) =>
       collection.images
         .filter((img) => !!img.src)
         .map((img) => ({
           ...img,
+          // keep collection context for future (filters / badges), harmless extra fields
           category: collection.title,
         })),
     );
   }, []);
 
-  const hasCollections = galleryCollections.length > 0;
   const hasAnyImages = allImages.length > 0;
 
-  // --- categories for filters ---
+  // Optional: keep simple category chips (All + per collection)
   const categories = useMemo(() => {
     const set = new Set<string>();
     galleryCollections.forEach((c) => set.add(c.title));
@@ -70,7 +72,7 @@ export default function Gallery() {
             </div>
           )}
 
-          {/* All empty state */}
+          {/* All empty state - only when NO collections exist */}
           {!hasCollections && (
             <div className="py-16">
               <div className="max-w-md mx-auto text-center">
@@ -86,28 +88,30 @@ export default function Gallery() {
             </div>
           )}
 
-          {/* Filters + ONE gallery */}
+          {/* ONE continuous gallery + optional filter chips */}
           {hasCollections && hasAnyImages && (
             <div className="mt-6">
-              {/* Filter chips */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {categories.map((c) => (
-                  <button
-                    key={c}
-                    onClick={() => setSelectedCategory(c)}
-                    className={cn(
-                      "px-3 py-1.5 rounded-full text-sm border transition",
-                      selectedCategory === c
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "bg-background border-border hover:bg-muted",
-                    )}
-                  >
-                    {c}
-                  </button>
-                ))}
-              </div>
+              {/* Filter chips (optional but helpful) */}
+              {categories.length > 1 && (
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {categories.map((c) => (
+                    <button
+                      key={c}
+                      onClick={() => setSelectedCategory(c)}
+                      className={cn(
+                        "px-3 py-1.5 rounded-full text-sm border transition",
+                        selectedCategory === c
+                          ? "bg-primary text-primary-foreground border-primary"
+                          : "bg-background border-border hover:bg-muted",
+                      )}
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
+              )}
 
-              {/* Single continuous gallery */}
+              {/* Single merged carousel */}
               <GalleryCollection collection={mergedCollection as any} showViewAllLink={false} />
             </div>
           )}

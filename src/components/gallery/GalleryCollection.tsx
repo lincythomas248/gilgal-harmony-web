@@ -1,23 +1,18 @@
 import { useState, useCallback, useEffect } from "react";
-import { Image as ImageIcon, Camera, ChevronLeft, ChevronRight } from "lucide-react";
+import { Image as ImageIcon, Camera, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-
-/**
- * Image format guidance:
- * - Use JPG for photographs
- * - Use PNG only for graphics with transparency
- * - Recommended max width: 1200px
- */
 
 export interface GalleryImage {
   src: string;
   alt: string;
   caption?: string;
   subtitle?: string;
+
+  // ✅ Video support
   type?: "image" | "video";
-  poster?: string;
+  poster?: string; // recommended for video previews
 }
 
 export interface GalleryCollectionData {
@@ -46,7 +41,7 @@ export function GalleryCollection({
 
   const displayImages = maxImages ? collection.images.slice(0, maxImages) : collection.images;
 
-  const hasRealImages = displayImages.some((img) => img.src);
+  const hasRealMedia = displayImages.some((img) => !!img.src);
 
   useEffect(() => {
     if (!api) return;
@@ -58,13 +53,6 @@ export function GalleryCollection({
       setCurrent(api.selectedScrollSnap());
     });
   }, [api]);
-
-  const scrollTo = useCallback(
-    (index: number) => {
-      api?.scrollTo(index);
-    },
-    [api],
-  );
 
   const scrollPrev = useCallback(() => {
     api?.scrollPrev();
@@ -85,8 +73,8 @@ export function GalleryCollection({
   const currentItem = displayImages[current];
   const caption = currentItem?.subtitle ?? currentItem?.caption;
 
-  // Empty state (no images at all)
-  if (!hasRealImages) {
+  // Empty state (no media at all)
+  if (!hasRealMedia) {
     return (
       <section className="py-8 first:pt-0">
         <div className="flex items-start justify-between mb-6">
@@ -100,7 +88,7 @@ export function GalleryCollection({
         <div className="aspect-video md:aspect-[16/9] max-w-4xl bg-muted/30 rounded-xl border border-border/40 flex items-center justify-center">
           <div className="text-center px-6 py-8">
             <Camera className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" />
-            <p className="text-muted-foreground/70 font-medium text-sm">Photos coming soon</p>
+            <p className="text-muted-foreground/70 font-medium text-sm">Media coming soon</p>
           </div>
         </div>
 
@@ -136,8 +124,9 @@ export function GalleryCollection({
       >
         <Carousel setApi={setApi} opts={{ align: "start", loop: true }} className="w-full">
           <CarouselContent className="ml-0">
-            {displayImages.map((image, index) => {
-              const isVideo = image.type === "video";
+            {displayImages.map((item, index) => {
+              const type = item.type ?? "image";
+              const isVideo = type === "video";
 
               return (
                 <CarouselItem key={index} className="pl-0 basis-full">
@@ -147,24 +136,53 @@ export function GalleryCollection({
                       onItemClick && "cursor-zoom-in",
                     )}
                     onClick={() => onItemClick?.(index)}
+                    role={onItemClick ? "button" : undefined}
+                    tabIndex={onItemClick ? 0 : undefined}
+                    onKeyDown={(e) => {
+                      if (!onItemClick) return;
+                      if (e.key === "Enter" || e.key === " ") onItemClick(index);
+                    }}
                   >
-                    {image.src ? (
-                      isVideo ? (
+                    {/* ✅ IMAGE */}
+                    {item.src && !isVideo && (
+                      <img
+                        src={item.src}
+                        alt={item.alt || collection.title}
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                    )}
+
+                    {/* ✅ VIDEO (proper preview + safe playback) */}
+                    {item.src && isVideo && (
+                      <>
+                        {/* We use a real <video> so it works everywhere. */}
                         <video
-                          src={image.src}
-                          poster={image.poster}
+                          src={item.src}
+                          poster={item.poster}
+                          controls
                           muted
-                          className="absolute inset-0 w-full h-full object-cover"
+                          playsInline
+                          preload="metadata"
+                          className="absolute inset-0 w-full h-full object-cover bg-black"
+                          // Prevent carousel swipe feeling “stuck” when user taps controls
+                          onClick={(e) => {
+                            // If you later add a lightbox, this prevents toggling slide by accident.
+                            // Keep it simple: allow playback, but still allow onItemClick if you want.
+                            e.stopPropagation();
+                          }}
                         />
-                      ) : (
-                        <img
-                          src={image.src}
-                          alt={image.alt || collection.title}
-                          loading="lazy"
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                        />
-                      )
-                    ) : (
+
+                        {/* Optional subtle play badge (premium hint) */}
+                        <div className="absolute top-3 left-3 px-2 py-1 rounded-full bg-black/60 text-white text-xs flex items-center gap-1 pointer-events-none">
+                          <Play className="w-3.5 h-3.5" />
+                          Video
+                        </div>
+                      </>
+                    )}
+
+                    {/* Placeholder */}
+                    {!item.src && (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <ImageIcon className="w-12 h-12 text-muted-foreground/30" />
                       </div>
@@ -183,6 +201,7 @@ export function GalleryCollection({
                 size="icon"
                 onClick={scrollPrev}
                 className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 shadow-lg"
+                aria-label="Previous"
               >
                 <ChevronLeft className="h-5 w-5" />
               </Button>
@@ -191,6 +210,7 @@ export function GalleryCollection({
                 size="icon"
                 onClick={scrollNext}
                 className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 shadow-lg"
+                aria-label="Next"
               >
                 <ChevronRight className="h-5 w-5" />
               </Button>
