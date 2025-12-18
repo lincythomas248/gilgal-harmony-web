@@ -4,16 +4,27 @@ interface LeadershipCardProps {
   name: string;
   role: string;
   phone: string;
+  image?: string;
 }
 
-export function LeadershipCard({ name, role, phone }: LeadershipCardProps) {
+export function LeadershipCard({ name, role, phone, image }: LeadershipCardProps) {
   return (
     <div className="bg-card rounded-2xl p-6 text-center shadow-sm border border-border hover:shadow-md transition-all duration-300 group">
       {/* Avatar with gradient ring */}
       <div className="relative inline-block mb-5">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full scale-110 group-hover:scale-115 transition-transform duration-300" />
-        <div className="relative w-24 h-24 bg-gradient-to-br from-muted to-muted/80 rounded-full flex items-center justify-center">
-          <User className="w-10 h-10 text-muted-foreground/70" />
+        <div className="relative w-24 h-24 rounded-full overflow-hidden">
+          {image ? (
+            <img 
+              src={image} 
+              alt={name} 
+              className="w-full h-full object-cover object-top"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-muted to-muted/80 flex items-center justify-center">
+              <User className="w-10 h-10 text-muted-foreground/70" />
+            </div>
+          )}
         </div>
       </div>
       
