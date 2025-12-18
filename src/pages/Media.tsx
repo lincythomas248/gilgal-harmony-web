@@ -2,8 +2,46 @@ import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { Youtube, PlayCircle, BookOpen, Sparkles } from "lucide-react";
+import { GalleryCollection, type GalleryCollectionData } from "@/components/gallery/GalleryCollection";
 
 export default function Media() {
+  const mergedGallery: GalleryCollectionData = {
+    id: "all-media",
+    title: "Gallery",
+    description: "Swipe through moments from our church community.",
+    images: [
+      {
+        id: "g1",
+        type: "image" as const,
+        src: "/placeholder.svg",
+        alt: "Church gathering",
+        subtitle: "Christmas Service – Worship & fellowship",
+      },
+      {
+        id: "g2",
+        type: "video" as const,
+        src: "/sample.mp4",
+        poster: "/placeholder.svg",
+        alt: "Baptism video",
+        subtitle: "Baptism – Celebrating new life in Christ",
+      },
+      {
+        id: "g3",
+        type: "image" as const,
+        src: "/placeholder.svg",
+        alt: "Youth fellowship",
+        subtitle: "Youth Fellowship – Growing together in faith",
+      },
+      {
+        id: "g4",
+        type: "image" as const,
+        src: "/placeholder.svg",
+        alt: "Prayer meeting",
+        subtitle: "Prayer Meeting – United in prayer",
+      },
+    ],
+  };
+
   return (
     <Layout>
       <BackToTop />
@@ -24,11 +62,10 @@ export default function Media() {
                   <Youtube className="w-12 h-12 text-destructive" />
                 </div>
                 <div className="text-center md:text-left">
-                  <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-3">
-                    Our YouTube Channel
-                  </h2>
+                  <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-3">Our YouTube Channel</h2>
                   <p className="text-muted-foreground mb-6 text-lg leading-relaxed">
-                    Visit our YouTube channel to access recorded sermons, teachings, and special programs from IPC Gilgal Church.
+                    Visit our YouTube channel to access recorded sermons, teachings, and special programs from IPC
+                    Gilgal Church.
                   </p>
                   <a
                     href="https://www.youtube.com/@ipcgilgalshj"
@@ -61,7 +98,8 @@ export default function Media() {
                 </div>
                 <h3 className="text-xl font-semibold text-foreground mb-3">Bible Teachings</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Access Bible study sessions and teaching series designed to help deepen your understanding of Scripture.
+                  Access Bible study sessions and teaching series designed to help deepen your understanding of
+                  Scripture.
                 </p>
               </div>
             </div>
@@ -74,6 +112,11 @@ export default function Media() {
                   New content is regularly added to our channel. Subscribe to stay updated with the latest uploads.
                 </p>
               </div>
+            </div>
+
+            {/* ✅ ONE continuous Gallery Carousel */}
+            <div className="mt-12">
+              <GalleryCollection collection={mergedGallery} showViewAllLink={false} />
             </div>
           </div>
         </div>
