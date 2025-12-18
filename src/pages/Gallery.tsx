@@ -1,15 +1,17 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { Camera, ImageIcon } from "lucide-react";
 import { GalleryCollection } from "@/components/gallery/GalleryCollection";
+import { GalleryLightbox } from "@/components/gallery/GalleryLightbox";
 import { galleryCollections } from "@/data/galleryData";
 import { cn } from "@/lib/utils";
 
 export default function Gallery() {
   const hasCollections = galleryCollections.length > 0;
 
+  // Flatten ALL collections into ONE list
   const allImages = useMemo(() => {
     return galleryCollections.flatMap((collection) =>
       collection.images
@@ -23,6 +25,7 @@ export default function Gallery() {
 
   const hasAnyImages = allImages.length > 0;
 
+  // Filter chips
   const categories = useMemo(() => {
     const set = new Set<string>();
     galleryCollections.forEach((c) => set.add(c.title));
@@ -44,6 +47,27 @@ export default function Gallery() {
       images: filteredImages,
     };
   }, [filteredImages]);
+
+  // ✅ Lightbox state
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = useCallback((index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  }, []);
+
+  const closeLightbox = useCallback(() => setLightboxOpen(false), []);
+
+  const prevLightbox = useCallback(() => {
+    if (!filteredImages.length) return;
+    setLightboxIndex((i) => (i - 1 + filteredImages.length) % filteredImages.length);
+  }, [filteredImages.length]);
+
+  const nextLightbox = useCallback(() => {
+    if (!filteredImages.length) return;
+    setLightboxIndex((i) => (i + 1) % filteredImages.length);
+  }, [filteredImages.length]);
 
   return (
     <Layout>
@@ -102,7 +126,20 @@ export default function Gallery() {
                 ))}
               </div>
 
-              <GalleryCollection collection={mergedCollection as any} showViewAllLink={false} />
+              <GalleryCollection
+                collection={mergedCollection as any}
+                showViewAllLink={false}
+                onItemClick={openLightbox}
+              />
+
+              <GalleryLightbox
+                open={lightboxOpen}
+                items={filteredImages as any}
+                index={lightboxIndex}
+                onClose={closeLightbox}
+                onPrev={prevLightbox}
+                onNext={nextLightbox}
+              />
             </div>
           )}
         </div>
