@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
-import { Calendar, Clock, MapPin, Megaphone, Sparkles } from "lucide-react";
+import { Calendar, Clock, MapPin, Sparkles, ArrowRight } from "lucide-react";
 
 const upcomingEvents = [
   {
@@ -70,7 +70,8 @@ export default function Events() {
               <span className="label-badge mb-4">Regular Services</span>
               <h2 className="text-foreground mb-4">Weekly Gatherings</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Stay connected with our church community through regular services and events. Contact us for specific dates and times.
+                Stay connected with our church community through regular services and events. Contact us for specific
+                dates and times.
               </p>
             </div>
 
@@ -83,13 +84,11 @@ export default function Events() {
                         <Calendar className="w-7 h-7 text-accent" />
                       </div>
                     </div>
+
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-foreground mb-2">
-                        {event.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm mb-3">
-                        {event.description}
-                      </p>
+                      <h3 className="text-lg font-semibold text-foreground mb-2">{event.title}</h3>
+                      <p className="text-muted-foreground text-sm mb-3">{event.description}</p>
+
                       <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                         <span className="flex items-center gap-1">
                           <Clock className="w-4 h-4 text-accent" />
@@ -101,6 +100,16 @@ export default function Events() {
                         </span>
                       </div>
                     </div>
+
+                    {/* optional CTA for future (keeps layout premium) */}
+                    <div className="md:self-stretch md:flex md:items-center">
+                      <a
+                        href="/contact"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                      >
+                        Enquire <ArrowRight className="w-4 h-4" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -109,65 +118,97 @@ export default function Events() {
         </div>
       </section>
 
-      {/* Latest Updates - Moved from Home */}
+      {/* Latest Updates */}
       <section className="section-cream page-section relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-dove/10 rounded-full blur-3xl" />
-        
+
         <div className="section-container relative">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <span className="label-badge mb-4">Updates</span>
-              <h2 className="text-foreground mb-4">Latest News</h2>
-              <p className="text-muted-foreground">
-                Recent happenings and announcements from our church community.
-              </p>
+          <div className="max-w-5xl mx-auto">
+            {/* Header row: fixes spacing + adds useful right-side action */}
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+              <div className="text-center md:text-left">
+                <span className="label-badge mb-4 inline-flex">Updates</span>
+                <h2 className="text-foreground mb-3">Latest News</h2>
+                <p className="text-muted-foreground max-w-2xl">
+                  Recent happenings and announcements from our church community.
+                </p>
+              </div>
+
+              <div className="flex justify-center md:justify-end">
+                <a
+                  href="/contact"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+                >
+                  Get updates <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            {/* Premium card layout: equal height + stronger hierarchy */}
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {latestUpdates.map((update, index) => (
-                <div key={index} className="card-warm group hover:shadow-lg transition-all">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0">
-                      <span className={`inline-block px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider ${
-                        index === 0 
-                          ? 'bg-accent/20 text-accent' 
-                          : index === 1 
-                            ? 'bg-primary/15 text-primary'
-                            : 'bg-dove/30 text-foreground'
-                      }`}>
+                <div key={index} className="card-warm group hover:shadow-lg transition-all h-full">
+                  <div className="flex flex-col h-full">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <span
+                        className={`inline-flex items-center px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider ${
+                          index === 0
+                            ? "bg-accent/20 text-accent"
+                            : index === 1
+                              ? "bg-primary/15 text-primary"
+                              : "bg-dove/30 text-foreground"
+                        }`}
+                      >
                         {update.month}
                       </span>
+
+                      <span className="text-xs text-muted-foreground">Update</span>
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-2">{update.title}</h3>
-                      <p className="text-sm text-muted-foreground">{update.description}</p>
+
+                    <h3 className="text-xl font-semibold text-foreground leading-snug mb-3">{update.title}</h3>
+
+                    <p className="text-sm text-muted-foreground leading-relaxed flex-1">{update.description}</p>
+
+                    {/* subtle CTA line for “this is clickable” feel (even if not linked yet) */}
+                    <div className="mt-5 pt-4 border-t border-border/40">
+                      <a
+                        href="/contact"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                      >
+                        Learn more <ArrowRight className="w-4 h-4" />
+                      </a>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Special Programs */}
-      <section className="section-light page-section">
-        <div className="section-container">
-          <div className="max-w-4xl mx-auto">
-            <div className="card-warm bg-gradient-to-br from-card via-dove-light/40 to-card border-dove/20 text-center">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <Sparkles className="w-5 h-5 text-accent" />
-                <h2 className="text-xl font-semibold text-foreground">Special Programs</h2>
-                <Sparkles className="w-5 h-5 text-accent" />
+            {/* Removes “dead space” feeling with a compact follow-on block */}
+            <div className="mt-10">
+              <div className="card-warm bg-gradient-to-br from-card via-dove-light/40 to-card border-dove/20">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                  <div className="flex items-center gap-3">
+                    <Sparkles className="w-5 h-5 text-accent" />
+                    <div>
+                      <h3 className="text-lg font-semibold text-foreground">Special Programs</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Christmas, Easter, and fellowship events throughout the year.
+                      </p>
+                    </div>
+                  </div>
+
+                  <a href="/contact" className="btn-gold inline-flex items-center justify-center gap-2">
+                    Contact for details <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
-              <p className="text-muted-foreground max-w-xl mx-auto">
-                Throughout the year, we hold special programs including Christmas celebrations, Easter services, and other fellowship events. Contact us or follow our social media for announcements.
-              </p>
             </div>
           </div>
         </div>
       </section>
+
+      {/* (Old Special Programs section removed — now integrated above to avoid extra vertical space) */}
     </Layout>
   );
 }
