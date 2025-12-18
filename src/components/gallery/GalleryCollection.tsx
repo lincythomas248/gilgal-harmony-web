@@ -1,17 +1,23 @@
-import { useState, useCallback, useEffect } from "react";
-import { Image as ImageIcon, Camera, ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { Image as ImageIcon, Camera, ChevronLeft, ChevronRight, X, Play } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
+/**
+ * Backward-compatible:
+ * - Existing data uses `images: [{ src, alt, caption }]`
+ * - You can now add videos too by adding:
+ *   { type:"video", src:"...", poster:"...", alt:"...", caption:"..." }
+ */
 export interface GalleryImage {
+  id?: string;
+  type?: "image" | "video";
   src: string;
+  poster?: string;
   alt: string;
   caption?: string;
-  subtitle?: string;
-
-  type?: "image" | "video";
-  poster?: string;
 }
 
 export interface GalleryCollectionData {
@@ -25,182 +31,375 @@ interface GalleryCollectionProps {
   collection: GalleryCollectionData;
   maxImages?: number;
   showViewAllLink?: boolean;
-  onItemClick?: (index: number) => void;
+  /** If true, hides the collection title/description header (useful when embedding on Media page) */
+  hideHeader?: boolean;
 }
 
 export function GalleryCollection({
   collection,
   maxImages,
-  showViewAllLink = false,
-  onItemClick,
+  showViewAllLink = true,
+  hideHeader = false,
 }: GalleryCollectionProps) {
+  const displayImages = useMemo(() => {
+    const list = (collection.images || []).map((m, idx) => ({
+      ...m,
+      type: m.type ?? "image",
+      _idx: idx,
+    }));
+    return typeof maxImages === "number" ? list.slice(0, maxImages) : list;
+  }, [collection.images, maxImages]);
+
+  const count = displayImages.length;
+
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
 
-  const items = maxImages ? collection.images.slice(0, maxImages) : collection.images;
-  const hasRealMedia = items.some((i) => !!i.src);
+  // Lightbox
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = (index: number) => {
+    if (!displayImages[index]?.src) return;
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => setLightboxOpen(false);
+
+  const prevLightbox = () => setLightboxIndex((i) => (i - 1 + count) % count);
+  const nextLightbox = () => setLightboxIndex((i) => (i + 1) % count);
 
   useEffect(() => {
     if (!api) return;
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap());
-    api.on("select", () => setCurrent(api.selectedScrollSnap()));
+
+    const onSelect = () => setCurrent(api.selectedScrollSnap());
+    onSelect();
+    api.on("select", onSelect);
+
+    return () => {
+      api.off("select", onSelect);
+    };
   }, [api]);
 
-  const scrollPrev = useCallback(() => api?.scrollPrev(), [api]);
-  const scrollNext = useCallback(() => api?.scrollNext(), [api]);
+  // Keyboard controls for lightbox
+  useEffect(() => {
+    if (!lightboxOpen) return;
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
-      if (e.key === "ArrowLeft") scrollPrev();
-      if (e.key === "ArrowRight") scrollNext();
-    },
-    [scrollPrev, scrollNext],
-  );
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") prevLightbox();
+      if (e.key === "ArrowRight") nextLightbox();
+    };
 
-  const caption = items[current]?.subtitle ?? items[current]?.caption;
+    document.addEventListener("keydown", onKeyDown);
+    // prevent background scroll
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
-  if (!hasRealMedia) {
-    return (
-      <section className="py-8 first:pt-0">
-        <div className="flex items-start justify-between mb-6">
-          <div>
-            <h2 className="text-h3 font-heading font-semibold text-foreground">{collection.title}</h2>
-            <p className="text-body-small text-muted-foreground mt-1">{collection.description}</p>
-          </div>
-          <span className="text-sm text-muted-foreground/60">View all</span>
-        </div>
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [lightboxOpen, count]);
 
-        <div className="aspect-video md:aspect-[16/9] max-w-4xl bg-muted/30 rounded-xl border border-border/40 flex items-center justify-center">
-          <div className="text-center px-6 py-8">
-            <Camera className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" />
-            <p className="text-muted-foreground/70 font-medium text-sm">Media coming soon</p>
-          </div>
-        </div>
+  const scrollTo = (index: number) => api?.scrollTo(index);
 
-        <div className="mt-10 border-b border-border/30" />
-      </section>
-    );
-  }
+  const currentCaption = displayImages[current]?.caption || displayImages[current]?.alt || "";
 
   return (
-    <section className="py-8 first:pt-0">
-      <div className="flex items-start justify-between mb-6">
-        <div>
-          <h2 className="text-h3 font-heading font-semibold text-foreground">{collection.title}</h2>
-          <p className="text-body-small text-muted-foreground mt-1">{collection.description}</p>
+    <section className="py-8 md:py-10">
+      {/* Header */}
+      {!hideHeader && (
+        <div className="flex items-start justify-between gap-6 mb-5">
+          <div>
+            <h2 className="text-foreground text-2xl md:text-3xl font-semibold">{collection.title}</h2>
+            <p className="text-muted-foreground mt-1">{collection.description}</p>
+          </div>
+
+          {/* NOTE: If you remove Gallery from the menu, this should go to /media */}
+          {showViewAllLink && (
+            <Link
+              to="/media"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
+            >
+              View all
+            </Link>
+          )}
         </div>
-        {showViewAllLink ? (
-          <a href="/gallery" className="text-sm text-primary hover:text-primary/80 font-medium">
-            View all →
-          </a>
-        ) : (
-          <span className="text-sm text-muted-foreground/50">View all</span>
-        )}
-      </div>
+      )}
 
-      <div
-        className="relative max-w-4xl rounded-xl border border-border/60 bg-card shadow-md overflow-hidden"
-        onKeyDown={handleKeyDown}
-        tabIndex={0}
-        role="region"
-        aria-label={`${collection.title} gallery`}
-      >
-        <Carousel setApi={setApi} opts={{ align: "start", loop: true }} className="w-full">
-          <CarouselContent className="ml-0">
-            {items.map((item, index) => {
-              const isVideo = (item.type ?? "image") === "video";
+      {/* Empty / coming soon */}
+      {count === 0 && (
+        <div className="card-warm bg-muted/10 border border-border/40 rounded-2xl p-8 text-center">
+          <div className="w-14 h-14 rounded-full bg-muted/50 flex items-center justify-center mx-auto mb-4">
+            <Camera className="w-7 h-7 text-muted-foreground/40" />
+          </div>
+          <h3 className="text-lg font-semibold text-foreground mb-2">Gallery coming soon</h3>
+          <p className="text-muted-foreground">We’re preparing beautiful photos and videos from our gatherings.</p>
+        </div>
+      )}
 
-              return (
-                <CarouselItem key={index} className="pl-0 basis-full">
-                  <div
-                    className={cn(
-                      "aspect-[4/3] md:aspect-[16/9] relative bg-muted group",
-                      onItemClick && "cursor-zoom-in",
-                    )}
-                    onClick={() => onItemClick?.(index)}
-                    role={onItemClick ? "button" : undefined}
-                    tabIndex={onItemClick ? 0 : undefined}
-                    onKeyDown={(e) => {
-                      if (!onItemClick) return;
-                      if (e.key === "Enter" || e.key === " ") onItemClick(index);
-                    }}
-                  >
-                    {item.src ? (
-                      isVideo ? (
-                        <>
-                          <video
-                            src={item.src}
-                            poster={item.poster}
-                            controls
-                            muted
-                            playsInline
-                            preload="metadata"
-                            className="absolute inset-0 w-full h-full object-cover bg-black"
-                            onClick={(e) => e.stopPropagation()}
-                          />
-                          <div className="absolute top-3 left-3 px-2 py-1 rounded-full bg-black/60 text-white text-xs flex items-center gap-1 pointer-events-none">
-                            <Play className="w-3.5 h-3.5" />
-                            Video
+      {count > 0 && (
+        <>
+          {/* Main carousel */}
+          <div className="relative">
+            {/* Desktop arrows */}
+            {count > 1 && (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="hidden md:flex absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-background/80 backdrop-blur border border-border shadow hover:bg-background"
+                  onClick={() => api?.scrollPrev()}
+                  aria-label="Previous"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </Button>
+
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="hidden md:flex absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-background/80 backdrop-blur border border-border shadow hover:bg-background"
+                  onClick={() => api?.scrollNext()}
+                  aria-label="Next"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </Button>
+              </>
+            )}
+
+            <div className="bg-card border border-border/40 rounded-2xl overflow-hidden shadow-sm">
+              <Carousel
+                setApi={setApi}
+                opts={{
+                  align: "center",
+                  loop: true,
+                }}
+                className="w-full"
+              >
+                <CarouselContent className="-ml-0">
+                  {displayImages.map((media, index) => {
+                    const isVideo = media.type === "video";
+                    const hasSrc = Boolean(media.src);
+
+                    return (
+                      <CarouselItem key={media.id ?? `${collection.id}-${index}`} className="pl-0">
+                        <div className="relative aspect-[16/9] bg-muted">
+                          {/* Click target opens lightbox */}
+                          <button
+                            type="button"
+                            onClick={() => openLightbox(index)}
+                            className={cn(
+                              "absolute inset-0 w-full h-full",
+                              hasSrc ? "cursor-zoom-in" : "cursor-default",
+                            )}
+                            aria-label={
+                              hasSrc ? `Open ${isVideo ? "video" : "image"} in full screen` : "Media placeholder"
+                            }
+                          >
+                            <span className="sr-only">Open</span>
+                          </button>
+
+                          {!hasSrc ? (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="flex flex-col items-center gap-2 text-muted-foreground/60">
+                                <ImageIcon className="w-8 h-8" />
+                                <span className="text-sm">Media coming soon</span>
+                              </div>
+                            </div>
+                          ) : isVideo ? (
+                            <div className="absolute inset-0">
+                              {/* Preview uses poster if provided; actual playback happens in lightbox */}
+                              {media.poster ? (
+                                <img
+                                  src={media.poster}
+                                  alt={media.alt}
+                                  className="w-full h-full object-cover"
+                                  loading="lazy"
+                                />
+                              ) : (
+                                <video
+                                  src={media.src}
+                                  className="w-full h-full object-cover"
+                                  muted
+                                  playsInline
+                                  preload="metadata"
+                                />
+                              )}
+
+                              <div className="absolute inset-0 bg-black/20" />
+                              <div className="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+                                <Play className="w-3 h-3" />
+                                Video
+                              </div>
+                            </div>
+                          ) : (
+                            <img
+                              src={media.src}
+                              alt={media.alt || collection.title}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                          )}
+
+                          {/* Slide counter */}
+                          {count > 1 && (
+                            <div className="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded-full">
+                              {current + 1}/{count}
+                            </div>
+                          )}
+                        </div>
+                      </CarouselItem>
+                    );
+                  })}
+                </CarouselContent>
+              </Carousel>
+
+              {/* Caption */}
+              {currentCaption && (
+                <div className="px-4 py-3 bg-muted/30 border-t border-border/30">
+                  <p className="text-body-small text-muted-foreground italic text-center">{currentCaption}</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Dots - mobile */}
+          {count > 1 && (
+            <div className="flex justify-center gap-2 mt-4 md:hidden">
+              {Array.from({ length: count }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => scrollTo(index)}
+                  className={cn(
+                    "w-2 h-2 rounded-full transition-all duration-200",
+                    current === index ? "bg-primary w-5" : "bg-muted-foreground/30 hover:bg-muted-foreground/50",
+                  )}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Thumbnails - desktop */}
+          {count > 1 && (
+            <div className="hidden md:flex justify-start gap-2 mt-4 max-w-4xl overflow-x-auto pb-1">
+              {displayImages.map((media, index) => (
+                <button
+                  key={media.id ?? `${collection.id}-thumb-${index}`}
+                  onClick={() => scrollTo(index)}
+                  className={cn(
+                    "flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-all duration-200",
+                    current === index
+                      ? "border-primary ring-2 ring-primary/20 shadow-md"
+                      : "border-border/40 opacity-60 hover:opacity-100 hover:border-border",
+                  )}
+                  aria-label={`View item ${index + 1}: ${media.alt || collection.title}`}
+                >
+                  {media.src ? (
+                    media.type === "video" ? (
+                      <>
+                        {media.poster ? (
+                          <img src={media.poster} alt="" loading="lazy" className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full bg-muted flex items-center justify-center">
+                            <Play className="w-4 h-4 text-muted-foreground/50" />
                           </div>
-                        </>
+                        )}
+                      </>
+                    ) : (
+                      <img src={media.src} alt="" loading="lazy" className="w-full h-full object-cover" />
+                    )
+                  ) : (
+                    <div className="w-full h-full bg-muted flex items-center justify-center">
+                      <ImageIcon className="w-4 h-4 text-muted-foreground/30" />
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Lightbox */}
+          {lightboxOpen && count > 0 && (
+            <div className="fixed inset-0 z-[9999] bg-black/90">
+              {/* Close */}
+              <button
+                onClick={closeLightbox}
+                className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Counter */}
+              <div className="absolute top-4 left-4 md:top-6 md:left-6 text-white/80 text-sm">
+                {lightboxIndex + 1} / {count}
+              </div>
+
+              {/* Prev/Next */}
+              {count > 1 && (
+                <>
+                  <button
+                    onClick={prevLightbox}
+                    className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"
+                    aria-label="Previous"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={nextLightbox}
+                    className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"
+                    aria-label="Next"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+                </>
+              )}
+
+              {/* Media */}
+              <div className="absolute inset-0 flex items-center justify-center px-4 py-16 md:py-20">
+                <div className="w-full max-w-5xl">
+                  <div className="bg-black/30 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                    <div className="relative bg-black aspect-[16/10] flex items-center justify-center">
+                      {displayImages[lightboxIndex]?.type === "video" ? (
+                        <video
+                          src={displayImages[lightboxIndex]?.src}
+                          poster={displayImages[lightboxIndex]?.poster}
+                          controls
+                          autoPlay
+                          playsInline
+                          className="w-full h-full object-contain bg-black"
+                        />
                       ) : (
                         <img
-                          src={item.src}
-                          alt={item.alt || collection.title}
-                          loading="lazy"
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                          src={displayImages[lightboxIndex]?.src}
+                          alt={displayImages[lightboxIndex]?.alt || collection.title}
+                          className="w-full h-full object-contain bg-black"
                         />
-                      )
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <ImageIcon className="w-12 h-12 text-muted-foreground/30" />
+                      )}
+                    </div>
+
+                    {/* Caption */}
+                    {(displayImages[lightboxIndex]?.caption || displayImages[lightboxIndex]?.alt) && (
+                      <div className="px-4 py-3 text-center text-white/85 text-sm bg-black/40">
+                        {displayImages[lightboxIndex]?.caption || displayImages[lightboxIndex]?.alt}
                       </div>
                     )}
                   </div>
-                </CarouselItem>
-              );
-            })}
-          </CarouselContent>
 
-          {count > 1 && (
-            <>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={scrollPrev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 shadow-lg"
-                aria-label="Previous"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={scrollNext}
-                className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-background/80 shadow-lg"
-                aria-label="Next"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </Button>
-            </>
-          )}
-
-          {count > 1 && (
-            <div className="absolute bottom-3 right-3 bg-black/60 text-white text-xs px-2.5 py-1 rounded-full">
-              {current + 1} / {count}
+                  <p className="mt-4 text-center text-white/40 text-xs">
+                    Tip: Use ← → arrow keys to navigate, Esc to close.
+                  </p>
+                </div>
+              </div>
             </div>
           )}
-        </Carousel>
+        </>
+      )}
 
-        {caption && (
-          <div className="px-4 py-3 bg-muted/30 border-t border-border/30">
-            <p className="text-body-small text-muted-foreground italic text-center">{caption}</p>
-          </div>
-        )}
-      </div>
-
+      {/* Divider */}
       <div className="mt-10 border-b border-border/30 last:hidden" />
     </section>
   );
