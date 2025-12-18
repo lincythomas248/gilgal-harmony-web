@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
@@ -10,9 +11,18 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { BookOpen, GraduationCap, Star, ArrowLeft, Baby, BookMarked, Lightbulb, Crown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png";
 import { curriculumData, type CurriculumGroup } from "@/data/curriculumData";
+
+// Map URL hash to group index
+const groupHashToIndex: Record<string, number> = {
+  "sub-junior": 0,
+  "junior": 1,
+  "intermediate": 2,
+  "senior": 3,
+  "super-senior": 4,
+};
 
 // Icon mapping for each group
 const groupIcons: Record<string, React.ReactNode> = {
@@ -33,6 +43,24 @@ const groupColors: Record<string, { bg: string; text: string; accent: string }> 
 };
 
 export default function ScriptureSchoolCurriculum() {
+  const location = useLocation();
+  const [openGroups, setOpenGroups] = useState<string[]>([]);
+
+  // Read URL hash on mount and auto-expand the corresponding group
+  useEffect(() => {
+    const hash = location.hash.replace("#", "");
+    if (hash && groupHashToIndex[hash] !== undefined) {
+      const groupIndex = groupHashToIndex[hash];
+      setOpenGroups([`group-${groupIndex}`]);
+      
+      // Scroll to the curriculum section after a short delay
+      setTimeout(() => {
+        const element = document.getElementById("curriculum-section");
+        element?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }, [location.hash]);
+
   return (
     <Layout>
       <BackToTop />
@@ -72,10 +100,15 @@ export default function ScriptureSchoolCurriculum() {
       </section>
 
       {/* Curriculum Accordion */}
-      <section className="section-light page-section">
+      <section id="curriculum-section" className="section-light page-section scroll-mt-20">
         <div className="section-container">
           <div className="max-w-4xl mx-auto">
-            <Accordion type="multiple" className="space-y-4">
+            <Accordion 
+              type="multiple" 
+              className="space-y-4"
+              value={openGroups}
+              onValueChange={setOpenGroups}
+            >
               {curriculumData.map((group, groupIndex) => {
                 const colors = groupColors[group.group] || groupColors["Junior"];
                 const icon = groupIcons[group.group] || <BookOpen className="w-5 h-5" />;

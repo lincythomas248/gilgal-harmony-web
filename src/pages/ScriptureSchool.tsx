@@ -384,7 +384,7 @@ export default function ScriptureSchool() {
                           size="sm"
                           className="rounded-full bg-amber-500 hover:bg-amber-400 text-emerald-950 font-medium"
                         >
-                          <Link to="/scripture-school/curriculum">
+                          <Link to={`/scripture-school/curriculum#${group.id}`}>
                             <BookMarked className="w-4 h-4 mr-2" />
                             View Lessons
                           </Link>
@@ -395,7 +395,7 @@ export default function ScriptureSchool() {
                           size="sm"
                           className="rounded-full border-white/20 text-white hover:bg-white/10 hover:text-white"
                         >
-                          <Link to="/scripture-school/curriculum">
+                          <Link to={`/scripture-school/curriculum#${group.id}`}>
                             <BookOpen className="w-4 h-4 mr-2" />
                             View Memory Verses
                           </Link>
