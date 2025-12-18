@@ -5,11 +5,14 @@ import { MapPin, Users, Heart, Sparkles, Phone, ChevronLeft, ChevronRight } from
 import { useState } from "react";
 import { LeadershipCard } from "@/components/home/LeadershipCard";
 import worshipBg from "@/assets/worship-community.jpg";
+import leader1 from "@/assets/leader-1.jpg";
+import leader2 from "@/assets/leader-2.jpg";
+import leader3 from "@/assets/leader-3.jpg";
 
 const leadership = [
-  { name: "Pr. John Varghese", role: "President", phone: "+971 50 189 2016" },
-  { name: "Br. Sajan K George", role: "Secretary", phone: "+971 50 575 6808" },
-  { name: "Br. Siby Mathew", role: "Joint Secretary", phone: "+971 50 219 5883" },
+  { name: "Pr. John Varghese", role: "President", phone: "+971 50 189 2016", image: leader1 },
+  { name: "Br. Sajan K George", role: "Secretary", phone: "+971 50 575 6808", image: leader2 },
+  { name: "Br. Siby Mathew", role: "Joint Secretary", phone: "+971 50 219 5883", image: leader3 },
 ];
 
 export default function About() {
