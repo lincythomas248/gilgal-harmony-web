@@ -18,7 +18,7 @@ const navigation = [
   },
   { name: "Media", href: "/media" },
   { name: "Events", href: "/events" },
-  { name: "Gallery", href: "/gallery" },
+  // ✅ Removed Gallery menu item
   { name: "Contact Us", href: "/contact" },
 ];
 
@@ -44,7 +44,10 @@ export function Header() {
               </div>
             </div>
             <div className="flex items-center gap-6">
-              <a href="mailto:ipcgilgalshj@gmail.com" className="flex items-center gap-2 hover:text-dove transition-colors">
+              <a
+                href="mailto:ipcgilgalshj@gmail.com"
+                className="flex items-center gap-2 hover:text-dove transition-colors"
+              >
                 <Mail className="h-3.5 w-3.5" />
                 <span>ipcgilgalshj@gmail.com</span>
               </a>
@@ -90,9 +93,7 @@ export function Header() {
                             key={child.name}
                             to={child.href}
                             className={`block px-4 py-2 text-sm hover:bg-muted transition-colors ${
-                              isActive(child.href)
-                                ? "text-primary font-medium"
-                                : "text-foreground/80"
+                              isActive(child.href) ? "text-primary font-medium" : "text-foreground/80"
                             }`}
                           >
                             {child.name}
@@ -105,13 +106,11 @@ export function Header() {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`nav-link px-3 py-2 ${
-                      isActive(item.href) ? "nav-link-active" : ""
-                    }`}
+                    className={`nav-link px-3 py-2 ${isActive(item.href) ? "nav-link-active" : ""}`}
                   >
                     {item.name}
                   </Link>
-                )
+                ),
               )}
               <a
                 href="https://www.instantchurchdirectory.com/login"
@@ -151,7 +150,7 @@ export function Header() {
                   <span>+971 50 189 2016</span>
                 </a>
               </div>
-              
+
               <div className="flex flex-col gap-1">
                 {navigation.map((item) =>
                   item.children ? (
@@ -163,11 +162,7 @@ export function Header() {
                         }`}
                       >
                         {item.name}
-                        <ChevronDown
-                          className={`h-4 w-4 transition-transform ${
-                            ministriesOpen ? "rotate-180" : ""
-                          }`}
-                        />
+                        <ChevronDown className={`h-4 w-4 transition-transform ${ministriesOpen ? "rotate-180" : ""}`} />
                       </button>
                       {ministriesOpen && (
                         <div className="pl-6 flex flex-col gap-1">
@@ -177,9 +172,7 @@ export function Header() {
                               to={child.href}
                               onClick={() => setMobileMenuOpen(false)}
                               className={`py-2 text-sm ${
-                                isActive(child.href)
-                                  ? "text-primary font-medium"
-                                  : "text-foreground/70"
+                                isActive(child.href) ? "text-primary font-medium" : "text-foreground/70"
                               }`}
                             >
                               {child.name}
@@ -193,13 +186,11 @@ export function Header() {
                       key={item.name}
                       to={item.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className={`nav-link px-3 py-2 ${
-                        isActive(item.href) ? "nav-link-active" : ""
-                      }`}
+                      className={`nav-link px-3 py-2 ${isActive(item.href) ? "nav-link-active" : ""}`}
                     >
                       {item.name}
                     </Link>
-                  )
+                  ),
                 )}
                 <a
                   href="https://www.instantchurchdirectory.com/login"
