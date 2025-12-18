@@ -11,14 +11,12 @@ export default function Media() {
     description: "Swipe through moments from our church community.",
     images: [
       {
-        id: "g1",
         type: "image" as const,
         src: "/placeholder.svg",
         alt: "Church gathering",
         subtitle: "Christmas Service – Worship & fellowship",
       },
       {
-        id: "g2",
         type: "video" as const,
         src: "/sample.mp4",
         poster: "/placeholder.svg",
@@ -26,14 +24,12 @@ export default function Media() {
         subtitle: "Baptism – Celebrating new life in Christ",
       },
       {
-        id: "g3",
         type: "image" as const,
         src: "/placeholder.svg",
         alt: "Youth fellowship",
         subtitle: "Youth Fellowship – Growing together in faith",
       },
       {
-        id: "g4",
         type: "image" as const,
         src: "/placeholder.svg",
         alt: "Prayer meeting",
