@@ -163,7 +163,6 @@ export default function Media() {
                 <GalleryCollection
                   collection={mergedCollection as any}
                   showViewAllLink={false}
-                  onItemClick={openLightbox}
                 />
 
                 <GalleryLightbox

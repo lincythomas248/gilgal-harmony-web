@@ -290,7 +290,7 @@ export default function ScriptureSchool() {
   "
                       title={group.group}
                     >
-                      {group.group.replaceAll("-", "-")}
+                      {group.group.replace(/-/g, "-")}
                     </h3>
 
                     <p className={`text-sm font-semibold ${group.color} mt-1`}>{group.ageRange}</p>

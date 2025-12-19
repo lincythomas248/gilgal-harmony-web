@@ -129,7 +129,6 @@ export default function Gallery() {
               <GalleryCollection
                 collection={mergedCollection as any}
                 showViewAllLink={false}
-                onItemClick={openLightbox}
               />
 
               <GalleryLightbox
