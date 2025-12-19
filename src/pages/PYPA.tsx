@@ -3,6 +3,7 @@ import { BackToTop } from "@/components/ui/BackToTop";
 import { Users, Heart, BookOpen, Music, ArrowRight, Sparkles, HeartHandshake, Calendar, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { PYPAPhotoStrip } from "@/components/pypa/PYPAPhotoStrip";
 import worshipImage from "@/assets/worship-hands.jpg";
 
 const activities = [
@@ -174,6 +175,9 @@ export default function PYPA() {
           </div>
         </div>
       </section>
+
+      {/* PYPA Photo Strip */}
+      <PYPAPhotoStrip />
 
       {/* Join PYPA - Premium CTA Band */}
       <section className="relative py-20 md:py-24 overflow-hidden">
