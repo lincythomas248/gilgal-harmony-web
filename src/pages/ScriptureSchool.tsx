@@ -1,5 +1,3 @@
-/* DEBUG_FINGERPRINT: 2025-12-19 1 */
-
 import { useState, useRef } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { BackToTop } from "@/components/ui/BackToTop";
@@ -283,13 +281,16 @@ export default function ScriptureSchool() {
                     {/* ✅ FIX: lock heading font-size + safe wrapping */}
                     <h3
                       className="
-                        font-extrabold text-foreground text-center leading-[1.05]
-                        text-[28px] sm:text-[30px] lg:text-[28px]
-                        px-2 whitespace-normal break-words
-                        min-h-[3.3rem] flex items-center justify-center
-                      "
+    font-extrabold text-foreground text-center leading-[1.05]
+    text-[22px] sm:text-[24px] lg:text-[22px]
+    px-2
+    whitespace-nowrap
+    overflow-hidden text-ellipsis
+    min-h-[2.2rem] flex items-center justify-center
+  "
+                      title={group.group}
                     >
-                      {group.group}
+                      {group.group.replaceAll("-", "-")}
                     </h3>
 
                     <p className={`text-sm font-semibold ${group.color} mt-1`}>{group.ageRange}</p>
