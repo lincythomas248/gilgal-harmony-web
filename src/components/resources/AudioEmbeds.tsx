@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Radio } from "lucide-react";
 
 interface Station {
@@ -6,8 +7,13 @@ interface Station {
   embedUrl: string;
 }
 
-// Malayalam TuneIn stations (currently none confirmed - placeholder for future)
-const malayalamTuneInStations: Station[] = [];
+// Malayalam TuneIn stations
+const malayalamTuneInStations: Station[] = [
+  { title: "Psalms Radio Malayalam Channel", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s125788/" },
+  { title: "Shalom Beats Channel", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s300613/" },
+  { title: "Voice of Gospel Channel", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s280249/" },
+  { title: "Ephphatha Malayalam Channel", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s293800/" },
+];
 
 // Malayalam Radio India stations
 const malayalamRadioIndiaStations: Station[] = [
@@ -18,15 +24,11 @@ const malayalamRadioIndiaStations: Station[] = [
   { title: "Heavenly Tunes (Malayalam)", source: "Radio India", embedUrl: "https://radiosindia.com/embed/heavenlytunes" },
 ];
 
-// English TuneIn stations - ALL admin-provided stations
+// English TuneIn stations
 const englishTuneInStations: Station[] = [
-  { title: "Station s105741", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s105741/" },
-  { title: "Station s49370", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s49370/" },
-  { title: "Station s17132", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s17132/" },
-  { title: "Station s125788", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s125788/" },
-  { title: "Station s300613", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s300613/" },
-  { title: "Station s280249", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s280249/" },
-  { title: "Station s293800", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s293800/" },
+  { title: "Praise and Worship Channel", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s105741/" },
+  { title: "All Worship Channel", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s49370/" },
+  { title: "Praise Channel", source: "TuneIn", embedUrl: "https://tunein.com/embed/player/s17132/" },
 ];
 
 interface StationCardProps {
@@ -34,12 +36,12 @@ interface StationCardProps {
 }
 
 const TuneInStationCard = ({ station }: StationCardProps) => (
-  <div className="bg-background/60 rounded-xl p-3">
-    <div className="mb-2">
-      <span className="font-medium text-sm text-foreground">{station.title}</span>
-      <p className="text-xs text-muted-foreground">Source: {station.source}</p>
+  <div className="min-w-[300px] md:min-w-[360px] snap-start rounded-2xl border border-border/50 bg-background shadow-sm p-4">
+    <div className="flex items-center justify-between mb-3">
+      <span className="font-medium text-sm text-foreground truncate pr-2">{station.title}</span>
+      <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary shrink-0">TuneIn</span>
     </div>
-    <div className="rounded-xl overflow-hidden border border-border/50 bg-background shadow-sm">
+    <div className="rounded-xl overflow-hidden border border-border/30 bg-muted/30">
       <iframe
         src={station.embedUrl}
         className="w-full h-[100px]"
@@ -53,13 +55,13 @@ const TuneInStationCard = ({ station }: StationCardProps) => (
 );
 
 const RadioIndiaStationCard = ({ station }: StationCardProps) => (
-  <div className="bg-background/60 rounded-xl p-3">
-    <div className="mb-2">
-      <span className="font-medium text-sm text-foreground">{station.title}</span>
-      <p className="text-xs text-muted-foreground">Source: {station.source}</p>
+  <div className="min-w-[300px] md:min-w-[360px] snap-start rounded-2xl border border-border/50 bg-background shadow-sm p-4">
+    <div className="flex items-center justify-between mb-3">
+      <span className="font-medium text-sm text-foreground truncate pr-2">{station.title}</span>
+      <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent/80 text-accent-foreground shrink-0">Radio India</span>
     </div>
-    <div className="rounded-xl overflow-hidden border border-border/50 bg-background shadow-sm relative">
-      <div className="absolute top-2 right-2 z-10 text-xs px-2 py-1 rounded-full bg-muted/80 backdrop-blur">
+    <div className="relative rounded-xl overflow-hidden border border-border/30 bg-muted/30">
+      <div className="absolute top-2 right-2 z-10 text-[11px] px-2 py-0.5 rounded-full bg-muted/80 backdrop-blur">
         Embedded player
       </div>
       <iframe
@@ -74,71 +76,86 @@ const RadioIndiaStationCard = ({ station }: StationCardProps) => (
   </div>
 );
 
-interface SectionBlockProps {
+interface CarouselRowProps {
   title: string;
-  subtitle?: string;
   stations: Station[];
   isRadioIndia?: boolean;
 }
 
-const SectionBlock = ({ title, subtitle, stations, isRadioIndia = false }: SectionBlockProps) => {
-  if (stations.length === 0) {
-    return null;
-  }
+const CarouselRow = ({ title, stations, isRadioIndia = false }: CarouselRowProps) => {
+  if (stations.length === 0) return null;
 
   return (
-    <div className="card-warm rounded-2xl p-5">
-      <div className="flex items-center gap-3 mb-2">
-        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-          <Radio className="w-5 h-5 text-primary" />
+    <div className="space-y-3">
+      <h4 className="text-sm font-medium text-muted-foreground px-1">{title}</h4>
+      <div className="overflow-x-auto pb-2 -mx-2 px-2">
+        <div className="flex gap-4 snap-x snap-mandatory">
+          {stations.map((station, index) => (
+            isRadioIndia ? (
+              <RadioIndiaStationCard key={index} station={station} />
+            ) : (
+              <TuneInStationCard key={index} station={station} />
+            )
+          ))}
         </div>
-        <div>
-          <h3 className="font-bold text-lg text-foreground">{title}</h3>
-          <p className="text-xs text-muted-foreground">{subtitle || "Tap play to listen"}</p>
-        </div>
-      </div>
-
-      <div className="space-y-4 mt-4">
-        {stations.map((station, index) => (
-          isRadioIndia ? (
-            <RadioIndiaStationCard key={index} station={station} />
-          ) : (
-            <TuneInStationCard key={index} station={station} />
-          )
-        ))}
       </div>
     </div>
   );
 };
 
 export const AudioEmbeds = () => {
+  const [activeTab, setActiveTab] = useState<"malayalam" | "english">("malayalam");
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {/* Left Column: Malayalam Christian Radio */}
-      <div className="space-y-6">
-        {malayalamTuneInStations.length > 0 && (
-          <SectionBlock 
-            title="Malayalam Christian Radio" 
-            subtitle="TuneIn stations"
-            stations={malayalamTuneInStations} 
-          />
-        )}
-        <SectionBlock 
-          title="Malayalam Christian Radio" 
-          subtitle="Radio India stations"
-          stations={malayalamRadioIndiaStations} 
-          isRadioIndia 
-        />
+    <div className="card-warm rounded-2xl p-5">
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+          <Radio className="w-5 h-5 text-primary" />
+        </div>
+        <div>
+          <h3 className="font-bold text-lg text-foreground">Christian Radio</h3>
+          <p className="text-xs text-muted-foreground">Tap play to listen</p>
+        </div>
       </div>
 
-      {/* Right Column: English Christian Radio */}
-      <div>
-        <SectionBlock 
-          title="English Christian Radio" 
-          subtitle="TuneIn stations"
-          stations={englishTuneInStations} 
-        />
+      {/* Pill Tabs */}
+      <div className="flex gap-2 mb-5">
+        <button
+          onClick={() => setActiveTab("malayalam")}
+          className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+            activeTab === "malayalam"
+              ? "bg-primary text-primary-foreground"
+              : "bg-muted/60 text-muted-foreground hover:bg-muted"
+          }`}
+        >
+          Malayalam
+        </button>
+        <button
+          onClick={() => setActiveTab("english")}
+          className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+            activeTab === "english"
+              ? "bg-primary text-primary-foreground"
+              : "bg-muted/60 text-muted-foreground hover:bg-muted"
+          }`}
+        >
+          English
+        </button>
       </div>
+
+      {/* Tab Content */}
+      {activeTab === "malayalam" && (
+        <div className="space-y-6">
+          <CarouselRow title="TuneIn Stations" stations={malayalamTuneInStations} />
+          <CarouselRow title="Radio India Stations" stations={malayalamRadioIndiaStations} isRadioIndia />
+        </div>
+      )}
+
+      {activeTab === "english" && (
+        <div className="space-y-6">
+          <CarouselRow title="TuneIn Stations" stations={englishTuneInStations} />
+        </div>
+      )}
     </div>
   );
 };
