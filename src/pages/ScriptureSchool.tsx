@@ -56,6 +56,13 @@ const experiences = [
     borderColor: "border-rose-200",
   },
   {
+    icon: Users,
+    label: "Youth Counseling",
+    color: "text-indigo-600",
+    bg: "bg-indigo-100",
+    borderColor: "border-indigo-200",
+  },
+  {
     icon: Award,
     label: "Achievements",
     color: "text-violet-600",
