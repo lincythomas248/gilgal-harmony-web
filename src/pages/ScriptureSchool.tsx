@@ -1,4 +1,18 @@
-import React, { useState, useRef } from "react";
+/**
+ * 🔒 LOCKED COMPONENT — ScriptureSchool.tsx
+ *
+ * This file is STABLE and APPROVED.
+ * Do NOT modify layout, structure, class names, or section order
+ * unless explicitly unlocking this file.
+ *
+ * Allowed changes ONLY:
+ * - Text copy (minor wording)
+ * - Data values (curriculum content)
+ *
+ * Locked on: 2025-12-19
+ */
+
+import { useState, useRef } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { HeroBanner } from "@/components/ui/HeroBanner";
@@ -20,82 +34,49 @@ import {
   CheckCircle2,
   Clock,
   X,
-  LifeBuoy,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png";
 import communityPhoto from "@/assets/scripture-school-community.jpg";
 import { ageGroups } from "@/data/curriculumData";
 
-/**
- * ✅ Premium, complementary tile palette (no dull grey)
- * - Uses subtle gradients + consistent borders + readable icon color.
- * - Keeps everything looking “premium” and consistent.
- */
 const experiences = [
   {
     icon: BookOpen,
     label: "Bible Stories",
-    iconColor: "text-amber-700",
-    tileBg: "bg-gradient-to-br from-amber-50 to-amber-100/60",
-    border: "border-amber-200/80",
-    iconBg: "bg-white/70",
+    color: "text-amber-600",
+    bg: "bg-amber-100",
+    borderColor: "border-amber-200",
   },
-  {
-    icon: Music,
-    label: "Worship Songs",
-    iconColor: "text-sky-700",
-    tileBg: "bg-gradient-to-br from-sky-50 to-sky-100/60",
-    border: "border-sky-200/80",
-    iconBg: "bg-white/70",
-  },
+  { icon: Music, label: "Worship Songs", color: "text-sky-600", bg: "bg-sky-100", borderColor: "border-sky-200" },
   {
     icon: Palette,
     label: "Creative Arts",
-    iconColor: "text-emerald-700",
-    tileBg: "bg-gradient-to-br from-emerald-50 to-emerald-100/60",
-    border: "border-emerald-200/80",
-    iconBg: "bg-white/70",
+    color: "text-emerald-600",
+    bg: "bg-emerald-100",
+    borderColor: "border-emerald-200",
   },
-  {
-    icon: Heart,
-    label: "Friendship",
-    iconColor: "text-rose-600",
-    tileBg: "bg-gradient-to-br from-rose-50 to-rose-100/60",
-    border: "border-rose-200/80",
-    iconBg: "bg-white/70",
-  },
-  {
-    icon: LifeBuoy,
-    label: "Youth Counseling",
-    iconColor: "text-indigo-700",
-    tileBg: "bg-gradient-to-br from-indigo-50 to-indigo-100/60",
-    border: "border-indigo-200/80",
-    iconBg: "bg-white/70",
-  },
+  { icon: Heart, label: "Friendship", color: "text-rose-500", bg: "bg-rose-100", borderColor: "border-rose-200" },
   {
     icon: Award,
     label: "Achievements",
-    iconColor: "text-violet-700",
-    tileBg: "bg-gradient-to-br from-violet-50 to-violet-100/60",
-    border: "border-violet-200/80",
-    iconBg: "bg-white/70",
+    color: "text-violet-600",
+    bg: "bg-violet-100",
+    borderColor: "border-violet-200",
   },
   {
     icon: PartyPopper,
     label: "Celebrations",
-    iconColor: "text-orange-700",
-    tileBg: "bg-gradient-to-br from-orange-50 to-orange-100/60",
-    border: "border-orange-200/80",
-    iconBg: "bg-white/70",
+    color: "text-orange-500",
+    bg: "bg-orange-100",
+    borderColor: "border-orange-200",
   },
   {
     icon: BookMarked,
     label: "IPC Region Curriculum",
-    iconColor: "text-teal-800",
-    tileBg: "bg-gradient-to-br from-teal-50 to-cyan-100/60",
-    border: "border-teal-200/80",
-    iconBg: "bg-white/70",
+    color: "text-primary",
+    bg: "bg-primary/10",
+    borderColor: "border-primary/30",
   },
 ];
 
@@ -234,39 +215,16 @@ export default function ScriptureSchool() {
               <p className="text-lg text-muted-foreground">Faith, fun, and friendship every week</p>
             </div>
 
-            {/* ✅ Label sizes toned down + consistent, premium tiles */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
               {experiences.map((exp, index) => (
                 <div
                   key={index}
-                  className={[
-                    exp.tileBg,
-                    exp.border,
-                    "border rounded-2xl p-6 text-center",
-                    "hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300",
-                    "min-h-[140px] flex flex-col items-center justify-center",
-                  ].join(" ")}
+                  className={`${exp.bg} ${exp.borderColor} border-2 rounded-2xl p-6 text-center hover:scale-105 hover:shadow-lg transition-all duration-300 min-h-[140px] flex flex-col items-center justify-center`}
                 >
-                  <div
-                    className={[
-                      "w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3",
-                      "ring-1 ring-black/5",
-                      exp.iconBg,
-                    ].join(" ")}
-                  >
-                    <exp.icon className={["w-7 h-7", exp.iconColor].join(" ")} />
+                  <div className={`w-14 h-14 ${exp.bg} rounded-2xl flex items-center justify-center mx-auto mb-3`}>
+                    <exp.icon className={`w-7 h-7 ${exp.color}`} />
                   </div>
-
-                  {/* ✅ FIX: reduce oversized text; keep consistent across tiles */}
-                  <p
-                    className={[
-                      "font-semibold leading-tight tracking-tight",
-                      "text-[14px] sm:text-[15px] md:text-[16px]",
-                      exp.iconColor,
-                    ].join(" ")}
-                  >
-                    {exp.label}
-                  </p>
+                  <p className={`text-base font-semibold ${exp.color} leading-tight`}>{exp.label}</p>
                 </div>
               ))}
             </div>
@@ -310,8 +268,6 @@ export default function ScriptureSchool() {
                 const isActive = activeAgeGroup === group.id;
                 const IconComponent = groupIcons[group.id] || BookMarked;
 
-                const forceSingleLine = group.id === "sub-junior" || group.id === "super-senior";
-
                 return (
                   <button
                     key={group.id}
@@ -336,15 +292,14 @@ export default function ScriptureSchool() {
                       <IconComponent className={`w-6 h-6 ${group.color}`} />
                     </div>
 
-                    {/* ✅ FIX: Sub-Junior + Super-Senior stay one line on sm+; mobile stays safe */}
+                    {/* ✅ FIX: lock heading font-size + safe wrapping */}
                     <h3
-                      className={[
-                        "font-extrabold text-foreground text-center leading-[1.05]",
-                        "text-[26px] sm:text-[24px] lg:text-[22px]",
-                        "px-2",
-                        forceSingleLine ? "sm:whitespace-nowrap" : "whitespace-normal break-words",
-                        "min-h-[3.0rem] flex items-center justify-center",
-                      ].join(" ")}
+                      className="
+                        font-extrabold text-foreground text-center leading-[1.05]
+                        text-[28px] sm:text-[30px] lg:text-[28px]
+                        px-2 whitespace-normal break-words
+                        min-h-[3.3rem] flex items-center justify-center
+                      "
                     >
                       {group.group}
                     </h3>
@@ -365,7 +320,7 @@ export default function ScriptureSchool() {
         </svg>
       </div>
 
-      {/* CURRICULUM ACCORDION SECTION (RESTORED / LOCKED) */}
+      {/* CURRICULUM ACCORDION SECTION */}
       <section ref={curriculumRef} className="bg-emerald-900 py-10 md:py-14 scroll-mt-16">
         <div className="section-container">
           <div className="max-w-4xl mx-auto">
