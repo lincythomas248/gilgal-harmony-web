@@ -1,8 +1,16 @@
+/**
+ * 🔒 LOCKED COMPONENT — CurriculumAccordion
+ * This accordion UI is APPROVED and FINAL.
+ * Do NOT change layout, classNames, spacing, typography, colors, or behavior
+ * unless explicitly instructed to unlock.
+ */
+
+import { useState, useRef, useImperativeHandle, forwardRef } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { BookMarked, BookOpen, CheckCircle2, Clock, GraduationCap, X, Baby, Lightbulb, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
-import type { AgeGroup } from "@/data/curriculumData";
+import { ageGroups } from "@/data/curriculumData";
 
 // Icon mapping for accordion
 const groupIcons: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -97,23 +105,33 @@ const ageGroupDetails: Record<string, { whatTheyLearn: string[]; classFlow: stri
   },
 };
 
-type Props = {
-  ageGroups: AgeGroup[];
-  accordionValue: string[];
-  onAccordionChange: (value: string[]) => void;
-  activeGroup: AgeGroup | undefined;
-  onShowAll: () => void;
-  curriculumRef: React.RefObject<HTMLDivElement>;
+export type CurriculumAccordionHandle = {
+  scrollIntoView: () => void;
+  setActiveGroup: (groupId: string) => void;
 };
 
-export function CurriculumAccordion({
-  ageGroups,
-  accordionValue,
-  onAccordionChange,
-  activeGroup,
-  onShowAll,
-  curriculumRef,
-}: Props) {
+export const CurriculumAccordion = forwardRef<CurriculumAccordionHandle>(function CurriculumAccordion(_, ref) {
+  const [accordionValue, setAccordionValue] = useState<string[]>([]);
+  const curriculumRef = useRef<HTMLDivElement>(null);
+
+  const activeAgeGroup = accordionValue.length === 1 ? accordionValue[0] : null;
+  const activeGroup = ageGroups.find((g) => g.id === activeAgeGroup);
+
+  const handleShowAll = () => {
+    setAccordionValue([]);
+  };
+
+  useImperativeHandle(ref, () => ({
+    scrollIntoView: () => {
+      setTimeout(() => {
+        curriculumRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    },
+    setActiveGroup: (groupId: string) => {
+      setAccordionValue([groupId]);
+    },
+  }));
+
   return (
     <section ref={curriculumRef} className="bg-emerald-900 py-10 md:py-14 scroll-mt-16">
       <div className="section-container">
@@ -136,7 +154,7 @@ export function CurriculumAccordion({
                   {activeGroup.ageRange})
                 </span>
                 <button
-                  onClick={onShowAll}
+                  onClick={handleShowAll}
                   className="ml-1 p-1 hover:bg-white/10 rounded-full transition-colors"
                   aria-label="Show all age groups"
                 >
@@ -151,7 +169,7 @@ export function CurriculumAccordion({
           </div>
 
           {/* Accordion Panels */}
-          <Accordion type="multiple" value={accordionValue} onValueChange={onAccordionChange} className="space-y-3">
+          <Accordion type="multiple" value={accordionValue} onValueChange={setAccordionValue} className="space-y-3">
             {ageGroups.map((group) => {
               const IconComponent = groupIcons[group.id] || BookMarked;
               const details = ageGroupDetails[group.id];
@@ -260,4 +278,4 @@ export function CurriculumAccordion({
       </div>
     </section>
   );
-}
+});
