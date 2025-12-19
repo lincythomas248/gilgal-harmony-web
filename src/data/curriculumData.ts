@@ -553,9 +553,19 @@ export const curriculumData: CurriculumGroup[] = [
     ],
   },
 ];
+// Age group type for interactive cards
+export interface AgeGroup {
+  id: string;
+  group: string;
+  ageRange: string;
+  summary: string;
+  color: string;
+  bg: string;
+  borderActive: string;
+}
 
 // Age group data for interactive cards (matching curriculum groups)
-export const ageGroups = [
+export const ageGroups: AgeGroup[] = [
   {
     id: "sub-junior",
     group: "Sub-Junior",
