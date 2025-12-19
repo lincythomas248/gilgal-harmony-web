@@ -1,10 +1,10 @@
 import { Layout } from "@/components/layout/Layout";
+import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { Users, Heart, BookOpen, Music, ArrowRight, Sparkles, HeartHandshake, Calendar, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PYPAPhotoStrip } from "@/components/pypa/PYPAPhotoStrip";
-import worshipImage from "@/assets/worship-hands.jpg";
 
 const activities = [
   {
@@ -76,40 +76,14 @@ export default function PYPA() {
   return (
     <Layout>
       <BackToTop />
-      
-      {/* Premium Hero Section */}
-      <section className="relative min-h-[70vh] md:min-h-[75vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image - no fadeout */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${worshipImage})` }}
-        />
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/50" />
-        
-        {/* Glass Card Content */}
-        <div className="relative z-10 section-container py-20">
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
-                PYPA
-              </h1>
-              <p className="text-lg md:text-xl text-white/90 mb-8 font-medium">
-                Pentecostal Young People's Association
-              </p>
-              <Link to="/contact">
-                <Button variant="gold" size="lg" className="group">
-                  Join PYPA
-                  <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroBanner
+        title="PYPA"
+        subtitle="Pentecostal Young People's Association"
+        primaryCta={{ text: "Join PYPA", link: "/contact" }}
+      />
 
       {/* Introduction Section */}
-      <section className="bg-background py-16 md:py-20">
+      <section className="section-light page-section">
         <div className="section-container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tracking-tight leading-tight mb-5">
