@@ -20,6 +20,7 @@ import {
   CheckCircle2,
   Clock,
   X,
+  MessageCircleHeart,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png";
@@ -82,6 +83,15 @@ const experiences = [
     borderColor: "border-primary/25",
     iconWrap: "bg-primary/10",
     hoverRing: "hover:ring-primary/25",
+  },
+  // ✅ NEW 8th tile to fill the empty slot
+  {
+    icon: MessageCircleHeart,
+    label: "Youth Counseling",
+    color: "text-indigo-700",
+    borderColor: "border-indigo-200/70",
+    iconWrap: "bg-indigo-500/10",
+    hoverRing: "hover:ring-indigo-200/70",
   },
 ];
 
@@ -211,7 +221,7 @@ export default function ScriptureSchool() {
         primaryCta={{ text: "Explore Classes", link: "#classes" }}
       />
 
-      {/* WHAT CHILDREN EXPERIENCE (REFINED) */}
+      {/* WHAT CHILDREN EXPERIENCE */}
       <section className="bg-amber-50/40 py-16 md:py-24">
         <div className="section-container">
           <div className="max-w-6xl mx-auto">
@@ -264,9 +274,6 @@ export default function ScriptureSchool() {
                 </div>
               ))}
             </div>
-
-            {/* NOTE: when you add Youth Counseling as the 8th tile later,
-                this grid will naturally become a perfect 2x4 on lg screens. */}
           </div>
         </div>
       </section>
@@ -331,7 +338,6 @@ export default function ScriptureSchool() {
                       <IconComponent className={`w-6 h-6 ${group.color}`} />
                     </div>
 
-                    {/* ✅ FIX: lock heading font-size + safe wrapping */}
                     <h3
                       className="
                         font-extrabold text-foreground text-center leading-[1.05]
