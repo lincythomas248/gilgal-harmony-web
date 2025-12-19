@@ -568,7 +568,7 @@ export interface AgeGroup {
 export const ageGroups: AgeGroup[] = [
   {
     id: "sub-junior",
-    group: "Sub-Junior",
+    group: "Sub‑Junior",
     ageRange: "Below 6 Years",
     summary: "Foundation of faith through stories and songs",
     color: "text-amber-600",
@@ -604,7 +604,7 @@ export const ageGroups: AgeGroup[] = [
   },
   {
     id: "super-senior",
-    group: "Super-Senior",
+    group: "Super‑Senior",
     ageRange: "15–18 Years",
     summary: "Preparing for life and ministry",
     color: "text-rose-600",
