@@ -1,15 +1,13 @@
-import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
-import { BookOpen, ExternalLink, Play, Headphones, Calendar, ChevronRight, Sparkles } from "lucide-react";
-import { useODBDevotionals, getExcerpt } from "@/hooks/useODBDevotionals";
-import { format } from "date-fns";
+import { Sparkles, Radio, BookOpen, Play, Headphones } from "lucide-react";
+import { ResourceSection } from "@/components/resources/ResourceSection";
+import { QuickLinks } from "@/components/resources/QuickLinks";
+import { VerseCard } from "@/components/resources/VerseCard";
 import { AudioEmbeds } from "@/components/resources/AudioEmbeds";
-import { ODBFallback } from "@/components/resources/ODBFallback";
+import { OdbSection } from "@/components/resources/OdbSection";
 
 const DevotionsResources = () => {
-  const { devotionals, loading, error } = useODBDevotionals(7);
-
   return (
     <Layout>
       <HeroBanner
@@ -17,187 +15,94 @@ const DevotionsResources = () => {
         subtitle="A curated space for young members to build daily habits of prayer, Scripture, and reflection."
       />
 
-      <section className="page-section">
+      <section className="page-section section-light">
         <div className="section-container">
           <div className="max-w-5xl mx-auto">
+            {/* Quick Links */}
+            <QuickLinks />
 
-            {/* 2. Daily Inspiration (Verse of the Day) */}
-            <div className="mb-12">
-              <h2 className="text-2xl font-bold text-foreground mb-6">Daily Inspiration</h2>
-              <Link
-                to="/resources/verse-of-the-day"
-                className="group card-elevated block p-6 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 bg-olive-light rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="w-7 h-7 text-olive" />
+            {/* 1. Verse of the Day */}
+            <ResourceSection
+              icon={<Sparkles className="w-5 h-5 text-primary" />}
+              title="Verse of the Day"
+              description="Start your day with God's Word"
+            >
+              <VerseCard />
+            </ResourceSection>
+
+            {/* 2. Our Daily Bread */}
+            <ResourceSection
+              icon={<BookOpen className="w-5 h-5 text-primary" />}
+              title="Our Daily Bread"
+              description="Daily devotional readings"
+              action={{ text: "Visit ODB", href: "https://ourdailybread.org", external: true }}
+            >
+              <OdbSection />
+            </ResourceSection>
+
+            {/* 3. Audio / Live Radio */}
+            <ResourceSection
+              icon={<Radio className="w-5 h-5 text-primary" />}
+              title="Audio Devotions"
+              description="Listen to worship music and Christian radio"
+            >
+              <AudioEmbeds />
+            </ResourceSection>
+
+            {/* 4. More Resources */}
+            <ResourceSection
+              icon={<Play className="w-5 h-5 text-primary" />}
+              title="More Resources"
+              description="Video content and worship music"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* YouTube Embed */}
+                <div className="bg-background/60 rounded-xl overflow-hidden">
+                  <div className="aspect-video bg-muted">
+                    <iframe
+                      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                      title="Youth Worship & Teaching"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                      loading="lazy"
+                    />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2 group-hover:text-primary transition-colors">
-                      Verse of the Day (Malayalam)
-                      <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+                  <div className="p-4">
+                    <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
+                      <Play className="w-4 h-4 text-primary" />
+                      Youth Worship & Teaching
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Daily Malayalam verse with a beautiful rotating background. Start your day with God's Word.
+                    <p className="text-sm text-muted-foreground">
+                      Watch inspiring messages and worship sessions.
                     </p>
-                    <span className="inline-flex items-center text-sm text-primary font-medium">
-                      Open Verse of the Day
-                    </span>
                   </div>
                 </div>
-              </Link>
-            </div>
 
-            {/* 3. Audio Devotions */}
-            <AudioEmbeds />
-
-            {/* 4. Our Daily Bread */}
-            <div className="mb-12">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-foreground">Our Daily Bread</h2>
-                <a
-                  href="https://ourdailybread.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-primary hover:underline flex items-center gap-1"
-                >
-                  Visit ODB <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-
-              {loading ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[...Array(6)].map((_, i) => (
-                    <div key={i} className="card-elevated p-4 animate-pulse">
-                      <div className="h-32 bg-muted rounded-lg mb-3" />
-                      <div className="h-5 bg-muted rounded w-3/4 mb-2" />
-                      <div className="h-4 bg-muted rounded w-1/2" />
-                    </div>
-                  ))}
-                </div>
-              ) : error || devotionals.length === 0 ? (
-                <ODBFallback errorMessage={error || undefined} />
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {devotionals.map((devotional) => (
-                    <Link
-                      key={devotional.slug}
-                      to={`/resources/devotions/odb/${devotional.slug}`}
-                      className="group card-elevated overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                    >
-                      {devotional.thumbnail && (
-                        <div className="aspect-video overflow-hidden">
-                          <img
-                            src={devotional.thumbnail}
-                            alt={devotional.title}
-                            loading="lazy"
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                          />
-                        </div>
-                      )}
-                      <div className="p-4">
-                        <h3 className="font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                          {devotional.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
-                          {getExcerpt(devotional.description, 20)}
-                        </p>
-                        <div className="flex items-center justify-between text-xs text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Calendar className="w-3.5 h-3.5" />
-                            {devotional.pubDate && format(new Date(devotional.pubDate), 'MMM d')}
-                          </span>
-                          <span className="flex items-center gap-0.5 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                            Read <ChevronRight className="w-3.5 h-3.5" />
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* 5. Other Resources */}
-            <h2 className="text-2xl font-bold text-foreground mb-6">More Resources</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* YouTube Embed */}
-              <div className="card-elevated overflow-hidden">
-                <div className="aspect-video bg-muted">
-                  <iframe
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                    title="Youth Worship & Teaching"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-5">
-                  <h3 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-                    <Play className="w-5 h-5 text-primary" />
-                    Youth Worship & Teaching
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Watch inspiring messages, worship sessions, and youth-focused content.
-                  </p>
-                </div>
-              </div>
-
-              {/* Spotify Embed */}
-              <div className="card-elevated overflow-hidden">
-                <div className="aspect-video bg-muted flex items-center justify-center">
-                  <iframe
-                    src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9uKNf5jGX6m"
-                    title="Worship & Christian Music"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-5">
-                  <h3 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-                    <Headphones className="w-5 h-5 text-primary" />
-                    Worship & Christian Music
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Listen to uplifting worship music and faith-based podcasts.
-                  </p>
-                </div>
-              </div>
-
-              {/* Bible Reading / Verse of the Day */}
-              <a
-                href="https://www.bible.com/verse-of-the-day"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group card-elevated block p-6 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 bg-olive-light rounded-xl flex items-center justify-center flex-shrink-0">
-                    <BookOpen className="w-7 h-7 text-olive" />
+                {/* Spotify Embed */}
+                <div className="bg-background/60 rounded-xl overflow-hidden">
+                  <div className="aspect-video bg-muted">
+                    <iframe
+                      src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9uKNf5jGX6m"
+                      title="Worship & Christian Music"
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                      loading="lazy"
+                    />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-                      Verse of the Day
-                      <ExternalLink className="w-4 h-4 text-muted-foreground" />
+                  <div className="p-4">
+                    <h3 className="text-base font-semibold text-foreground mb-1 flex items-center gap-2">
+                      <Headphones className="w-4 h-4 text-primary" />
+                      Worship & Christian Music
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Start each day with Scripture. Get daily verses and reading plans from YouVersion Bible App.
+                    <p className="text-sm text-muted-foreground">
+                      Listen to uplifting worship music and podcasts.
                     </p>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="text-xs bg-cream px-3 py-1 rounded-full text-foreground/70">
-                        Daily Verses
-                      </span>
-                      <span className="text-xs bg-cream px-3 py-1 rounded-full text-foreground/70">
-                        Reading Plans
-                      </span>
-                    </div>
                   </div>
                 </div>
-              </a>
-            </div>
+              </div>
+            </ResourceSection>
           </div>
         </div>
       </section>
