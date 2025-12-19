@@ -36,32 +36,38 @@ const activities = [
   },
 ];
 
-// Activity Card component
+// Activity Card component - Premium styling
 const ActivityCard = ({ activity }: { activity: typeof activities[0] }) => (
-  <div className="group relative rounded-2xl p-6 bg-[#FAF8F3] shadow-md border border-black/[0.04] h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-    {/* Micro label */}
-    <span className={`absolute top-4 right-4 text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded-full ${
+  <div className="group relative rounded-2xl p-7 bg-gradient-to-br from-background to-dove-light/50 h-full transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-border/50 hover:border-accent/30 shadow-lg">
+    {/* Premium pill badge */}
+    <span className={`absolute top-5 right-5 text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border backdrop-blur-sm ${
       activity.color === 'gold' 
-        ? 'bg-accent/15 text-accent' 
-        : 'bg-primary/10 text-primary'
+        ? 'bg-accent/10 text-accent border-accent/25' 
+        : 'bg-primary/10 text-primary border-primary/20'
     }`}>
       {activity.label}
     </span>
     
-    <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-5 ${
+    {/* Premium icon container with gradient border effect */}
+    <div className={`relative w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-md ${
       activity.color === 'gold' 
-        ? 'bg-gradient-to-br from-accent/20 to-accent/10' 
-        : 'bg-gradient-to-br from-primary/15 to-primary/5'
+        ? 'bg-gradient-to-br from-accent/25 via-accent/15 to-accent/5 ring-1 ring-accent/20' 
+        : 'bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 ring-1 ring-primary/15'
     }`}>
       <activity.icon className={`w-7 h-7 ${activity.color === 'gold' ? 'text-accent' : 'text-primary'}`} />
     </div>
     
-    <h3 className="text-lg font-semibold text-foreground mb-2 leading-snug">
+    <h3 className="text-xl font-bold text-foreground mb-3 leading-snug tracking-tight">
       {activity.title}
     </h3>
     <p className="text-muted-foreground text-sm leading-relaxed">
       {activity.description}
     </p>
+    
+    {/* Subtle bottom accent line on hover */}
+    <div className={`absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl transition-opacity duration-300 opacity-0 group-hover:opacity-100 ${
+      activity.color === 'gold' ? 'bg-gradient-to-r from-accent/50 via-accent to-accent/50' : 'bg-gradient-to-r from-primary/50 via-primary to-primary/50'
+    }`} />
   </div>
 );
 
@@ -115,40 +121,52 @@ export default function PYPA() {
         </div>
       </section>
 
-      {/* Our Mission - Premium Card */}
-      <section className="bg-dove-light/50 py-16 md:py-20">
+      {/* Our Mission - Premium Card with glow border */}
+      <section className="bg-dove-light/50 py-20 md:py-28">
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
-            <div className="relative rounded-2xl p-8 md:p-10 bg-gradient-to-br from-[#FAF8F3] to-white shadow-lg border border-black/[0.04]">
-              {/* Icon badge */}
-              <div className="absolute -top-5 left-8 w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center shadow-lg">
-                <HeartHandshake className="w-5 h-5 text-white" />
+            {/* Outer glow wrapper */}
+            <div className="relative p-[2px] rounded-3xl bg-gradient-to-br from-accent/40 via-primary/20 to-accent/30 shadow-xl shadow-accent/10">
+              <div className="relative rounded-3xl p-8 md:p-12 bg-gradient-to-br from-background via-background to-dove-light/80">
+                {/* Floating icon badge */}
+                <div className="absolute -top-6 left-10 w-12 h-12 rounded-2xl bg-gradient-to-br from-accent via-accent to-accent/80 flex items-center justify-center shadow-xl ring-4 ring-background">
+                  <HeartHandshake className="w-6 h-6 text-white" />
+                </div>
+                
+                {/* Section label */}
+                <span className="inline-block text-[11px] font-bold uppercase tracking-widest text-accent mb-4 mt-2">Our Purpose</span>
+                
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 tracking-tight">Our Mission</h2>
+                
+                {/* Accent divider */}
+                <div className="w-16 h-1 bg-gradient-to-r from-accent to-accent/50 rounded-full mb-5" />
+                
+                <p className="text-muted-foreground leading-relaxed text-lg">
+                  PYPA exists to nurture the spiritual growth of young people, equipping them with a strong foundation of faith. We create opportunities for youth to discover their purpose, develop leadership qualities, and build lasting friendships within the church community.
+                </p>
               </div>
-              
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 mt-2">Our Mission</h2>
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                PYPA exists to nurture the spiritual growth of young people, equipping them with a strong foundation of faith. We create opportunities for youth to discover their purpose, develop leadership qualities, and build lasting friendships within the church community.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* What We Do - Activity Cards */}
-      <section className="bg-background py-16 md:py-24">
+      <section className="bg-background py-20 md:py-28">
         <div className="section-container">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-14">
+              <span className="inline-block text-[11px] font-bold uppercase tracking-widest text-accent mb-3">Our Activities</span>
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight mb-4">
                 What We Do
               </h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">
+              <div className="w-12 h-1 bg-gradient-to-r from-accent to-accent/50 rounded-full mx-auto mb-5" />
+              <p className="text-muted-foreground max-w-xl mx-auto text-lg">
                 Discover the various ways we come together to grow, serve, and worship.
               </p>
             </div>
             
-            {/* 2x2 Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* 2x2 Grid with better gap */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
               {activities.map((activity, index) => (
                 <ActivityCard key={index} activity={activity} />
               ))}
