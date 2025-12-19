@@ -26,90 +26,43 @@ import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png"
 import communityPhoto from "@/assets/scripture-school-community.jpg";
 import { ageGroups } from "@/data/curriculumData";
 
-/**
- * Premium pastel tile system:
- * - tileBg: subtle gradient background
- * - border: soft border
- * - iconWrap: white glassy icon plate for “premium” feel
- * - icon/text colors: balanced + readable
- */
 const experiences = [
   {
     icon: BookOpen,
     label: "Bible Stories",
-    text: "text-amber-700",
-    iconColor: "text-amber-700",
-    tileBg: "bg-gradient-to-br from-amber-50 to-amber-100/80",
-    border: "border-amber-200/70",
-    iconWrap: "bg-white/70 ring-1 ring-amber-200/50",
+    color: "text-amber-600",
+    bg: "bg-amber-100",
+    borderColor: "border-amber-200",
   },
-  {
-    icon: Music,
-    label: "Worship Songs",
-    text: "text-sky-700",
-    iconColor: "text-sky-700",
-    tileBg: "bg-gradient-to-br from-sky-50 to-sky-100/80",
-    border: "border-sky-200/70",
-    iconWrap: "bg-white/70 ring-1 ring-sky-200/50",
-  },
+  { icon: Music, label: "Worship Songs", color: "text-sky-600", bg: "bg-sky-100", borderColor: "border-sky-200" },
   {
     icon: Palette,
     label: "Creative Arts",
-    text: "text-emerald-700",
-    iconColor: "text-emerald-700",
-    tileBg: "bg-gradient-to-br from-emerald-50 to-emerald-100/80",
-    border: "border-emerald-200/70",
-    iconWrap: "bg-white/70 ring-1 ring-emerald-200/50",
+    color: "text-emerald-600",
+    bg: "bg-emerald-100",
+    borderColor: "border-emerald-200",
   },
-  {
-    icon: Heart,
-    label: "Friendship",
-    text: "text-rose-700",
-    iconColor: "text-rose-700",
-    tileBg: "bg-gradient-to-br from-rose-50 to-rose-100/80",
-    border: "border-rose-200/70",
-    iconWrap: "bg-white/70 ring-1 ring-rose-200/50",
-  },
-
-  // ✅ RESTORED: Youth Counseling (uses Users icon for safe import)
-  {
-    icon: Users,
-    label: "Youth Counseling",
-    text: "text-indigo-700",
-    iconColor: "text-indigo-700",
-    tileBg: "bg-gradient-to-br from-indigo-50 to-indigo-100/80",
-    border: "border-indigo-200/70",
-    iconWrap: "bg-white/70 ring-1 ring-indigo-200/50",
-  },
-
+  { icon: Heart, label: "Friendship", color: "text-rose-500", bg: "bg-rose-100", borderColor: "border-rose-200" },
   {
     icon: Award,
     label: "Achievements",
-    text: "text-violet-700",
-    iconColor: "text-violet-700",
-    tileBg: "bg-gradient-to-br from-violet-50 to-violet-100/80",
-    border: "border-violet-200/70",
-    iconWrap: "bg-white/70 ring-1 ring-violet-200/50",
+    color: "text-violet-600",
+    bg: "bg-violet-100",
+    borderColor: "border-violet-200",
   },
   {
     icon: PartyPopper,
     label: "Celebrations",
-    text: "text-orange-700",
-    iconColor: "text-orange-700",
-    tileBg: "bg-gradient-to-br from-orange-50 to-orange-100/80",
-    border: "border-orange-200/70",
-    iconWrap: "bg-white/70 ring-1 ring-orange-200/50",
+    color: "text-orange-500",
+    bg: "bg-orange-100",
+    borderColor: "border-orange-200",
   },
-
-  // ✅ No more grey: premium teal/mint that complements the set
   {
     icon: BookMarked,
     label: "IPC Region Curriculum",
-    text: "text-teal-800",
-    iconColor: "text-teal-800",
-    tileBg: "bg-gradient-to-br from-teal-50 to-cyan-100/80",
-    border: "border-teal-200/70",
-    iconWrap: "bg-white/70 ring-1 ring-teal-200/50",
+    color: "text-primary",
+    bg: "bg-primary/10",
+    borderColor: "border-primary/30",
   },
 ];
 
@@ -252,23 +205,12 @@ export default function ScriptureSchool() {
               {experiences.map((exp, index) => (
                 <div
                   key={index}
-                  className={`
-                    ${exp.tileBg} ${exp.border}
-                    border rounded-2xl p-6 text-center
-                    transition-all duration-300
-                    hover:-translate-y-1 hover:shadow-xl
-                    min-h-[140px] flex flex-col items-center justify-center
-                  `}
+                  className={`${exp.bg} ${exp.borderColor} border-2 rounded-2xl p-6 text-center hover:scale-105 hover:shadow-lg transition-all duration-300 min-h-[140px] flex flex-col items-center justify-center`}
                 >
-                  <div
-                    className={`
-                      w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3
-                      ${exp.iconWrap} backdrop-blur-sm
-                    `}
-                  >
-                    <exp.icon className={`w-7 h-7 ${exp.iconColor}`} />
+                  <div className={`w-14 h-14 ${exp.bg} rounded-2xl flex items-center justify-center mx-auto mb-3`}>
+                    <exp.icon className={`w-7 h-7 ${exp.color}`} />
                   </div>
-                  <p className={`text-base font-semibold ${exp.text} leading-tight`}>{exp.label}</p>
+                  <p className={`text-base font-semibold ${exp.color} leading-tight`}>{exp.label}</p>
                 </div>
               ))}
             </div>
@@ -336,14 +278,15 @@ export default function ScriptureSchool() {
                       <IconComponent className={`w-6 h-6 ${group.color}`} />
                     </div>
 
-                    {/* NOTE: leaving your heading logic as-is (we’ll fix the Sub/Super single-line issue next if you want) */}
+                    {/* ✅ FIX: lock heading font-size + safe wrapping */}
                     <h3
                       className="
-                        font-extrabold text-foreground text-center leading-[1.05]
-                        text-[28px] sm:text-[30px] lg:text-[28px]
-                        px-2 whitespace-normal break-words
-                        min-h-[3.3rem] flex items-center justify-center
-                      "
+    font-extrabold text-foreground text-center leading-none
+    whitespace-nowrap
+    text-[clamp(18px,2.4vw,30px)]
+    tracking-tight
+    px-2
+  "
                     >
                       {group.group}
                     </h3>
