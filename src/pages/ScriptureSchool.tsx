@@ -1,16 +1,4 @@
-/**
- * 🔒 LOCKED COMPONENT — ScriptureSchool.tsx
- *
- * This file/section is STABLE and APPROVED.
- * Do NOT modify layout, structure, class names, or section order
- * unless explicitly instructed to unlock this file.
- *
- * Allowed changes ONLY:
- * - Text copy (minor wording)
- * - Data values (curriculum content)
- *
- * Locked on: 2025-12-19
- */
+/* DEBUG_FINGERPRINT: 2025-12-19 1 */
 
 import { useState, useRef } from "react";
 import { Layout } from "@/components/layout/Layout";
