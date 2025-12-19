@@ -4,6 +4,7 @@ import { QuickLinks } from "@/components/resources/QuickLinks";
 import { VerseCardLarge } from "@/components/resources/VerseCardLarge";
 import { AudioEmbeds } from "@/components/resources/AudioEmbeds";
 import { OdbCompact } from "@/components/resources/OdbCompact";
+import { ScriptureDailyDevotions } from "@/components/resources/ScriptureDailyDevotions";
 
 const DevotionsResources = () => {
   return (
@@ -30,6 +31,11 @@ const DevotionsResources = () => {
               <div className="lg:col-span-5">
                 <OdbCompact />
               </div>
+            </div>
+
+            {/* Scripture & Daily Devotions Section */}
+            <div className="mt-10">
+              <ScriptureDailyDevotions />
             </div>
 
             {/* Audio Section - Full Width Below */}

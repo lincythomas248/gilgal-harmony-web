@@ -19,7 +19,7 @@ const DevotionCard = ({ title, subtitle, children, className = "" }: DevotionCar
   </div>
 );
 
-export const ScriptureDevotionsSection = () => {
+export const ScriptureDailyDevotions = () => {
   return (
     <div className="mb-12">
       {/* Section Header */}
