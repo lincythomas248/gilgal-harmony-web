@@ -48,16 +48,14 @@ export function AgeGroupCards({ activeAgeGroup, onAgeGroupClick }: AgeGroupCards
 
             <h3
               className="
-                font-extrabold text-foreground text-center leading-[1.05]
-                text-[22px] sm:text-[24px] lg:text-[22px]
-                px-2
-                whitespace-nowrap
-                overflow-hidden text-ellipsis
+                font-extrabold text-foreground text-center leading-tight
+                text-[20px] sm:text-[22px] lg:text-[20px]
+                px-1
                 min-h-[2.2rem] flex items-center justify-center
               "
               title={group.group}
             >
-              {group.group.replace(/-/g, "-")}
+              {group.group}
             </h3>
 
             <p className={`text-sm font-semibold ${group.color} mt-1`}>{group.ageRange}</p>
