@@ -1,9 +1,9 @@
 /**
  * 🔒 LOCKED COMPONENT — ScriptureSchool.tsx
  *
- * This file is STABLE and APPROVED.
+ * This file/section is STABLE and APPROVED.
  * Do NOT modify layout, structure, class names, or section order
- * unless explicitly unlocking this file.
+ * unless explicitly instructed to unlock this file.
  *
  * Allowed changes ONLY:
  * - Text copy (minor wording)
