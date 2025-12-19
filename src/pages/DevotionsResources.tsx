@@ -20,10 +20,6 @@ const DevotionsResources = () => {
       <section className="page-section">
         <div className="section-container">
           <div className="max-w-5xl mx-auto">
-            {/* 1. Short Intro */}
-            <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
-              Explore devotionals, Bible reading plans, worship music, and faith-building content designed for youth.
-            </p>
 
             {/* 2. Daily Inspiration (Verse of the Day) */}
             <div className="mb-12">
