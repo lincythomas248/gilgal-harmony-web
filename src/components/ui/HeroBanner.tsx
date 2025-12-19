@@ -39,7 +39,7 @@ export function HeroBanner({
         className="absolute inset-0 bg-cover bg-no-repeat"
         style={{
           backgroundImage: `url(${heroBg})`,
-          backgroundPosition: "center 35%", // 👈 LOCK: pushes the open Bible lower in view
+          backgroundPosition: "center 22%", // 👈 LOCK: pushes the open Bible lower in view
         }}
       />
 
