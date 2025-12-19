@@ -2,7 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { QuickLinks } from "@/components/resources/QuickLinks";
 import { VerseCardLarge } from "@/components/resources/VerseCardLarge";
-import { AudioCompact } from "@/components/resources/AudioCompact";
+import { AudioEmbeds } from "@/components/resources/AudioEmbeds";
 import { OdbCompact } from "@/components/resources/OdbCompact";
 
 const DevotionsResources = () => {
@@ -26,11 +26,15 @@ const DevotionsResources = () => {
                 <VerseCardLarge />
               </div>
 
-              {/* Right Column - Audio + ODB stacked */}
-              <div className="lg:col-span-5 flex flex-col gap-6">
-                <AudioCompact />
+              {/* Right Column - ODB */}
+              <div className="lg:col-span-5">
                 <OdbCompact />
               </div>
+            </div>
+
+            {/* Audio Section - Full Width Below */}
+            <div className="mt-8">
+              <AudioEmbeds />
             </div>
           </div>
         </div>
