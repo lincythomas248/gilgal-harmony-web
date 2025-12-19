@@ -9,7 +9,7 @@ import { GalleryLightbox } from "@/components/gallery/GalleryLightbox";
 import { galleryCollections } from "@/data/galleryData";
 import { cn } from "@/lib/utils";
 import { ResourcesDevotionsTeaser } from "@/components/resources/ResourcesDevotionsTeaser";
-import { ScriptureDevotionsSection } from "@/components/media/ScriptureDevotionsSection";
+
 
 export default function Media() {
   // ✅ ONE continuous gallery (flatten + filter)
@@ -175,13 +175,8 @@ export default function Media() {
               </div>
             </div>
 
-            {/* Scripture & Daily Devotions Section */}
-            <div className="mt-14">
-              <ScriptureDevotionsSection />
-            </div>
-
             {/* Resources & Devotions CTA */}
-            <div className="mt-10">
+            <div className="mt-14">
               <ResourcesDevotionsTeaser />
             </div>
           </div>
