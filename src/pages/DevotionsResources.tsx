@@ -4,6 +4,7 @@ import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BookOpen, ExternalLink, Play, Headphones, Calendar, ChevronRight, Sparkles } from "lucide-react";
 import { useODBDevotionals, getExcerpt } from "@/hooks/useODBDevotionals";
 import { format } from "date-fns";
+import { AudioEmbeds } from "@/components/resources/AudioEmbeds";
 
 const DevotionsResources = () => {
   const { devotionals, loading, error } = useODBDevotionals(7);
@@ -49,6 +50,9 @@ const DevotionsResources = () => {
                 </div>
               </Link>
             </div>
+
+            {/* Audio Devotions Section */}
+            <AudioEmbeds />
 
             {/* Our Daily Bread Section */}
             <div className="mb-12">
