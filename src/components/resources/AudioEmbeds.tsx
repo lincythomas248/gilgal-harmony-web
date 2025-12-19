@@ -1,21 +1,55 @@
-import { Radio, ExternalLink } from "lucide-react";
+import { Radio } from "lucide-react";
 
 interface Station {
   title: string;
+  source: "Radio India" | "TuneIn";
   embedUrl: string;
 }
 
 const malayalamStations: Station[] = [
-  { title: "Malayalam Station 1", embedUrl: "https://tunein.com/embed/player/s105741/" },
-  { title: "Malayalam Station 2", embedUrl: "https://tunein.com/embed/player/s49370/" },
-  { title: "Malayalam Station 3", embedUrl: "https://tunein.com/embed/player/s17132/" },
-  { title: "Malayalam Station 4", embedUrl: "https://tunein.com/embed/player/s125788/" },
+  {
+    title: "BAFA Radio (Malayalam)",
+    source: "Radio India",
+    embedUrl: "https://radiosindia.com/embed/bafaradio",
+  },
+  {
+    title: "Sehion Radio (Malayalam)",
+    source: "Radio India",
+    embedUrl: "https://radiosindia.com/embed/sehionradio",
+  },
+  {
+    title: "Harvest Radio (Malayalam)",
+    source: "Radio India",
+    embedUrl: "https://radiosindia.com/embed/harvestradio",
+  },
+  {
+    title: "Nambikkai FM (Malayalam)",
+    source: "Radio India",
+    embedUrl: "https://radiosindia.com/embed/nambikkaifm",
+  },
+  {
+    title: "Heavenly Tunes (Malayalam)",
+    source: "Radio India",
+    embedUrl: "https://radiosindia.com/embed/heavenlytunes",
+  },
 ];
 
 const englishStations: Station[] = [
-  { title: "English Station 1", embedUrl: "https://tunein.com/embed/player/s300613/" },
-  { title: "English Station 2", embedUrl: "https://tunein.com/embed/player/s280249/" },
-  { title: "English Station 3", embedUrl: "https://tunein.com/embed/player/s293800/" },
+  {
+    title: "Christian Worship Radio",
+    source: "TuneIn",
+    embedUrl: "https://tunein.com/embed/player/s300613/",
+  },
+  {
+    title: "Faith & Praise Radio",
+    source: "TuneIn",
+    embedUrl: "https://tunein.com/embed/player/s280249/",
+  },
+  {
+    title: "Christian Teaching & Music",
+    source: "TuneIn",
+    embedUrl: "https://tunein.com/embed/player/s293800/",
+  },
 ];
 
 interface StationBlockProps {
@@ -33,7 +67,7 @@ const StationBlock = ({ title, stations }: StationBlockProps) => {
           </div>
           <h3 className="font-bold text-lg text-foreground">{title}</h3>
         </div>
-        <p className="text-muted-foreground text-sm">No stations added yet</p>
+        <p className="text-muted-foreground text-sm">Radio stations will appear here soon.</p>
       </div>
     );
   }
@@ -54,34 +88,25 @@ const StationBlock = ({ title, stations }: StationBlockProps) => {
       {/* Station List */}
       <div className="space-y-4 mt-4">
         {stations.map((station, index) => {
-          // Extract station ID from embedUrl for the external link
-          const stationId = station.embedUrl.match(/\/s(\d+)\//)?.[0]?.replace(/\//g, "") || "";
+          const iframeHeight = station.source === "Radio India" ? "h-[120px]" : "h-[100px]";
           
           return (
             <div key={index} className="bg-background/60 rounded-xl p-3">
               {/* Station Header */}
-              <div className="flex items-center justify-between mb-2">
+              <div className="mb-2">
                 <span className="font-medium text-sm text-foreground">{station.title}</span>
-                <a
-                  href={`https://tunein.com/radio/${stationId}/`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
-                >
-                  Open in TuneIn
-                  <ExternalLink className="w-3 h-3" />
-                </a>
+                <p className="text-xs text-muted-foreground">Source: {station.source}</p>
               </div>
               
               {/* Iframe Player */}
               <div className="rounded-xl overflow-hidden border border-border/50 bg-background">
                 <iframe
                   src={station.embedUrl}
-                  className="w-full h-[100px]"
+                  className={`w-full ${iframeHeight}`}
                   loading="lazy"
                   referrerPolicy="no-referrer"
-                  allow="autoplay"
-                  title={`TuneIn ${station.title}`}
+                  allow={station.source === "TuneIn" ? "autoplay" : undefined}
+                  title={station.title}
                 />
               </div>
             </div>
@@ -95,8 +120,8 @@ const StationBlock = ({ title, stations }: StationBlockProps) => {
 export const AudioEmbeds = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <StationBlock title="Malayalam Radio" stations={malayalamStations} />
-      <StationBlock title="English Radio" stations={englishStations} />
+      <StationBlock title="Malayalam Christian Radio" stations={malayalamStations} />
+      <StationBlock title="English Christian Radio" stations={englishStations} />
     </div>
   );
 };
