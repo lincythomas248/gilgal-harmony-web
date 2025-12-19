@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, Facebook, Youtube } from "lucide-react";
-import logo from "@/assets/logo-church.png";
+import logo from "@/assets/ipc-gilgal-logo.png";
 
 export function Footer() {
   return (
@@ -15,10 +15,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Logo & About */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-5">
-              <img src={logo} alt="IPC Gilgal Church" className="h-16 w-auto" />
+            <div className="flex items-center gap-4 mb-5">
+              <img 
+                src={logo} 
+                alt="IPC Gilgal Sharjah logo" 
+                className="h-14 md:h-14 w-auto object-contain drop-shadow-sm"
+              />
               <div>
-                <h4 className="font-semibold text-navy-foreground">IPC Gilgal</h4>
+                <h4 className="font-semibold text-navy-foreground text-lg">IPC Gilgal</h4>
                 <p className="text-xs text-navy-foreground/60">Sharjah & RAK</p>
               </div>
             </div>

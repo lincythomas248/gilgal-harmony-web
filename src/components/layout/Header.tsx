@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, MapPin, Mail, Phone } from "lucide-react";
-import logo from "@/assets/logo-church.png";
+import logo from "@/assets/ipc-gilgal-logo.png";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -26,6 +26,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [ministriesOpen, setMinistriesOpen] = useState(false);
   const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const isActive = (href: string) => location.pathname === href;
   const isMinistryActive = () =>
@@ -66,9 +67,17 @@ export function Header() {
           <div className="flex items-center justify-between py-3">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3">
-              <img src={logo} alt="IPC Gilgal Church" className="h-20 md:h-24 w-auto" />
+              <img 
+                src={logo} 
+                alt="IPC Gilgal Sharjah logo" 
+                className={`object-contain transition-all duration-200 ${
+                  isHomePage 
+                    ? "h-14 md:h-[72px] drop-shadow-md ring-1 ring-border/30 rounded-full" 
+                    : "h-10 md:h-14"
+                }`}
+              />
               <div className="hidden sm:block">
-                <p className="text-lg font-semibold text-foreground">IPC Gilgal</p>
+                <p className={`font-semibold text-foreground ${isHomePage ? "text-xl" : "text-lg"}`}>IPC Gilgal</p>
                 <p className="text-xs text-muted-foreground">Sharjah & RAK</p>
               </div>
             </Link>
