@@ -5,6 +5,7 @@ import { BookOpen, ExternalLink, Play, Headphones, Calendar, ChevronRight, Spark
 import { useODBDevotionals, getExcerpt } from "@/hooks/useODBDevotionals";
 import { format } from "date-fns";
 import { AudioEmbeds } from "@/components/resources/AudioEmbeds";
+import { ODBFallback } from "@/components/resources/ODBFallback";
 
 const DevotionsResources = () => {
   const { devotionals, loading, error } = useODBDevotionals(7);
@@ -78,18 +79,8 @@ const DevotionsResources = () => {
                     </div>
                   ))}
                 </div>
-              ) : error ? (
-                <div className="card-elevated p-6 text-center">
-                  <p className="text-muted-foreground mb-4">{error}</p>
-                  <a
-                    href="https://ourdailybread.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    Visit Our Daily Bread directly
-                  </a>
-                </div>
+              ) : error || devotionals.length === 0 ? (
+                <ODBFallback errorMessage={error || undefined} />
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {devotionals.map((devotional) => (
