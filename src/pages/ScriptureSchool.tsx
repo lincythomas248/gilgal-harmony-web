@@ -20,7 +20,6 @@ import {
   CheckCircle2,
   Clock,
   X,
-  MessageCircleHeart,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import scriptureSchoolLogo from "@/assets/scripture-school-logo-transparent.png";
@@ -31,67 +30,39 @@ const experiences = [
   {
     icon: BookOpen,
     label: "Bible Stories",
-    color: "text-amber-700",
-    borderColor: "border-amber-200/70",
-    iconWrap: "bg-amber-500/10",
-    hoverRing: "hover:ring-amber-200/70",
+    color: "text-amber-600",
+    bg: "bg-amber-100",
+    borderColor: "border-amber-200",
   },
-  {
-    icon: Music,
-    label: "Worship Songs",
-    color: "text-sky-700",
-    borderColor: "border-sky-200/70",
-    iconWrap: "bg-sky-500/10",
-    hoverRing: "hover:ring-sky-200/70",
-  },
+  { icon: Music, label: "Worship Songs", color: "text-sky-600", bg: "bg-sky-100", borderColor: "border-sky-200" },
   {
     icon: Palette,
     label: "Creative Arts",
-    color: "text-emerald-700",
-    borderColor: "border-emerald-200/70",
-    iconWrap: "bg-emerald-500/10",
-    hoverRing: "hover:ring-emerald-200/70",
+    color: "text-emerald-600",
+    bg: "bg-emerald-100",
+    borderColor: "border-emerald-200",
   },
-  {
-    icon: Heart,
-    label: "Friendship",
-    color: "text-rose-700",
-    borderColor: "border-rose-200/70",
-    iconWrap: "bg-rose-500/10",
-    hoverRing: "hover:ring-rose-200/70",
-  },
+  { icon: Heart, label: "Friendship", color: "text-rose-500", bg: "bg-rose-100", borderColor: "border-rose-200" },
   {
     icon: Award,
     label: "Achievements",
-    color: "text-violet-700",
-    borderColor: "border-violet-200/70",
-    iconWrap: "bg-violet-500/10",
-    hoverRing: "hover:ring-violet-200/70",
+    color: "text-violet-600",
+    bg: "bg-violet-100",
+    borderColor: "border-violet-200",
   },
   {
     icon: PartyPopper,
     label: "Celebrations",
-    color: "text-orange-700",
-    borderColor: "border-orange-200/70",
-    iconWrap: "bg-orange-500/10",
-    hoverRing: "hover:ring-orange-200/70",
+    color: "text-orange-500",
+    bg: "bg-orange-100",
+    borderColor: "border-orange-200",
   },
   {
     icon: BookMarked,
     label: "IPC Region Curriculum",
     color: "text-primary",
-    borderColor: "border-primary/25",
-    iconWrap: "bg-primary/10",
-    hoverRing: "hover:ring-primary/25",
-  },
-  // ✅ NEW 8th tile to fill the empty slot
-  {
-    icon: MessageCircleHeart,
-    label: "Youth Counseling",
-    color: "text-indigo-700",
-    borderColor: "border-indigo-200/70",
-    iconWrap: "bg-indigo-500/10",
-    hoverRing: "hover:ring-indigo-200/70",
+    bg: "bg-primary/10",
+    borderColor: "border-primary/30",
   },
 ];
 
@@ -222,55 +193,24 @@ export default function ScriptureSchool() {
       />
 
       {/* WHAT CHILDREN EXPERIENCE */}
-      <section className="bg-amber-50/40 py-16 md:py-24">
+      <section className="bg-background py-16 md:py-24">
         <div className="section-container">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-10 md:mb-12">
-              <h2 className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight">
-                What Children Experience
-              </h2>
-              <p className="text-base md:text-lg text-muted-foreground mt-3">Faith, fun, and friendship every week</p>
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">What Children Experience</h2>
+              <p className="text-lg text-muted-foreground">Faith, fun, and friendship every week</p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
               {experiences.map((exp, index) => (
                 <div
                   key={index}
-                  className={`
-                    group relative overflow-hidden
-                    rounded-2xl border ${exp.borderColor}
-                    bg-white/70 backdrop-blur-sm
-                    shadow-sm
-                    transition-all duration-300
-                    hover:-translate-y-1 hover:shadow-xl
-                    ring-1 ring-transparent ${exp.hoverRing}
-                    min-h-[140px] md:min-h-[156px]
-                    flex items-center justify-center
-                  `}
+                  className={`${exp.bg} ${exp.borderColor} border-2 rounded-2xl p-6 text-center hover:scale-105 hover:shadow-lg transition-all duration-300 min-h-[140px] flex flex-col items-center justify-center`}
                 >
-                  {/* subtle highlight sweep */}
-                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-white/40 blur-2xl" />
+                  <div className={`w-14 h-14 ${exp.bg} rounded-2xl flex items-center justify-center mx-auto mb-3`}>
+                    <exp.icon className={`w-7 h-7 ${exp.color}`} />
                   </div>
-
-                  <div className="relative z-10 flex flex-col items-center justify-center text-center px-4">
-                    <div
-                      className={`
-                        w-14 h-14 md:w-16 md:h-16
-                        rounded-2xl
-                        ${exp.iconWrap}
-                        flex items-center justify-center
-                        mb-3
-                        shadow-inner
-                      `}
-                    >
-                      <exp.icon className={`w-7 h-7 md:w-8 md:h-8 ${exp.color}`} />
-                    </div>
-
-                    <p className={`text-[15px] md:text-[16px] font-extrabold ${exp.color} leading-tight`}>
-                      {exp.label}
-                    </p>
-                  </div>
+                  <p className={`text-base font-semibold ${exp.color} leading-tight`}>{exp.label}</p>
                 </div>
               ))}
             </div>
@@ -338,6 +278,7 @@ export default function ScriptureSchool() {
                       <IconComponent className={`w-6 h-6 ${group.color}`} />
                     </div>
 
+                    {/* ✅ FIX: lock heading font-size + safe wrapping */}
                     <h3
                       className="
                         font-extrabold text-foreground text-center leading-[1.05]
@@ -421,7 +362,27 @@ export default function ScriptureSchool() {
                           <IconComponent className={`w-5 h-5 ${group.color}`} />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-white text-lg">{group.group}</h3>
+                          <h3
+                            className="
+    font-extrabold text-foreground text-center leading-[1.05]
+    text-[26px] sm:text-[28px] lg:text-[26px]
+    px-2
+    h-[3.2rem]            /* lock title height for ALL */
+    flex items-center justify-center
+  "
+                          >
+                            <span
+                              className="
+      block
+      whitespace-normal
+      break-words
+      [text-wrap:balance]  /* nicer wrap when it breaks */
+    "
+                            >
+                              {group.group}
+                            </span>
+                          </h3>
+
                           <p className="text-emerald-100/60 text-sm">
                             {group.ageRange} • {group.summary}
                           </p>
