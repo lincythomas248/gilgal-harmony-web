@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import heroBg from "@/assets/hero-bible.jpg";
 
+const HERO_BG_POSITION = "center 65%"; // ✅ LOCK: your chosen crop
+
 interface CTAButton {
   text: string;
   link: string;
@@ -33,22 +35,22 @@ export function HeroBanner({
   showCurvedDivider = true,
 }: HeroBannerProps) {
   return (
-    <section className="relative w-full min-h-[520px] sm:min-h-[560px] lg:min-h-[600px] flex items-start overflow-hidden">
-      {/* Full-bleed Bible background - rendered as-is without overlay */}
+    // ✅ LOCK: fixed heights => consistent hero sizing across all pages
+    <section className="relative w-full h-[520px] sm:h-[560px] lg:h-[600px] flex items-start overflow-hidden">
+      {/* Full-bleed Bible background */}
       <div
         className="absolute inset-0 bg-cover bg-no-repeat"
         style={{
           backgroundImage: `url(${heroBg})`,
-          backgroundPosition: "center 65%", // 👈 LOCK: pushes the open Bible lower in view
+          backgroundPosition: HERO_BG_POSITION,
         }}
       />
 
-      {/* Content container - positioned at top to stay above the Bible */}
+      {/* Content container */}
       <div className="section-container relative z-10 pt-8 pb-36 md:pt-12 md:pb-44 lg:pb-52">
-        {/* Glass panel container for readability */}
         <div className="max-w-2xl mx-auto bg-black/40 backdrop-blur-sm rounded-2xl ring-1 ring-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.45)] px-6 py-6 sm:px-8 sm:py-7 md:px-10 md:py-8">
           <div className="text-center">
-            {/* Logo - transparent, no background */}
+            {/* Logo */}
             {logo && (
               <img
                 src={logo}
@@ -65,7 +67,7 @@ export function HeroBanner({
               />
             )}
 
-            {/* Title - with enhanced text shadow for readability */}
+            {/* Title */}
             <h1
               className="animate-fade-in"
               style={{
@@ -133,6 +135,7 @@ export function HeroBanner({
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 )}
+
                 {secondaryCta && (
                   <Link
                     to={secondaryCta.link}
