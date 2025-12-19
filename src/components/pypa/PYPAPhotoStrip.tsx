@@ -1,11 +1,13 @@
 import worshipCommunity from "@/assets/worship-community.jpg";
+import worshipHands from "@/assets/worship-hands.jpg";
+import pentecostSpirit from "@/assets/pentecost-holy-spirit.jpg";
 
 const tiles = [
-  { position: "object-[20%_30%]", delay: "0ms" },
-  { position: "object-[40%_50%]", delay: "50ms" },
-  { position: "object-[60%_40%]", delay: "100ms" },
-  { position: "object-[80%_60%]", delay: "150ms" },
-  { position: "object-[50%_70%]", delay: "200ms" },
+  { position: "object-[20%_30%]", label: "Worship", image: worshipCommunity },
+  { position: "object-[50%_40%]", label: "Fellowship", image: worshipHands },
+  { position: "object-[60%_50%]", label: "Service", image: pentecostSpirit },
+  { position: "object-[40%_60%]", label: "Prayer", image: worshipCommunity },
+  { position: "object-[70%_35%]", label: "Community", image: worshipHands },
 ];
 
 export const PYPAPhotoStrip = () => {
@@ -28,16 +30,19 @@ export const PYPAPhotoStrip = () => {
             {tiles.map((tile, index) => (
               <div
                 key={index}
-                className="group relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg ring-1 ring-black/5 transition-all duration-300 hover:shadow-xl hover:ring-accent/20 hover:-translate-y-1"
-                style={{ animationDelay: tile.delay }}
+                className="group relative h-32 md:h-36 rounded-2xl overflow-hidden shadow-lg ring-1 ring-border/50 transition-all duration-300 hover:shadow-xl hover:ring-accent/30 hover:scale-[1.02]"
               >
                 <img
-                  src={worshipCommunity}
-                  alt={`PYPA moment ${index + 1}`}
+                  src={tile.image}
+                  alt={tile.label}
                   className={`w-full h-full object-cover ${tile.position} transition-transform duration-500 group-hover:scale-110`}
                 />
-                {/* Subtle gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Gradient overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                {/* Pill caption */}
+                <span className="absolute bottom-2 left-2 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white bg-black/40 backdrop-blur-sm rounded-full border border-white/20">
+                  {tile.label}
+                </span>
               </div>
             ))}
           </div>
