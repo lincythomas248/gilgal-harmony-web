@@ -1,11 +1,9 @@
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
-import { Sparkles, Radio, BookOpen } from "lucide-react";
-import { ResourceSection } from "@/components/resources/ResourceSection";
 import { QuickLinks } from "@/components/resources/QuickLinks";
-import { VerseCard } from "@/components/resources/VerseCard";
-import { AudioEmbeds } from "@/components/resources/AudioEmbeds";
-import { OdbSection } from "@/components/resources/OdbSection";
+import { VerseCardLarge } from "@/components/resources/VerseCardLarge";
+import { AudioCompact } from "@/components/resources/AudioCompact";
+import { OdbCompact } from "@/components/resources/OdbCompact";
 
 const DevotionsResources = () => {
   return (
@@ -21,33 +19,19 @@ const DevotionsResources = () => {
             {/* Quick Links */}
             <QuickLinks />
 
-            {/* 1. Verse of the Day */}
-            <ResourceSection
-              icon={<Sparkles className="w-5 h-5 text-primary" />}
-              title="Verse of the Day"
-              description="Start your day with God's Word"
-            >
-              <VerseCard />
-            </ResourceSection>
+            {/* Main Grid: Horizontal on desktop */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              {/* Left Column - Verse of the Day (Featured) */}
+              <div className="lg:col-span-7">
+                <VerseCardLarge />
+              </div>
 
-            {/* 2. Our Daily Bread */}
-            <ResourceSection
-              icon={<BookOpen className="w-5 h-5 text-primary" />}
-              title="Our Daily Bread"
-              description="Daily devotional readings"
-              action={{ text: "Visit ODB", href: "https://ourdailybread.org", external: true }}
-            >
-              <OdbSection />
-            </ResourceSection>
-
-            {/* 3. Audio / Live Radio */}
-            <ResourceSection
-              icon={<Radio className="w-5 h-5 text-primary" />}
-              title="Audio Devotions"
-              description="Listen to worship music and Christian radio"
-            >
-              <AudioEmbeds />
-            </ResourceSection>
+              {/* Right Column - Audio + ODB stacked */}
+              <div className="lg:col-span-5 flex flex-col gap-6">
+                <AudioCompact />
+                <OdbCompact />
+              </div>
+            </div>
           </div>
         </div>
       </section>
