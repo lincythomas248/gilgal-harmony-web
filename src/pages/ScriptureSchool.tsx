@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import type { ComponentType } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { HeroBanner } from "@/components/ui/HeroBanner";
@@ -18,7 +17,6 @@ import {
   Lightbulb,
   Crown,
   Heart,
-  LifeBuoy,
   CheckCircle2,
   Clock,
   X,
@@ -32,66 +30,56 @@ const experiences = [
   {
     icon: BookOpen,
     label: "Bible Stories",
-    color: "text-amber-700",
-    bg: "bg-amber-100/80",
-    borderColor: "border-amber-200/70",
+    color: "text-amber-600",
+    bg: "bg-amber-100",
+    borderColor: "border-amber-200",
   },
   {
     icon: Music,
     label: "Worship Songs",
-    color: "text-sky-700",
-    bg: "bg-sky-100/80",
-    borderColor: "border-sky-200/70",
+    color: "text-sky-600",
+    bg: "bg-sky-100",
+    borderColor: "border-sky-200",
   },
   {
     icon: Palette,
     label: "Creative Arts",
-    color: "text-emerald-700",
-    bg: "bg-emerald-100/80",
-    borderColor: "border-emerald-200/70",
+    color: "text-emerald-600",
+    bg: "bg-emerald-100",
+    borderColor: "border-emerald-200",
   },
   {
     icon: Heart,
     label: "Friendship",
-    color: "text-rose-600",
-    bg: "bg-rose-100/80",
-    borderColor: "border-rose-200/70",
+    color: "text-rose-500",
+    bg: "bg-rose-100",
+    borderColor: "border-rose-200",
   },
-
-  // ✅ NEW: 8th tile (fills the empty block under Friendship)
-  {
-    icon: LifeBuoy,
-    label: "Youth Counseling",
-    color: "text-indigo-700",
-    bg: "bg-indigo-100/80",
-    borderColor: "border-indigo-200/70",
-  },
-
   {
     icon: Award,
     label: "Achievements",
-    color: "text-violet-700",
-    bg: "bg-violet-100/80",
-    borderColor: "border-violet-200/70",
+    color: "text-violet-600",
+    bg: "bg-violet-100",
+    borderColor: "border-violet-200",
   },
   {
     icon: PartyPopper,
     label: "Celebrations",
-    color: "text-orange-700",
-    bg: "bg-orange-100/80",
-    borderColor: "border-orange-200/70",
+    color: "text-orange-500",
+    bg: "bg-orange-100",
+    borderColor: "border-orange-200",
   },
   {
     icon: BookMarked,
     label: "IPC Region Curriculum",
-    color: "text-primary",
-    bg: "bg-primary/10",
-    borderColor: "border-primary/30",
+    color: "text-teal-700",
+    bg: "bg-teal-100",
+    borderColor: "border-teal-200",
   },
 ];
 
 // Icon mapping for each group
-const groupIcons: Record<string, ComponentType<{ className?: string }>> = {
+const groupIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   "sub-junior": Baby,
   junior: BookMarked,
   intermediate: Lightbulb,
@@ -229,16 +217,9 @@ export default function ScriptureSchool() {
               {experiences.map((exp, index) => (
                 <div
                   key={index}
-                  className={[
-                    exp.bg,
-                    exp.borderColor,
-                    "border-2 rounded-2xl p-6 text-center",
-                    "transition-all duration-300",
-                    "min-h-[140px] flex flex-col items-center justify-center",
-                    "hover:-translate-y-1 hover:shadow-xl hover:border-primary/20",
-                  ].join(" ")}
+                  className={`${exp.bg} ${exp.borderColor} border-2 rounded-2xl p-6 text-center hover:scale-105 hover:shadow-lg transition-all duration-300 min-h-[140px] flex flex-col items-center justify-center`}
                 >
-                  <div className="w-14 h-14 bg-white/55 rounded-2xl flex items-center justify-center mx-auto mb-3 ring-1 ring-black/5">
+                  <div className={`w-14 h-14 ${exp.bg} rounded-2xl flex items-center justify-center mx-auto mb-3`}>
                     <exp.icon className={`w-7 h-7 ${exp.color}`} />
                   </div>
                   <p className={`text-base font-semibold ${exp.color} leading-tight`}>{exp.label}</p>
@@ -270,7 +251,7 @@ export default function ScriptureSchool() {
       {/* A CLASS FOR EVERY CHILD */}
       <section id="classes" className="bg-amber-50/70 py-10 md:py-14 scroll-mt-20">
         <div className="section-container">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/80 rounded-full mb-4 shadow-sm">
                 <Users className="w-4 h-4 text-amber-600" />
@@ -280,8 +261,7 @@ export default function ScriptureSchool() {
               <p className="text-muted-foreground mt-2 text-sm">Click a class to explore its curriculum</p>
             </div>
 
-            {/* ✅ FIX: 5 cards stay on ONE ROW from md+ (no wrap at your screenshot size) */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
               {ageGroups.map((group) => {
                 const isActive = activeAgeGroup === group.id;
                 const IconComponent = groupIcons[group.id] || BookMarked;
@@ -290,32 +270,35 @@ export default function ScriptureSchool() {
                   <button
                     key={group.id}
                     onClick={() => handleAgeGroupClick(group.id)}
-                    className={[
-                      "bg-white rounded-2xl shadow-sm text-center group",
-                      "min-h-[170px] md:min-h-[180px]",
-                      "flex flex-col items-center justify-center",
-                      "cursor-pointer transition-all duration-300",
-                      "hover:-translate-y-1 hover:shadow-lg",
-                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary",
-                      isActive
-                        ? `ring-2 ${group.borderActive} shadow-lg -translate-y-1`
-                        : "hover:ring-1 hover:ring-gray-200",
-                    ].join(" ")}
+                    className={`
+                      bg-white rounded-2xl p-5 shadow-sm text-center group
+                      min-h-[168px] flex flex-col items-center justify-center
+                      cursor-pointer transition-all duration-300
+                      hover:-translate-y-1 hover:shadow-lg
+                      focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary
+                      ${isActive ? `ring-2 ${group.borderActive} shadow-lg -translate-y-1` : "hover:ring-1 hover:ring-gray-200"}
+                    `}
                     aria-pressed={isActive}
                   >
                     <div
-                      className={[
-                        "w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3",
-                        "transition-all duration-300",
-                        group.bg,
-                        isActive ? "scale-110" : "group-hover:scale-110",
-                      ].join(" ")}
+                      className={`
+                        w-12 h-12 ${group.bg} rounded-xl flex items-center justify-center mx-auto mb-3
+                        transition-all duration-300
+                        ${isActive ? "scale-110" : "group-hover:scale-110"}
+                      `}
                     >
                       <IconComponent className={`w-6 h-6 ${group.color}`} />
                     </div>
 
-                    {/* ✅ FIX: prevent Sub-Junior / Super-Senior breaking at hyphen */}
-                    <h3 className="font-extrabold text-foreground text-center leading-tight text-[22px] sm:text-[24px] md:text-[22px] lg:text-[24px] px-2 whitespace-nowrap">
+                    {/* ✅ FIX: lock heading font-size + safe wrapping */}
+                    <h3
+                      className="
+                        font-extrabold text-foreground text-center leading-[1.05]
+                        text-[28px] sm:text-[30px] lg:text-[28px]
+                        px-2 whitespace-normal break-words
+                        min-h-[3.3rem] flex items-center justify-center
+                      "
+                    >
                       {group.group}
                     </h3>
 
@@ -331,27 +314,27 @@ export default function ScriptureSchool() {
       {/* Tighter curved transition to curriculum */}
       <div className="relative h-8 md:h-10 bg-amber-50/70">
         <svg viewBox="0 0 1440 60" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
-          <path d="M0,0 C480,60 960,60 1440,0 L1440,60 L0,60 Z" className="fill-emerald-950" />
+          <path d="M0,0 C480,60 960,60 1440,0 L1440,60 L0,60 Z" className="fill-emerald-900" />
         </svg>
       </div>
 
-      {/* CURRICULUM ACCORDION SECTION (premium uplift) */}
-      <section ref={curriculumRef} className="bg-emerald-950 py-12 md:py-16 scroll-mt-16">
+      {/* CURRICULUM ACCORDION SECTION */}
+      <section ref={curriculumRef} className="bg-emerald-900 py-10 md:py-14 scroll-mt-16">
         <div className="section-container">
           <div className="max-w-4xl mx-auto">
             {/* Header */}
             <div className="text-center mb-8">
-              <div className="w-14 h-14 bg-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 ring-1 ring-white/10">
-                <BookMarked className="w-7 h-7 text-amber-300" />
+              <div className="w-14 h-14 bg-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <BookMarked className="w-7 h-7 text-amber-400" />
               </div>
               <h2 className="text-2xl md:text-3xl text-white mb-2">Explore Our Curriculum</h2>
-              <p className="text-emerald-100/75 max-w-md mx-auto text-sm leading-relaxed">
+              <p className="text-emerald-100/70 max-w-md mx-auto text-sm">
                 A thoughtful journey from Sub-Junior to Super-Senior, with clear milestones and exam-focused lessons.
               </p>
 
               {/* Active filter indicator */}
               {activeGroup && (
-                <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full ring-1 ring-white/10">
+                <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
                   <span className="text-white/90 text-sm">
                     Showing: <span className="font-semibold text-amber-300">{activeGroup.group}</span> (
                     {activeGroup.ageRange})
@@ -367,7 +350,7 @@ export default function ScriptureSchool() {
               )}
 
               {!activeGroup && (
-                <p className="mt-5 text-emerald-100/55 text-sm">Select an age group above or expand any below</p>
+                <p className="mt-4 text-emerald-100/50 text-sm">Select an age group above or expand any below</p>
               )}
             </div>
 
@@ -381,23 +364,20 @@ export default function ScriptureSchool() {
                   <AccordionItem
                     key={group.id}
                     value={group.id}
-                    className="bg-white/6 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.25)]"
+                    className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden"
                   >
-                    <AccordionTrigger className="px-5 py-4 hover:bg-white/6 hover:no-underline [&[data-state=open]]:bg-white/10">
-                      <div className="flex items-center gap-4 text-left w-full">
+                    <AccordionTrigger className="px-5 py-4 hover:bg-white/5 hover:no-underline [&[data-state=open]]:bg-white/10">
+                      <div className="flex items-center gap-4 text-left">
                         <div
-                          className={`w-11 h-11 ${group.bg} rounded-xl flex items-center justify-center flex-shrink-0 ring-1 ring-black/5`}
+                          className={`w-10 h-10 ${group.bg} rounded-lg flex items-center justify-center flex-shrink-0`}
                         >
                           <IconComponent className={`w-5 h-5 ${group.color}`} />
                         </div>
-                        <div className="min-w-0">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <h3 className="font-semibold text-white text-lg">{group.group}</h3>
-                            <span className="px-2 py-0.5 rounded-full text-xs bg-white/10 text-white/80 ring-1 ring-white/10">
-                              {group.ageRange}
-                            </span>
-                          </div>
-                          <p className="text-emerald-100/70 text-sm mt-0.5">{group.summary}</p>
+                        <div>
+                          <h3 className="font-semibold text-white text-lg">{group.group}</h3>
+                          <p className="text-emerald-100/60 text-sm">
+                            {group.ageRange} • {group.summary}
+                          </p>
                         </div>
                       </div>
                     </AccordionTrigger>
@@ -405,15 +385,15 @@ export default function ScriptureSchool() {
                     <AccordionContent className="px-5 pb-5">
                       <div className="grid md:grid-cols-2 gap-6 pt-2">
                         {/* What They Learn */}
-                        <div className="bg-white/6 rounded-2xl p-5 ring-1 ring-white/10">
+                        <div className="bg-white/5 rounded-xl p-5">
                           <div className="flex items-center gap-2 mb-3">
-                            <CheckCircle2 className="w-5 h-5 text-amber-300" />
+                            <CheckCircle2 className="w-5 h-5 text-amber-400" />
                             <h4 className="font-semibold text-white">What They Learn</h4>
                           </div>
                           <ul className="space-y-2">
                             {details?.whatTheyLearn.map((item, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-emerald-100/85 text-sm">
-                                <span className="text-amber-300 mt-1">•</span>
+                              <li key={idx} className="flex items-start gap-2 text-emerald-100/80 text-sm">
+                                <span className="text-amber-400 mt-1">•</span>
                                 {item}
                               </li>
                             ))}
@@ -421,15 +401,15 @@ export default function ScriptureSchool() {
                         </div>
 
                         {/* Typical Class Flow */}
-                        <div className="bg-white/6 rounded-2xl p-5 ring-1 ring-white/10">
+                        <div className="bg-white/5 rounded-xl p-5">
                           <div className="flex items-center gap-2 mb-3">
-                            <Clock className="w-5 h-5 text-amber-300" />
+                            <Clock className="w-5 h-5 text-amber-400" />
                             <h4 className="font-semibold text-white">Typical Class Flow</h4>
                           </div>
                           <ul className="space-y-2">
                             {details?.classFlow.map((item, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-emerald-100/85 text-sm">
-                                <span className="text-amber-300 font-medium">{idx + 1}.</span>
+                              <li key={idx} className="flex items-start gap-2 text-emerald-100/80 text-sm">
+                                <span className="text-amber-400 font-medium">{idx + 1}.</span>
                                 {item}
                               </li>
                             ))}
@@ -438,7 +418,7 @@ export default function ScriptureSchool() {
                       </div>
 
                       {/* CTA Row */}
-                      <div className="flex flex-wrap gap-3 mt-6 pt-5 border-t border-white/10">
+                      <div className="flex flex-wrap gap-3 mt-5 pt-4 border-t border-white/10">
                         <Button
                           asChild
                           size="sm"
@@ -449,7 +429,6 @@ export default function ScriptureSchool() {
                             View Lessons
                           </Link>
                         </Button>
-
                         <Button
                           asChild
                           variant="outline"
@@ -469,11 +448,11 @@ export default function ScriptureSchool() {
             </Accordion>
 
             {/* Full Curriculum Link */}
-            <div className="text-center mt-9">
+            <div className="text-center mt-8">
               <Button
                 asChild
                 size="lg"
-                className="rounded-full bg-white hover:bg-amber-50 text-emerald-950 font-semibold shadow-lg hover:shadow-xl transition-all px-8"
+                className="rounded-full bg-white hover:bg-amber-50 text-emerald-900 font-semibold shadow-lg hover:shadow-xl transition-all px-8"
               >
                 <Link to="/scripture-school/curriculum" className="inline-flex items-center gap-2">
                   <GraduationCap className="w-5 h-5" />
@@ -486,7 +465,7 @@ export default function ScriptureSchool() {
       </section>
 
       {/* Curved transition out */}
-      <div className="relative h-10 md:h-12 bg-emerald-950">
+      <div className="relative h-10 md:h-12 bg-emerald-900">
         <svg viewBox="0 0 1440 60" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
           <path d="M0,0 C480,60 960,60 1440,0 L1440,60 L0,60 Z" className="fill-background" />
         </svg>
