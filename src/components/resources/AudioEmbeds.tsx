@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Radio } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { Radio, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Station {
   title: string;
@@ -83,20 +83,79 @@ interface CarouselRowProps {
 }
 
 const CarouselRow = ({ title, stations, isRadioIndia = false }: CarouselRowProps) => {
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateScrollState = useCallback(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    updateScrollState();
+    window.addEventListener("resize", updateScrollState);
+    return () => window.removeEventListener("resize", updateScrollState);
+  }, [updateScrollState]);
+
+  const scroll = (dir: -1 | 1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const step = Math.round(el.clientWidth * 0.85);
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+
   if (stations.length === 0) return null;
 
   return (
     <div className="space-y-3">
       <h4 className="text-sm font-medium text-muted-foreground px-1">{title}</h4>
-      <div className="overflow-x-auto pb-2 -mx-2 px-2">
-        <div className="flex gap-4 snap-x snap-mandatory">
-          {stations.map((station, index) => (
-            isRadioIndia ? (
-              <RadioIndiaStationCard key={index} station={station} />
-            ) : (
-              <TuneInStationCard key={index} station={station} />
-            )
-          ))}
+      <div className="relative">
+        {/* Left Arrow */}
+        <button
+          onClick={() => scroll(-1)}
+          disabled={!canScrollLeft}
+          className={`absolute left-1 top-1/2 -translate-y-1/2 z-10 h-9 w-9 rounded-full border bg-background/90 backdrop-blur shadow-sm flex items-center justify-center transition-all ${
+            canScrollLeft
+              ? "hover:bg-muted cursor-pointer"
+              : "opacity-40 pointer-events-none"
+          }`}
+          aria-label="Scroll left"
+        >
+          <ChevronLeft className="w-5 h-5 text-foreground" />
+        </button>
+
+        {/* Right Arrow */}
+        <button
+          onClick={() => scroll(1)}
+          disabled={!canScrollRight}
+          className={`absolute right-1 top-1/2 -translate-y-1/2 z-10 h-9 w-9 rounded-full border bg-background/90 backdrop-blur shadow-sm flex items-center justify-center transition-all ${
+            canScrollRight
+              ? "hover:bg-muted cursor-pointer"
+              : "opacity-40 pointer-events-none"
+          }`}
+          aria-label="Scroll right"
+        >
+          <ChevronRight className="w-5 h-5 text-foreground" />
+        </button>
+
+        {/* Scrollable Container */}
+        <div
+          ref={scrollerRef}
+          onScroll={updateScrollState}
+          className="overflow-x-auto pb-2 px-6 scrollbar-thin"
+        >
+          <div className="flex gap-4 snap-x snap-mandatory">
+            {stations.map((station, index) => (
+              isRadioIndia ? (
+                <RadioIndiaStationCard key={index} station={station} />
+              ) : (
+                <TuneInStationCard key={index} station={station} />
+              )
+            ))}
+          </div>
         </div>
       </div>
     </div>
