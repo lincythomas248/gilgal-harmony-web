@@ -17,7 +17,7 @@ export function GalleryLightbox({ open, items, index, onClose, onPrev, onNext }:
 
   const item = items[index];
   const isVideo = (item?.type ?? "image") === "video";
-  const caption = item?.subtitle ?? item?.caption ?? "";
+  const caption = item?.caption ?? "";
 
   const safeIndexText = useMemo(() => {
     if (!items?.length) return "";
