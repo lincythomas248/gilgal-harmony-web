@@ -4,8 +4,6 @@ import { BookOpen, Users, ArrowRight, Globe, HandHeart, Church, Video, PlayCircl
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { PastorMessage } from "@/components/home/PastorMessage";
-import ipcLogo from "@/assets/ipc-gilgal-logo.png";
-
 const ministries = [
   {
     id: "scripture-school",
@@ -53,8 +51,6 @@ export default function Home() {
         location="Sharjah & Ras Al Khaimah, UAE"
         primaryCta={{ text: "Discover Our Church", link: "/about" }}
         secondaryCta={{ text: "Get in Touch", link: "/contact" }}
-        logo={ipcLogo}
-        logoAlt="IPC Gilgal Church Logo"
       />
 
       {/* Explore IPC Gilgal - Hub Grid */}
