@@ -17,6 +17,7 @@ import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import DevotionsResources from "./pages/DevotionsResources";
 import ODBDevotionalDetail from "./pages/ODBDevotionalDetail";
+import VerseOfTheDay from "./pages/VerseOfTheDay";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/resources/devotions" element={<DevotionsResources />} />
           <Route path="/resources/devotions/odb/:slug" element={<ODBDevotionalDetail />} />
+          <Route path="/resources/verse-of-the-day" element={<VerseOfTheDay />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
