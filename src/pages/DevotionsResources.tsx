@@ -20,12 +20,12 @@ const DevotionsResources = () => {
       <section className="page-section">
         <div className="section-container">
           <div className="max-w-5xl mx-auto">
-            {/* Intro */}
+            {/* 1. Short Intro */}
             <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
               Explore devotionals, Bible reading plans, worship music, and faith-building content designed for youth.
             </p>
 
-            {/* Daily Inspiration Section */}
+            {/* 2. Daily Inspiration (Verse of the Day) */}
             <div className="mb-12">
               <h2 className="text-2xl font-bold text-foreground mb-6">Daily Inspiration</h2>
               <Link
@@ -52,10 +52,10 @@ const DevotionsResources = () => {
               </Link>
             </div>
 
-            {/* Audio Devotions Section */}
+            {/* 3. Audio Devotions */}
             <AudioEmbeds />
 
-            {/* Our Daily Bread Section */}
+            {/* 4. Our Daily Bread */}
             <div className="mb-12">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-foreground">Our Daily Bread</h2>
@@ -122,17 +122,12 @@ const DevotionsResources = () => {
               )}
             </div>
 
-            {/* Other Resources Grid */}
+            {/* 5. Other Resources */}
             <h2 className="text-2xl font-bold text-foreground mb-6">More Resources</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-              {/* Card B: YouTube Embed */}
+              {/* YouTube Embed */}
               <div className="card-elevated overflow-hidden">
                 <div className="aspect-video bg-muted">
-                  {/* 
-                    REPLACE the src below with your actual YouTube embed URL
-                    Example: https://www.youtube.com/embed/VIDEO_ID
-                  */}
                   <iframe
                     src="https://www.youtube.com/embed/dQw4w9WgXcQ"
                     title="Youth Worship & Teaching"
@@ -143,23 +138,19 @@ const DevotionsResources = () => {
                   />
                 </div>
                 <div className="p-5">
-                  <h2 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
+                  <h3 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
                     <Play className="w-5 h-5 text-primary" />
                     Youth Worship & Teaching
-                  </h2>
+                  </h3>
                   <p className="text-sm text-muted-foreground">
                     Watch inspiring messages, worship sessions, and youth-focused content.
                   </p>
                 </div>
               </div>
 
-              {/* Card C: Spotify/Podcast Embed */}
+              {/* Spotify Embed */}
               <div className="card-elevated overflow-hidden">
                 <div className="aspect-video bg-muted flex items-center justify-center">
-                  {/* 
-                    REPLACE the src below with your actual Spotify embed URL
-                    Example: https://open.spotify.com/embed/playlist/PLAYLIST_ID
-                  */}
                   <iframe
                     src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9uKNf5jGX6m"
                     title="Worship & Christian Music"
@@ -170,17 +161,17 @@ const DevotionsResources = () => {
                   />
                 </div>
                 <div className="p-5">
-                  <h2 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
+                  <h3 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
                     <Headphones className="w-5 h-5 text-primary" />
                     Worship & Christian Music
-                  </h2>
+                  </h3>
                   <p className="text-sm text-muted-foreground">
                     Listen to uplifting worship music and faith-based podcasts.
                   </p>
                 </div>
               </div>
 
-              {/* Card D: Bible Reading / Verse of the Day */}
+              {/* Bible Reading / Verse of the Day */}
               <a
                 href="https://www.bible.com/verse-of-the-day"
                 target="_blank"
@@ -192,16 +183,13 @@ const DevotionsResources = () => {
                     <BookOpen className="w-7 h-7 text-olive" />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
+                    <h3 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
                       Verse of the Day
                       <ExternalLink className="w-4 h-4 text-muted-foreground" />
-                    </h2>
+                    </h3>
                     <p className="text-sm text-muted-foreground mb-4">
                       Start each day with Scripture. Get daily verses and reading plans from YouVersion Bible App.
                     </p>
-                    {/* 
-                      EDIT LINKS: You can change these to any Bible reading resources
-                    */}
                     <div className="flex flex-wrap gap-2">
                       <span className="text-xs bg-cream px-3 py-1 rounded-full text-foreground/70">
                         Daily Verses
