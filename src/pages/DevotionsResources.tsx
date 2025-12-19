@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
-import { BookOpen, ExternalLink, Play, Headphones, Calendar, ChevronRight } from "lucide-react";
+import { BookOpen, ExternalLink, Play, Headphones, Calendar, ChevronRight, Sparkles } from "lucide-react";
 import { useODBDevotionals, getExcerpt } from "@/hooks/useODBDevotionals";
 import { format } from "date-fns";
 
@@ -22,6 +22,33 @@ const DevotionsResources = () => {
             <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
               Explore devotionals, Bible reading plans, worship music, and faith-building content designed for youth.
             </p>
+
+            {/* Daily Inspiration Section */}
+            <div className="mb-12">
+              <h2 className="text-2xl font-bold text-foreground mb-6">Daily Inspiration</h2>
+              <Link
+                to="/resources/verse-of-the-day"
+                className="group card-elevated block p-6 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 bg-olive-light rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="w-7 h-7 text-olive" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2 group-hover:text-primary transition-colors">
+                      Verse of the Day (Malayalam)
+                      <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Daily Malayalam verse with a beautiful rotating background. Start your day with God's Word.
+                    </p>
+                    <span className="inline-flex items-center text-sm text-primary font-medium">
+                      Open Verse of the Day
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </div>
 
             {/* Our Daily Bread Section */}
             <div className="mb-12">
