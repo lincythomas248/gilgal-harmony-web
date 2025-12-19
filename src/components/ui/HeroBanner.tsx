@@ -55,7 +55,7 @@ export function HeroBanner({
               <img
                 src={logo}
                 alt={logoAlt}
-                className="block w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-contain mb-4 mx-auto animate-fade-in"
+                className="block w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain mb-5 mx-auto animate-fade-in drop-shadow-2xl"
                 style={{
                   background: "transparent",
                   boxShadow: "none",
@@ -63,6 +63,7 @@ export function HeroBanner({
                   padding: 0,
                   animationDelay: "0.1s",
                   animationFillMode: "both",
+                  filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.4))",
                 }}
               />
             )}
