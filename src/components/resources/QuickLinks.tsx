@@ -4,32 +4,32 @@ import { Button } from "@/components/ui/button";
 
 export const QuickLinks = () => {
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
-      <Button asChild variant="default" className="gap-2">
+    <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+      <Button asChild variant="default" size="sm" className="gap-1.5">
         <Link to="/resources/verse-of-the-day">
-          <Sparkles className="w-4 h-4" />
+          <Sparkles className="w-3.5 h-3.5" />
           Verse of the Day
         </Link>
       </Button>
       
-      <Button asChild variant="outline" className="gap-2">
+      <Button asChild variant="outline" size="sm" className="gap-1.5">
         <a
-          href="https://www.youtube.com/@YourChannel"
+          href="https://www.youtube.com/@ipcgilgalshj"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Youtube className="w-4 h-4" />
+          <Youtube className="w-3.5 h-3.5" />
           YouTube
         </a>
       </Button>
       
-      <Button asChild variant="outline" className="gap-2">
+      <Button asChild variant="outline" size="sm" className="gap-1.5">
         <a
           href="https://ourdailybread.org"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <BookOpen className="w-4 h-4" />
+          <BookOpen className="w-3.5 h-3.5" />
           Our Daily Bread
         </a>
       </Button>
