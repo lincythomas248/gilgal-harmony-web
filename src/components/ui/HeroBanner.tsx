@@ -35,13 +35,14 @@ export function HeroBanner({
   return (
     <section className="relative min-h-[420px] sm:min-h-[460px] md:min-h-[500px] lg:min-h-[540px] flex items-start overflow-hidden">
       {/* Full-bleed Bible background - rendered as-is without overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-bottom bg-no-repeat"
-        style={{ 
+      <div
+        className="absolute inset-0 bg-cover bg-no-repeat"
+        style={{
           backgroundImage: `url(${heroBg})`,
+          backgroundPosition: "center 35%", // 👈 LOCK: pushes the open Bible lower in view
         }}
       />
-      
+
       {/* Content container - positioned at top to stay above the Bible */}
       <div className="section-container relative z-10 pt-8 pb-36 md:pt-12 md:pb-44 lg:pb-52">
         {/* Glass panel container for readability */}
@@ -49,28 +50,28 @@ export function HeroBanner({
           <div className="text-center">
             {/* Logo - transparent, no background */}
             {logo && (
-              <img 
-                src={logo} 
+              <img
+                src={logo}
                 alt={logoAlt}
                 className="block w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-contain mb-4 mx-auto animate-fade-in"
-                style={{ 
-                  background: 'transparent',
-                  boxShadow: 'none',
-                  border: 'none',
+                style={{
+                  background: "transparent",
+                  boxShadow: "none",
+                  border: "none",
                   padding: 0,
-                  animationDelay: '0.1s',
-                  animationFillMode: 'both'
+                  animationDelay: "0.1s",
+                  animationFillMode: "both",
                 }}
               />
             )}
-            
+
             {/* Title - with enhanced text shadow for readability */}
-            <h1 
+            <h1
               className="animate-fade-in"
-              style={{ 
-                animationDelay: '0.2s', 
-                animationFillMode: 'both',
-                textShadow: '0 6px 24px rgba(0,0,0,0.75)'
+              style={{
+                animationDelay: "0.2s",
+                animationFillMode: "both",
+                textShadow: "0 6px 24px rgba(0,0,0,0.75)",
               }}
             >
               <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05]">
@@ -82,15 +83,15 @@ export function HeroBanner({
                 </span>
               )}
             </h1>
-            
+
             {/* Subtitle */}
             {subtitle && (
-              <p 
+              <p
                 className="text-lg sm:text-xl md:text-2xl text-accent font-serif italic leading-relaxed mt-3 animate-fade-in"
-                style={{ 
-                  animationDelay: '0.4s', 
-                  animationFillMode: 'both',
-                  textShadow: '0 4px 16px rgba(0,0,0,0.8)'
+                style={{
+                  animationDelay: "0.4s",
+                  animationFillMode: "both",
+                  textShadow: "0 4px 16px rgba(0,0,0,0.8)",
                 }}
               >
                 {subtitle}
@@ -102,29 +103,29 @@ export function HeroBanner({
                 )}
               </p>
             )}
-            
+
             {/* Location */}
             {location && (
-              <p 
+              <p
                 className="text-sm sm:text-base text-white/90 tracking-[0.22em] uppercase font-semibold mt-2 animate-fade-in"
-                style={{ 
-                  animationDelay: '0.5s', 
-                  animationFillMode: 'both',
-                  textShadow: '0 3px 12px rgba(0,0,0,0.85)'
+                style={{
+                  animationDelay: "0.5s",
+                  animationFillMode: "both",
+                  textShadow: "0 3px 12px rgba(0,0,0,0.85)",
                 }}
               >
                 {location}
               </p>
             )}
-            
+
             {/* CTA Buttons */}
             {(primaryCta || secondaryCta) && (
-              <div 
+              <div
                 className="flex flex-col sm:flex-row gap-3 justify-center mt-6 animate-fade-in"
-                style={{ animationDelay: '0.6s', animationFillMode: 'both' }}
+                style={{ animationDelay: "0.6s", animationFillMode: "both" }}
               >
                 {primaryCta && (
-                  <Link 
+                  <Link
                     to={primaryCta.link}
                     className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-gold-dark text-foreground px-6 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                   >
@@ -133,7 +134,7 @@ export function HeroBanner({
                   </Link>
                 )}
                 {secondaryCta && (
-                  <Link 
+                  <Link
                     to={secondaryCta.link}
                     className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border-2 border-white/40 hover:border-white/70 hover:bg-white/20 px-6 py-3 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm"
                   >
@@ -145,7 +146,7 @@ export function HeroBanner({
           </div>
         </div>
       </div>
-      
+
       {/* Curved bottom divider */}
       {showCurvedDivider && (
         <svg viewBox="0 0 1440 60" className="absolute bottom-0 w-full h-10 md:h-14" preserveAspectRatio="none">
