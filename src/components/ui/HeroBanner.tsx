@@ -33,7 +33,7 @@ export function HeroBanner({
   showCurvedDivider = true,
 }: HeroBannerProps) {
   return (
-    <section className="relative min-h-[420px] sm:min-h-[460px] md:min-h-[500px] lg:min-h-[540px] flex items-start overflow-hidden">
+    <section className="relative w-full min-h-[520px] sm:min-h-[560px] lg:min-h-[600px] flex items-start overflow-hidden">
       {/* Full-bleed Bible background - rendered as-is without overlay */}
       <div
         className="absolute inset-0 bg-cover bg-no-repeat"
