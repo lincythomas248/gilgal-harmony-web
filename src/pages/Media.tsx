@@ -2,13 +2,13 @@ import { useMemo, useState, useCallback } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { HeroBanner } from "@/components/ui/HeroBanner";
 import { BackToTop } from "@/components/ui/BackToTop";
-import { Youtube, PlayCircle, BookOpen, Sparkles, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Youtube, PlayCircle, BookOpen, Sparkles } from "lucide-react";
 
 import { GalleryCollection } from "@/components/gallery/GalleryCollection";
 import { GalleryLightbox } from "@/components/gallery/GalleryLightbox";
 import { galleryCollections } from "@/data/galleryData";
 import { cn } from "@/lib/utils";
+import { ResourcesDevotionsTeaser } from "@/components/resources/ResourcesDevotionsTeaser";
 
 export default function Media() {
   // ✅ ONE continuous gallery (flatten + filter)
@@ -176,28 +176,7 @@ export default function Media() {
 
             {/* Resources & Devotions CTA */}
             <div className="mt-14">
-              <Link
-                to="/resources/devotions"
-                className="group block relative rounded-2xl p-8 bg-gradient-to-br from-[#FAF8F3] to-white shadow-lg border-2 border-accent/20 transition-all duration-300 hover:shadow-xl hover:border-accent/40 hover:-translate-y-1"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center">
-                        <BookOpen className="w-5 h-5 text-accent" />
-                      </div>
-                      <h2 className="text-xl md:text-2xl font-bold text-foreground">Resources & Devotions</h2>
-                    </div>
-                    <p className="text-muted-foreground">
-                      Weekly devotionals, Bible reading, and youth-friendly resources to grow in faith.
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 text-accent ml-4">
-                    <span className="text-sm font-semibold hidden sm:inline">Explore</span>
-                    <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-2" />
-                  </div>
-                </div>
-              </Link>
+              <ResourcesDevotionsTeaser />
             </div>
           </div>
         </div>
