@@ -128,57 +128,53 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column - Media & Events Stack */}
-            <div className="flex flex-col gap-4">
-              {/* Media Card */}
+            {/* Right Column - Media & Events Stack (Supporting) */}
+            <div className="flex flex-col gap-3 lg:justify-center">
+              {/* Media Card - Compact */}
               <Link 
                 to="/media" 
                 onClick={() => window.scrollTo(0, 0)}
-                className="group relative rounded-2xl overflow-hidden flex-1 min-h-[180px]"
+                className="group relative rounded-xl overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-navy via-primary to-navy-light" />
                 <div className="absolute inset-0 pattern-grid opacity-10" />
-                <div className="absolute top-0 right-0 w-32 h-32 bg-accent/20 rounded-full -translate-y-1/3 translate-x-1/3 blur-2xl" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-accent/20 rounded-full -translate-y-1/3 translate-x-1/3 blur-2xl" />
                 
-                <div className="relative h-full flex flex-col justify-between p-5 md:p-6">
-                  <div>
-                    <div className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-white/15 transition-all">
-                      <PlayCircle className="w-5 h-5 text-white" />
-                    </div>
-                    <h3 className="text-lg md:text-xl font-bold text-white mb-1">Media & Teachings</h3>
-                    <p className="text-white/75 text-sm leading-relaxed">
-                      Explore sermons, Bible teachings, worship recordings, and our photo gallery.
+                <div className="relative flex items-center gap-4 p-4 md:p-5">
+                  <div className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-white/15 transition-all">
+                    <PlayCircle className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base font-bold text-white mb-0.5">Media & Teachings</h3>
+                    <p className="text-white/70 text-xs leading-relaxed line-clamp-2">
+                      Sermons, worship recordings & photo gallery.
                     </p>
                   </div>
-                  <span className="inline-flex items-center gap-1.5 text-accent font-semibold text-sm group-hover:gap-2.5 transition-all mt-3">
-                    Visit Media <ArrowRight className="w-4 h-4" />
-                  </span>
+                  <ArrowRight className="w-4 h-4 text-accent flex-shrink-0 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
 
-              {/* Events Card */}
+              {/* Events Card - Compact */}
               <Link 
                 to="/events" 
                 onClick={() => window.scrollTo(0, 0)}
-                className="group relative rounded-2xl overflow-hidden flex-1 min-h-[180px]"
+                className="group relative rounded-xl overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-accent via-gold to-gold-dark" />
                 <div className="absolute inset-0 pattern-dots-gold opacity-20" />
-                <div className="absolute bottom-0 left-0 w-28 h-28 bg-primary/15 rounded-full translate-y-1/3 -translate-x-1/3 blur-2xl" />
+                <div className="absolute bottom-0 left-0 w-20 h-20 bg-primary/15 rounded-full translate-y-1/3 -translate-x-1/3 blur-2xl" />
                 
-                <div className="relative h-full flex flex-col justify-between p-5 md:p-6">
-                  <div>
-                    <div className="w-10 h-10 bg-primary/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-primary/25 transition-all">
-                      <Calendar className="w-5 h-5 text-primary" />
-                    </div>
-                    <h3 className="text-lg md:text-xl font-bold text-primary mb-1">Events & Services</h3>
-                    <p className="text-primary/80 text-sm leading-relaxed">
-                      Stay updated with weekly services, special programs, and community gatherings.
+                <div className="relative flex items-center gap-4 p-4 md:p-5">
+                  <div className="w-10 h-10 bg-primary/20 backdrop-blur-sm rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-primary/25 transition-all">
+                    <Calendar className="w-5 h-5 text-primary" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base font-bold text-primary mb-0.5">Events & Services</h3>
+                    <p className="text-primary/75 text-xs leading-relaxed line-clamp-2">
+                      Weekly services & community gatherings.
                     </p>
                   </div>
-                  <span className="inline-flex items-center gap-1.5 text-primary font-semibold text-sm group-hover:gap-2.5 transition-all mt-3">
-                    View Events <ArrowRight className="w-4 h-4" />
-                  </span>
+                  <ArrowRight className="w-4 h-4 text-primary flex-shrink-0 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
             </div>
