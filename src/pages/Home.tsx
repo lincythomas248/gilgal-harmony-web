@@ -103,27 +103,27 @@ export default function Home() {
       </section>
 
       {/* Ministries + Media/Events - Two Column Layout */}
-      <section className="section-light py-10 md:py-14 relative overflow-hidden">
+      <section className="section-light py-6 md:py-10 relative overflow-hidden">
         {/* Subtle background accents */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-56 h-56 bg-dove/5 rounded-full blur-3xl" />
         
         <div className="section-container relative">
-          <div className="grid lg:grid-cols-[1fr_320px] gap-6 lg:gap-8">
+          <div className="grid lg:grid-cols-[1fr_300px] gap-4 lg:gap-5 items-start">
             
             {/* Left Column - How We Serve (Dominant) */}
             <div className="relative">
               {/* Subtle background highlight */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cream/50 via-gold-soft/20 to-transparent rounded-3xl -m-4 md:-m-6" />
+              <div className="absolute inset-0 bg-gradient-to-br from-cream/50 via-gold-soft/20 to-transparent rounded-3xl -m-3 md:-m-4" />
               
-              <div className="relative p-4 md:p-6">
-                <div className="text-center lg:text-left mb-6 md:mb-8">
-                  <span className="label-badge mb-3">Our Ministries</span>
+              <div className="relative p-3 md:p-4">
+                <div className="text-center lg:text-left mb-3 md:mb-4">
+                  <span className="label-badge mb-2">Our Ministries</span>
                   <h2 className="text-foreground text-3xl md:text-4xl lg:text-5xl font-bold">How We Serve</h2>
                 </div>
 
                 {/* Ministry Pills - Larger */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-6">
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-3">
                   {ministries.map((ministry) => (
                     <Link
                       key={ministry.id}
