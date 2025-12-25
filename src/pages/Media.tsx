@@ -84,24 +84,6 @@ export default function Media() {
             {/* ✅ Gallery Carousel ABOVE YouTube */}
             {hasAnyImages && (
               <div className="mt-12">
-                {/* Filter chips */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {categories.map((c) => (
-                    <button
-                      key={c}
-                      onClick={() => setSelectedCategory(c)}
-                      className={cn(
-                        "px-3 py-1.5 rounded-full text-sm border transition",
-                        selectedCategory === c
-                          ? "bg-primary text-primary-foreground border-primary"
-                          : "bg-background border-border hover:bg-muted",
-                      )}
-                    >
-                      {c}
-                    </button>
-                  ))}
-                </div>
-
                 <GalleryCollection collection={mergedCollection as any} showViewAllLink={false} />
 
                 <GalleryLightbox
