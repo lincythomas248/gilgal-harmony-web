@@ -67,8 +67,8 @@ export function HeroBanner({
               />
             )}
 
-            {/* Title */}
-            <h1
+            {/* Title Block - Cohesive Unit */}
+            <div
               className="animate-fade-in"
               style={{
                 animationDelay: "0.2s",
@@ -76,20 +76,24 @@ export function HeroBanner({
                 textShadow: "0 6px 24px rgba(0,0,0,0.75)",
               }}
             >
-              <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05]">
-                {title}
-              </span>
-              {titleSecondLine && (
-                <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white/95 mt-2">
-                  {titleSecondLine}
+              <h1>
+                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05]">
+                  {title}
+                  {titleSecondLine && ` ${titleSecondLine}`}
                 </span>
+              </h1>
+              {/* Location - immediately below as subtitle */}
+              {location && (
+                <p className="text-base sm:text-lg md:text-xl text-white/85 font-semibold mt-1.5 tracking-wide">
+                  {location}
+                </p>
               )}
-            </h1>
+            </div>
 
             {/* Subtitle */}
             {subtitle && (
               <p
-                className="text-lg sm:text-xl md:text-2xl text-accent font-serif italic leading-relaxed mt-3 animate-fade-in"
+                className="text-lg sm:text-xl md:text-2xl text-accent font-serif italic leading-relaxed mt-4 animate-fade-in"
                 style={{
                   animationDelay: "0.4s",
                   animationFillMode: "both",
@@ -103,20 +107,6 @@ export function HeroBanner({
                     {subtitleSecondLine}
                   </>
                 )}
-              </p>
-            )}
-
-            {/* Location */}
-            {location && (
-              <p
-                className="text-sm sm:text-base text-white/90 tracking-[0.22em] uppercase font-semibold mt-2 animate-fade-in"
-                style={{
-                  animationDelay: "0.5s",
-                  animationFillMode: "both",
-                  textShadow: "0 3px 12px rgba(0,0,0,0.85)",
-                }}
-              >
-                {location}
               </p>
             )}
 
