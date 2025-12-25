@@ -103,33 +103,33 @@ export default function Home() {
       </section>
 
       {/* Ministries + Media/Events - Two Column Layout */}
-      <section className="section-light py-6 md:py-10 relative overflow-hidden">
+      <section className="section-light py-4 md:py-6 relative overflow-hidden">
         {/* Subtle background accents */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-56 h-56 bg-dove/5 rounded-full blur-3xl" />
         
         <div className="section-container relative">
-          <div className="grid lg:grid-cols-[1fr_300px] gap-4 lg:gap-5 items-start">
+          <div className="grid lg:grid-cols-[1fr_280px] gap-3 lg:gap-4 items-start">
             
             {/* Left Column - How We Serve (Dominant) */}
             <div className="relative">
               {/* Subtle background highlight */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cream/50 via-gold-soft/20 to-transparent rounded-3xl -m-3 md:-m-4" />
+              <div className="absolute inset-0 bg-gradient-to-br from-cream/50 via-gold-soft/20 to-transparent rounded-2xl -m-2" />
               
-              <div className="relative p-3 md:p-4">
-                <div className="text-center lg:text-left mb-3 md:mb-4">
-                  <span className="label-badge mb-2">Our Ministries</span>
-                  <h2 className="text-foreground text-3xl md:text-4xl lg:text-5xl font-bold">How We Serve</h2>
+              <div className="relative p-2 md:p-3">
+                <div className="text-center lg:text-left mb-1.5">
+                  <span className="label-badge mb-1">Our Ministries</span>
+                  <h2 className="text-foreground text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">How We Serve</h2>
                 </div>
 
                 {/* Ministry Pills - Larger */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-3">
+                <div className="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-2">
                   {ministries.map((ministry) => (
                     <Link
                       key={ministry.id}
                       to={ministry.link}
                       onClick={() => window.scrollTo(0, 0)}
-                      className="px-5 py-3 md:px-6 md:py-3.5 rounded-xl font-semibold text-base md:text-lg transition-all duration-300 flex items-center gap-2.5 bg-card border-2 border-border hover:border-accent hover:bg-accent/5 hover:shadow-lg hover:-translate-y-0.5 text-foreground"
+                      className="px-4 py-2.5 md:px-5 md:py-3 rounded-xl font-semibold text-base md:text-lg transition-all duration-300 flex items-center gap-2 bg-card border-2 border-border hover:border-accent hover:bg-accent/5 hover:shadow-lg hover:-translate-y-0.5 text-foreground"
                     >
                       <ministry.icon className="w-5 h-5 md:w-6 md:h-6 text-accent" />
                       <span>{ministry.label}</span>
@@ -138,12 +138,12 @@ export default function Home() {
                 </div>
 
                 {/* Info Pills */}
-                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream/80 border border-gold/20 text-muted-foreground text-xs">
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-1.5">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cream/80 border border-gold/20 text-muted-foreground text-xs">
                     <Globe className="w-3.5 h-3.5 text-accent/70" />
                     <span>Services in Malayalam</span>
                   </div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream/80 border border-gold/20 text-muted-foreground text-xs">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cream/80 border border-gold/20 text-muted-foreground text-xs">
                     <Bus className="w-3.5 h-3.5 text-accent/70" />
                     <span>Transportation available (contact in advance)</span>
                   </div>
@@ -152,26 +152,26 @@ export default function Home() {
             </div>
 
             {/* Right Column - Media & Events (Secondary) */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               {/* Media - Compact */}
               <Link 
                 to="/media" 
                 onClick={() => window.scrollTo(0, 0)}
-                className="group relative rounded-2xl overflow-hidden flex-1"
+                className="group relative rounded-xl overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-navy via-primary to-navy" />
                 <div className="absolute inset-0 pattern-grid opacity-10" />
                 
-                <div className="relative p-4 md:p-5">
-                  <div className="w-8 h-8 bg-primary-foreground/15 backdrop-blur-sm rounded-lg flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
-                    <PlayCircle className="w-4 h-4 text-primary-foreground" />
+                <div className="relative p-3.5 md:p-4">
+                  <div className="w-7 h-7 bg-primary-foreground/15 backdrop-blur-sm rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                    <PlayCircle className="w-3.5 h-3.5 text-primary-foreground" />
                   </div>
-                  <h3 className="text-base md:text-lg font-bold text-primary-foreground mb-1">Media</h3>
-                  <p className="text-primary-foreground/80 text-sm leading-relaxed mb-2">
-                    Sermons, teachings, and worship sessions
+                  <h3 className="text-sm md:text-base font-bold text-primary-foreground mb-0.5">Media</h3>
+                  <p className="text-primary-foreground/80 text-xs leading-relaxed mb-1.5">
+                    Sermons, teachings, and worship
                   </p>
-                  <span className="inline-flex items-center gap-1.5 text-accent font-semibold text-sm group-hover:gap-2.5 transition-all">
-                    Visit Media <ArrowRight className="w-3.5 h-3.5" />
+                  <span className="inline-flex items-center gap-1 text-accent font-semibold text-xs group-hover:gap-2 transition-all">
+                    Visit Media <ArrowRight className="w-3 h-3" />
                   </span>
                 </div>
               </Link>
@@ -180,21 +180,21 @@ export default function Home() {
               <Link 
                 to="/events" 
                 onClick={() => window.scrollTo(0, 0)}
-                className="group relative rounded-2xl overflow-hidden flex-1"
+                className="group relative rounded-xl overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-accent via-gold to-accent" />
                 <div className="absolute inset-0 pattern-dots-gold opacity-15" />
                 
-                <div className="relative p-4 md:p-5">
-                  <div className="w-8 h-8 bg-primary/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
-                    <Calendar className="w-4 h-4 text-primary" />
+                <div className="relative p-3.5 md:p-4">
+                  <div className="w-7 h-7 bg-primary/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                    <Calendar className="w-3.5 h-3.5 text-primary" />
                   </div>
-                  <h3 className="text-base md:text-lg font-bold text-primary mb-1">Events</h3>
-                  <p className="text-primary/80 text-sm leading-relaxed mb-2">
+                  <h3 className="text-sm md:text-base font-bold text-primary mb-0.5">Events</h3>
+                  <p className="text-primary/80 text-xs leading-relaxed mb-1.5">
                     Upcoming services and gatherings
                   </p>
-                  <span className="inline-flex items-center gap-1.5 text-primary font-semibold text-sm group-hover:gap-2.5 transition-all">
-                    View Events <ArrowRight className="w-3.5 h-3.5" />
+                  <span className="inline-flex items-center gap-1 text-primary font-semibold text-xs group-hover:gap-2 transition-all">
+                    View Events <ArrowRight className="w-3 h-3" />
                   </span>
                 </div>
               </Link>
