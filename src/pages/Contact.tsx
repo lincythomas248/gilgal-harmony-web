@@ -175,7 +175,7 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold text-foreground mb-2">Location</h3>
                       <p className="text-muted-foreground">
-                        IPC Gilgal Church serves communities in Sharjah and Ras Al Khaimah, United Arab Emirates. Contact us for service location details.
+                        IPC Gilgal Church serves communities in Sharjah, Dubai, and Ras Al Khaimah in the United Arab Emirates. Contact us for location details and timings.
                       </p>
                     </div>
                   </div>
