@@ -77,7 +77,7 @@ export function HeroBanner({
               }}
             >
               <h1>
-                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05]">
+                <span className="block text-4xl sm:text-5xl md:text-[3.5rem] lg:text-6xl font-extrabold text-white tracking-tight leading-[1.05] md:whitespace-nowrap">
                   {title}
                   {titleSecondLine && ` ${titleSecondLine}`}
                 </span>
