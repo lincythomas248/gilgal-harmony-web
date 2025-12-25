@@ -1,4 +1,3 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
 import pastorImage from "@/assets/pastor-john-varghese.jpg";
 
 const fullMessage = `Greetings in the name of our Lord and Savior Jesus Christ.
@@ -27,32 +26,39 @@ export function PastorMessage() {
           <h2 className="text-foreground text-2xl md:text-3xl">Pastor's Message</h2>
         </div>
 
-        {/* Card with larger photo and inline message */}
+        {/* Card with two-column layout */}
         <div className="max-w-5xl mx-auto">
           <div className="card-warm p-5 md:p-8 rounded-2xl bg-gradient-to-br from-card via-gold-soft/20 to-card border border-gold/15 shadow-lg">
-            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+            <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
               
-              {/* Pastor Photo - Large Visual Anchor */}
-              <div className="flex-shrink-0 flex flex-col items-center lg:items-start">
+              {/* Left Column: Large Pastor Photo + Name/Role (single instance) */}
+              <div className="flex-shrink-0 flex flex-col items-center lg:items-start lg:w-72">
                 <img
                   src={pastorImage}
                   alt="Pr. John Varghese delivering a message"
-                  className="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-2xl object-cover shadow-xl ring-4 ring-white/60"
+                  className="w-56 h-56 md:w-64 md:h-64 lg:w-72 lg:h-80 rounded-2xl object-cover shadow-xl ring-4 ring-white/60"
                 />
-                <div className="mt-4 text-center lg:text-left">
+                <div className="mt-5 text-center lg:text-left">
                   <h3 className="text-xl md:text-2xl font-bold text-foreground">
                     Pr. John Varghese
                   </h3>
-                  <p className="text-accent font-semibold text-sm">
+                  <p className="text-accent font-semibold text-sm mt-1">
                     Minister-in-Charge
                   </p>
                 </div>
               </div>
 
-              {/* Scrollable Message Content */}
-              <div className="flex-1 min-w-0">
-                <ScrollArea className="h-[280px] md:h-[320px] lg:h-[340px] pr-4">
-                  <div className="space-y-4">
+              {/* Right Column: Scrollable Message Content with visible scroll */}
+              <div className="flex-1 min-w-0 relative">
+                {/* Custom scrollable area with always-visible scrollbar */}
+                <div 
+                  className="h-[300px] md:h-[360px] lg:h-[400px] overflow-y-auto pr-3"
+                  style={{
+                    scrollbarWidth: 'thin',
+                    scrollbarColor: 'hsl(var(--accent) / 0.3) transparent'
+                  }}
+                >
+                  <div className="space-y-4 pb-8">
                     <p className="text-accent font-semibold italic text-lg">
                       Greetings in the name of our Lord and Savior Jesus Christ.
                     </p>
@@ -63,11 +69,9 @@ export function PastorMessage() {
                       </p>
                     ))}
 
-                    {/* Signature Block */}
+                    {/* Signature Block - without duplicate name/title */}
                     <div className="pt-4 mt-4 border-t border-border/50">
                       <p className="text-foreground font-semibold">With prayers and blessings,</p>
-                      <p className="text-foreground font-bold">Pr. John Varghese</p>
-                      <p className="text-accent text-sm">Minister-in-Charge</p>
                       
                       <div className="mt-4 text-center">
                         <p className="text-primary font-bold tracking-wide">
@@ -79,7 +83,17 @@ export function PastorMessage() {
                       </div>
                     </div>
                   </div>
-                </ScrollArea>
+                </div>
+                
+                {/* Bottom fade gradient to indicate more content */}
+                <div className="absolute bottom-0 left-0 right-3 h-12 bg-gradient-to-t from-card via-card/80 to-transparent pointer-events-none rounded-b-lg" />
+                
+                {/* Scroll hint */}
+                <div className="absolute bottom-1 left-0 right-3 flex justify-center pointer-events-none">
+                  <span className="text-xs text-muted-foreground/60 bg-card/90 px-2 py-0.5 rounded">
+                    Scroll to read more
+                  </span>
+                </div>
               </div>
             </div>
           </div>
