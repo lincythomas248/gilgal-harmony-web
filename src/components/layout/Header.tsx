@@ -122,7 +122,7 @@ export function Header() {
                 ),
               )}
               <a
-                href="https://www.instantchurchdirectory.com/login"
+                href="https://members.instantchurchdirectory.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ml-3 btn-primary text-sm px-4 py-2"
@@ -202,7 +202,7 @@ export function Header() {
                   ),
                 )}
                 <a
-                  href="https://www.instantchurchdirectory.com/login"
+                  href="https://members.instantchurchdirectory.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-3 mx-3 btn-primary text-sm text-center"
