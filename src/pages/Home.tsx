@@ -102,99 +102,104 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Ministries - Compact Tabbed Interface */}
-      <section className="section-light py-6 md:py-8 relative overflow-hidden">
-        {/* Subtle background accent */}
-        <div className="absolute top-0 right-0 w-48 h-48 bg-accent/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-40 h-40 bg-dove/5 rounded-full blur-3xl" />
+      {/* Ministries + Media/Events - Two Column Layout */}
+      <section className="section-light py-10 md:py-14 relative overflow-hidden">
+        {/* Subtle background accents */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-56 h-56 bg-dove/5 rounded-full blur-3xl" />
         
         <div className="section-container relative">
-          <div className="text-center mb-4">
-            <span className="label-badge mb-2">Our Ministries</span>
-            <h2 className="text-foreground text-2xl md:text-3xl">How We Serve</h2>
-          </div>
+          <div className="grid lg:grid-cols-[1fr_320px] gap-6 lg:gap-8">
+            
+            {/* Left Column - How We Serve (Dominant) */}
+            <div className="relative">
+              {/* Subtle background highlight */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cream/50 via-gold-soft/20 to-transparent rounded-3xl -m-4 md:-m-6" />
+              
+              <div className="relative p-4 md:p-6">
+                <div className="text-center lg:text-left mb-6 md:mb-8">
+                  <span className="label-badge mb-3">Our Ministries</span>
+                  <h2 className="text-foreground text-3xl md:text-4xl lg:text-5xl font-bold">How We Serve</h2>
+                </div>
 
-          {/* Ministry Pills */}
-          <div className="flex flex-wrap justify-center gap-2 mb-3">
-            {ministries.map((ministry) => (
-              <Link
-                key={ministry.id}
-                to={ministry.link}
+                {/* Ministry Pills - Larger */}
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-6">
+                  {ministries.map((ministry) => (
+                    <Link
+                      key={ministry.id}
+                      to={ministry.link}
+                      onClick={() => window.scrollTo(0, 0)}
+                      className="px-5 py-3 md:px-6 md:py-3.5 rounded-xl font-semibold text-base md:text-lg transition-all duration-300 flex items-center gap-2.5 bg-card border-2 border-border hover:border-accent hover:bg-accent/5 hover:shadow-lg hover:-translate-y-0.5 text-foreground"
+                    >
+                      <ministry.icon className="w-5 h-5 md:w-6 md:h-6 text-accent" />
+                      <span>{ministry.label}</span>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Info Pills */}
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream/80 border border-gold/20 text-muted-foreground text-xs">
+                    <Globe className="w-3.5 h-3.5 text-accent/70" />
+                    <span>Services in Malayalam</span>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream/80 border border-gold/20 text-muted-foreground text-xs">
+                    <Bus className="w-3.5 h-3.5 text-accent/70" />
+                    <span>Transportation available (contact in advance)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Media & Events (Secondary) */}
+            <div className="flex flex-col gap-4">
+              {/* Media - Compact */}
+              <Link 
+                to="/media" 
                 onClick={() => window.scrollTo(0, 0)}
-                className="px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center gap-2 bg-card border border-border hover:border-accent/40 hover:shadow-md hover:-translate-y-0.5 text-foreground"
+                className="group relative rounded-2xl overflow-hidden flex-1"
               >
-                <ministry.icon className="w-4 h-4 text-accent" />
-                <span>{ministry.label}</span>
+                <div className="absolute inset-0 bg-gradient-to-br from-navy via-primary to-navy" />
+                <div className="absolute inset-0 pattern-grid opacity-10" />
+                
+                <div className="relative p-4 md:p-5">
+                  <div className="w-8 h-8 bg-primary-foreground/15 backdrop-blur-sm rounded-lg flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
+                    <PlayCircle className="w-4 h-4 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-base md:text-lg font-bold text-primary-foreground mb-1">Media</h3>
+                  <p className="text-primary-foreground/80 text-sm leading-relaxed mb-2">
+                    Sermons, teachings, and worship sessions
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-accent font-semibold text-sm group-hover:gap-2.5 transition-all">
+                    Visit Media <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </div>
               </Link>
-            ))}
-          </div>
 
-          {/* Info Pills - Smaller & Lighter */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream/60 border border-gold/20 text-muted-foreground text-xs">
-              <Globe className="w-3.5 h-3.5 text-accent/70" />
-              <span>Services in Malayalam</span>
-            </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream/60 border border-gold/20 text-muted-foreground text-xs">
-              <Bus className="w-3.5 h-3.5 text-accent/70" />
-              <span>Transportation available (contact in advance)</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Media + Events - Combined Strip */}
-      <section className="section-cream py-8 md:py-10 relative overflow-hidden">
-        {/* Subtle background texture */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} />
-        
-        <div className="section-container relative">
-          <div className="grid md:grid-cols-2 gap-4">
-            {/* Media */}
-            <Link 
-              to="/media" 
-              onClick={() => window.scrollTo(0, 0)}
-              className="group relative rounded-2xl overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-navy via-primary to-navy" />
-              <div className="absolute inset-0 pattern-grid opacity-10" />
-              
-              <div className="relative p-5 md:p-6">
-                <div className="w-9 h-9 bg-primary-foreground/15 backdrop-blur-sm rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <PlayCircle className="w-5 h-5 text-primary-foreground" />
+              {/* Events - Compact */}
+              <Link 
+                to="/events" 
+                onClick={() => window.scrollTo(0, 0)}
+                className="group relative rounded-2xl overflow-hidden flex-1"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-accent via-gold to-accent" />
+                <div className="absolute inset-0 pattern-dots-gold opacity-15" />
+                
+                <div className="relative p-4 md:p-5">
+                  <div className="w-8 h-8 bg-primary/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
+                    <Calendar className="w-4 h-4 text-primary" />
+                  </div>
+                  <h3 className="text-base md:text-lg font-bold text-primary mb-1">Events</h3>
+                  <p className="text-primary/80 text-sm leading-relaxed mb-2">
+                    Upcoming services and gatherings
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-primary font-semibold text-sm group-hover:gap-2.5 transition-all">
+                    View Events <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
                 </div>
-                <h3 className="text-lg md:text-xl font-bold text-primary-foreground mb-1.5">Media</h3>
-                <p className="text-primary-foreground/80 text-sm md:text-base leading-relaxed mb-3">
-                  Sermons, teachings, and worship sessions
-                </p>
-                <span className="inline-flex items-center gap-2 text-accent font-semibold text-sm group-hover:gap-3 transition-all">
-                  Visit Media <ArrowRight className="w-4 h-4" />
-                </span>
-              </div>
-            </Link>
+              </Link>
+            </div>
 
-            {/* Events */}
-            <Link 
-              to="/events" 
-              onClick={() => window.scrollTo(0, 0)}
-              className="group relative rounded-2xl overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-accent via-gold to-accent" />
-              <div className="absolute inset-0 pattern-dots-gold opacity-15" />
-              
-              <div className="relative p-5 md:p-6">
-                <div className="w-9 h-9 bg-primary/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <Calendar className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="text-lg md:text-xl font-bold text-primary mb-1.5">Events</h3>
-                <p className="text-primary/80 text-sm md:text-base leading-relaxed mb-3">
-                  Upcoming services and gatherings
-                </p>
-                <span className="inline-flex items-center gap-2 text-primary font-semibold text-sm group-hover:gap-3 transition-all">
-                  View Events <ArrowRight className="w-4 h-4" />
-                </span>
-              </div>
-            </Link>
           </div>
         </div>
       </section>
