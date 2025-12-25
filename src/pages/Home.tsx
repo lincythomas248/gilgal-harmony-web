@@ -46,13 +46,13 @@ export default function Home() {
         secondaryCta={{ text: "Get in Touch", link: "/contact" }}
       />
 
-      {/* Discover Life at IPC Gilgal - Unified Feature Section */}
-      <section className="section-cream py-10 md:py-14 relative overflow-hidden">
+      {/* Discover Life at IPC Gilgal - Asymmetric Feature Grid */}
+      <section className="section-cream py-12 md:py-16 relative overflow-hidden">
         {/* Ambient background accents */}
         <div className="absolute top-0 right-0 w-72 h-72 bg-accent/8 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-dove/8 rounded-full blur-3xl" />
         
-        <div className="section-container relative">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative">
           {/* Section Header */}
           <div className="text-center mb-8">
             <span className="label-badge mb-2">Welcome Home</span>
@@ -61,10 +61,11 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid lg:grid-cols-[1.4fr_1fr] gap-4 lg:gap-6 items-stretch">
+          {/* Asymmetric Three-Card Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-4 items-stretch">
             
-            {/* Left Column - Image-backed Ministries Area */}
-            <div className="relative rounded-2xl overflow-hidden min-h-[420px] lg:min-h-[500px] group">
+            {/* Primary Card - Growing Together in Faith */}
+            <div className="relative rounded-2xl overflow-hidden min-h-[480px] lg:min-h-[520px] group">
               {/* Background Image */}
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -75,106 +76,114 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-r from-primary/40 to-transparent" />
               
               {/* Content */}
-              <div className="relative h-full flex flex-col justify-end p-6 md:p-8 lg:p-10">
+              <div className="relative h-full flex flex-col justify-end p-6 md:p-8">
                 {/* Header Content */}
                 <div className="mb-5">
-                  <h3 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mb-3" style={{ textShadow: '0 4px 16px rgba(0,0,0,0.4)' }}>
+                  <h3 className="text-white text-2xl md:text-3xl font-bold mb-3" style={{ textShadow: '0 4px 16px rgba(0,0,0,0.4)' }}>
                     Growing Together in Faith
                   </h3>
-                  <p className="text-white/90 text-base md:text-lg max-w-lg leading-relaxed mb-4" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
+                  <p className="text-white/90 text-sm md:text-base max-w-md leading-relaxed mb-4" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>
                     Join our vibrant community through worship, learning, and fellowship as we journey in Christ together.
                   </p>
-                  {/* How We Serve Pill - Moved below description, larger */}
-                  <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-accent/90 text-primary text-sm md:text-base font-bold shadow-lg">
-                    <HandHeart className="w-5 h-5" />
+                  {/* How We Serve Pill */}
+                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/90 text-primary text-sm font-bold shadow-lg">
+                    <HandHeart className="w-4 h-4" />
                     How We Serve
                   </span>
                 </div>
 
                 {/* Ministry Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4">
                   {ministries.map((ministry) => (
                     <Link
                       key={ministry.id}
                       to={ministry.link}
                       onClick={() => window.scrollTo(0, 0)}
-                      className="group/card relative bg-white/12 hover:bg-white/20 backdrop-blur-md border border-white/15 hover:border-white/30 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                      className="group/card relative bg-white/12 hover:bg-white/20 backdrop-blur-md border border-white/15 hover:border-white/30 rounded-xl p-3.5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                     >
-                      <div className="flex items-center gap-2.5 mb-2">
-                        <div className="w-9 h-9 rounded-lg bg-accent/90 flex items-center justify-center shadow-md">
-                          <ministry.icon className="w-4.5 h-4.5 text-primary" />
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <div className="w-8 h-8 rounded-lg bg-accent/90 flex items-center justify-center shadow-md">
+                          <ministry.icon className="w-4 h-4 text-primary" />
                         </div>
                         <h4 className="text-white font-semibold text-sm">{ministry.label}</h4>
                       </div>
                       <p className="text-white/75 text-xs leading-relaxed line-clamp-2">{ministry.description}</p>
-                      <span className="inline-flex items-center gap-1 text-accent text-xs font-semibold mt-2.5 group-hover/card:gap-1.5 transition-all">
+                      <span className="inline-flex items-center gap-1 text-accent text-xs font-semibold mt-2 group-hover/card:gap-1.5 transition-all">
                         Learn more <ArrowRight className="w-3 h-3" />
                       </span>
                     </Link>
                   ))}
                 </div>
 
-                {/* Info Tags - Larger, more balanced */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/15 backdrop-blur-sm border border-white/10">
-                    <Globe className="w-5 h-5 text-accent" />
-                    <span className="text-white font-medium text-sm">Services in Malayalam</span>
+                {/* Info Tags */}
+                <div className="grid grid-cols-2 gap-2.5">
+                  <div className="flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white/15 backdrop-blur-sm border border-white/10">
+                    <Globe className="w-4 h-4 text-accent" />
+                    <span className="text-white font-medium text-xs">Services in Malayalam</span>
                   </div>
-                  <div className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/15 backdrop-blur-sm border border-white/10">
+                  <div className="flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white/15 backdrop-blur-sm border border-white/10">
                     <Bus className="w-5 h-5 text-accent" />
-                    <span className="text-white font-medium text-sm">Transportation available</span>
+                    <span className="text-white font-medium text-xs">Transportation available</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column - Media & Events Stack (Supporting) */}
-            <div className="flex flex-col gap-3 lg:justify-center">
-              {/* Media Card - Compact */}
+            {/* Secondary Cards Column */}
+            <div className="flex flex-col gap-4">
+              {/* Media Card - Near Square */}
               <Link 
                 to="/media" 
                 onClick={() => window.scrollTo(0, 0)}
-                className="group relative rounded-xl overflow-hidden"
+                className="group relative rounded-2xl overflow-hidden flex-1 min-h-[140px]"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-navy via-primary to-navy-light" />
                 <div className="absolute inset-0 pattern-grid opacity-10" />
-                <div className="absolute top-0 right-0 w-24 h-24 bg-accent/20 rounded-full -translate-y-1/3 translate-x-1/3 blur-2xl" />
+                <div className="absolute top-0 right-0 w-28 h-28 bg-accent/20 rounded-full -translate-y-1/3 translate-x-1/3 blur-2xl" />
                 
-                <div className="relative flex items-center gap-4 p-4 md:p-5">
-                  <div className="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-white/15 transition-all">
-                    <PlayCircle className="w-5 h-5 text-white" />
+                <div className="relative h-full flex flex-col justify-center p-5 md:p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-11 h-11 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:bg-white/15 transition-all">
+                      <PlayCircle className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white">Media & Teachings</h3>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base font-bold text-white mb-0.5">Media & Teachings</h3>
-                    <p className="text-white/70 text-xs leading-relaxed line-clamp-2">
-                      Sermons, worship recordings & photo gallery.
-                    </p>
-                  </div>
-                  <ArrowRight className="w-4 h-4 text-accent flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                  <p className="text-white/75 text-sm leading-relaxed mb-3">
+                    Sermons, worship recordings & photo gallery.
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-accent text-sm font-semibold group-hover:gap-2.5 transition-all">
+                    Explore <ArrowRight className="w-4 h-4" />
+                  </span>
                 </div>
               </Link>
 
-              {/* Events Card - Compact */}
+              {/* Events Card - Near Square */}
               <Link 
                 to="/events" 
                 onClick={() => window.scrollTo(0, 0)}
-                className="group relative rounded-xl overflow-hidden"
+                className="group relative rounded-2xl overflow-hidden flex-1 min-h-[140px]"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-accent via-gold to-gold-dark" />
                 <div className="absolute inset-0 pattern-dots-gold opacity-20" />
-                <div className="absolute bottom-0 left-0 w-20 h-20 bg-primary/15 rounded-full translate-y-1/3 -translate-x-1/3 blur-2xl" />
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-primary/15 rounded-full translate-y-1/3 -translate-x-1/3 blur-2xl" />
                 
-                <div className="relative flex items-center gap-4 p-4 md:p-5">
-                  <div className="w-10 h-10 bg-primary/20 backdrop-blur-sm rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-primary/25 transition-all">
-                    <Calendar className="w-5 h-5 text-primary" />
+                <div className="relative h-full flex flex-col justify-center p-5 md:p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-11 h-11 bg-primary/20 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:bg-primary/25 transition-all">
+                      <Calendar className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-primary">Events & Services</h3>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base font-bold text-primary mb-0.5">Events & Services</h3>
-                    <p className="text-primary/75 text-xs leading-relaxed line-clamp-2">
-                      Weekly services & community gatherings.
-                    </p>
-                  </div>
-                  <ArrowRight className="w-4 h-4 text-primary flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                  <p className="text-primary/80 text-sm leading-relaxed mb-3">
+                    Weekly services & community gatherings.
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-primary text-sm font-semibold group-hover:gap-2.5 transition-all">
+                    View Schedule <ArrowRight className="w-4 h-4" />
+                  </span>
                 </div>
               </Link>
             </div>
